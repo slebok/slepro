@@ -11,9 +11,9 @@
 :- ['../languages/mml/derive-table-multi.pro'].
 
 % Model editing
-:- ['../languages/mml/new-object.pro'].
-:- ['../languages/mml/add-object.pro'].
-:- ['../languages/mml/remove-object.pro'].
+:- ['../languages/mml/editing/new-object.pro'].
+:- ['../languages/mml/editing/add-object.pro'].
+:- ['../languages/mml/editing/remove-object.pro'].
 
 % Model evolution
 :- ['../languages/mml/relax-cardinality.pro'].

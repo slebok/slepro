@@ -19,9 +19,9 @@
 :- ['../languages/mml/subclass.pro'].
 
 % Conformance
-:- ['../languages/mml/conformance.pro'].
-:- ['../languages/mml/conformance-member.pro'].
-:- ['../languages/mml/conformance-cardinality.pro'].
+:- ['../languages/mml/conformance/main.pro'].
+:- ['../languages/mml/conformance/member.pro'].
+:- ['../languages/mml/conformance/cardinality.pro'].
 
 % Test target
 

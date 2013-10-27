@@ -1,0 +1,32 @@
+fork(
+  rule(add, expr, [n(expr), t('+'), n(expr)]),
+  [
+    fork(
+      rule(const, expr, [n(nat)]),
+      [
+        fork(
+          rule(zero, nat, [t(zero)]),
+          [leaf(zero)]
+        )
+      ]
+    ),
+    leaf('+'),
+    fork(
+      rule(const, expr, [n(nat)]),
+      [ 
+        fork(
+          rule(succ, nat, [t(succ), t('('), n(nat), t(')')]),
+          [
+            leaf(succ),
+            leaf('('),
+            fork(
+              rule(zero,nat,[t(zero)]),
+              [leaf(zero)]
+            ),
+            leaf(')')
+          ]
+        )
+      ]
+    )
+  ]
+).

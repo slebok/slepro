@@ -1,0 +1,40 @@
+% The applied signature of applied signatures
+signature(
+  [ 
+    % Signatures as a list of declarations
+    symbol(signature,
+      [
+        list(sort(decl))
+      ],
+      signature),
+
+    % Aliases as assigning term types to sorts
+    symbol(alias,
+      [
+        sort(sort), % the sort being aliased
+        sort(ttype) % the definition of the alias
+      ], 
+      decl),
+
+    % Symbols associated with argument and result types
+    symbol(symbol,
+      [
+        sort(symbol), % the actual symbol
+        list(sort(ttype)), % the argument types
+        sort(sort) % the result type (sort)
+      ], 
+      decl),
+
+    % Different kind of term types
+    symbol(atom, [], ttype), % primitive type "atom"
+    symbol(integer, [], ttype), % ... "integer"
+    symbol(sort, [sort(sort)], ttype), % sort reference
+    symbol(list, [sort(ttype)], ttype), % list types
+    symbol(tuple, [list(sort(ttype))], ttype), % tuple types
+
+    % Names
+    alias(sort, atom),
+    alias(symbol, atom)
+
+  ]
+).

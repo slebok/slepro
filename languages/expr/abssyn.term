@@ -1,0 +1,13 @@
+% A signature for simple expressions
+signature(
+
+  % Sorts of this signature
+  [nat, expr],
+
+  % Symbol types
+  [ symbol(zero, [], nat), % zero ("0")
+    symbol(succ, [nat], nat), % successor function
+    symbol(const, [nat], expr), % a number is an expression
+    symbol(add, [expr, expr], expr) % binary addition
+  ]
+).

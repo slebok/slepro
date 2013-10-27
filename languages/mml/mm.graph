@@ -1,0 +1,194 @@
+{
+  class : metamodel,
+  name : metametamodel,
+  classifiers : [
+
+    base &
+    {
+      class : class,
+      name : base,
+      abstract : true,
+      super : [],
+      members : [
+        {
+          class : value,
+          name : name,
+          type : # atom,
+          cardinality : { class : one }
+        }
+      ]
+    },
+
+    metamodel &
+    {
+      class : class,
+      name : metamodel,
+      abstract : false,
+      super : [ # base ],
+      members : [
+        {
+          class : part,
+          name : classifiers,
+          type : # classifier,
+          cardinality : { class : star }
+        }
+      ]
+    },
+
+    classifier &
+    {
+      class : class,
+      name : classifier,
+      abstract : true,
+      super : [ # base ],
+      members : []
+    },
+
+    datatype &
+    {
+      class : class,
+      name : datatype,
+      abstract : false,
+      super : [ # classifier ],
+      members : []
+    },
+
+    class &
+    {
+      class : class,
+      name : class,
+      abstract : false,
+      super : [ # classifier ],
+      members : [
+        {
+          class : value,
+          name : abstract,
+          type : # boolean,
+          cardinality : { class : one }
+        },
+        {
+          class : reference,
+          name : super,
+          type : # class,
+          cardinality : { class : option }
+        },
+        {
+          class : part,
+          name : members,
+          type : # member,
+          cardinality : { class : star }
+        }
+      ]
+    },
+
+    member &
+    {
+      class : class,
+      name : member,
+      abstract : true,
+      super : [ # base ],
+      members : [
+        {
+          class : part,
+          name : cardinality,
+          type : # cardinality,
+          cardinality : { class : one }
+        }
+      ]
+    },
+
+    value &
+    {
+      class : class,
+      name : value,
+      abstract : false,
+      super : [ # member ],
+      members : [
+        {
+          class : reference,
+          name : type,
+          type : # datatype,
+          cardinality : { class : one }
+        }
+      ]
+    },
+
+    part &
+    {
+      class : class,
+      name : part,
+      abstract : false,
+      super : [ # member ],
+      members : [
+        {
+          class : reference,
+          name : type,
+          type : # class,
+          cardinality : { class : one }
+        }
+      ]
+    },
+
+    reference &
+    {
+      class : class,
+      name : reference,
+      abstract : false,
+      super : [ # member ],
+      members : [
+        {
+          class : reference,
+          name : type,
+          type : # class,
+          cardinality : { class : one }
+        }
+      ]
+    },
+
+    cardinality &
+    {
+      class : class,
+      name : cardinality,
+      abstract : true,
+      super : [ ],
+      members : [ ]
+    },
+
+    {
+      class : class,
+      name : one,
+      abstract : false,
+      super : [ # cardinality ],
+      members : [ ]
+    },
+
+    {
+      class : class,
+      name : star,
+      abstract : false,
+      super : [ # cardinality ],
+      members : [ ]
+    },
+
+    {
+      class : class,
+      name : option,
+      abstract : false,
+      super : [ # cardinality ],
+      members : [ ]
+    },
+
+    atom &
+    {
+      class : datatype,
+      name : atom
+    },
+
+    boolean &
+    {
+      class : datatype,
+      name : boolean
+    }
+
+  ]
+}.

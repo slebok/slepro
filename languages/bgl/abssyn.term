@@ -1,0 +1,30 @@
+% The signature of context-free grammars
+signature(
+  [ 
+    
+    % Grammars as lists of nonterminals and rules
+    symbol(grammar, [
+        list(sort(nonterminal)), % list of nonterminals
+        list(sort(rule)) % list of rules
+      ],
+      grammar),
+
+    % Rules with LHS and RHS as well as a label
+    symbol(rule, [
+        sort(label), % label of rule
+        sort(nonterminal), % LHS nonterminal
+        list(sort(symbol)) % RHS sequence of symbols
+      ],
+      rule),
+
+    % Classification of grammar symbols
+    symbol(t, [sort(terminal)], symbol), % terminals are symbols
+    symbol(n, [sort(nonterminal)], symbol), % nonterminals as well
+
+    % Elementary kinds of symbols
+    alias(nonterminal, atom),
+    alias(terminal, atom),
+    alias(label, atom)
+
+  ]
+).

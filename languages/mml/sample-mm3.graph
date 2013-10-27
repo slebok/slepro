@@ -1,0 +1,10 @@
+{
+  class : metamodel,
+  name : singleDatatype,
+  classifiers : [
+    {
+      class : datatype,
+      name : atom
+    }
+  ]
+}.

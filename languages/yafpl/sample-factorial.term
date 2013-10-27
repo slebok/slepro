@@ -1,0 +1,1 @@
+[ ((factorial,[inttype],inttype),factorial,[x],if(op(eq,name(x),intconst(0)),intconst(1),op(mult,name(x),apply(factorial,[op(sub,name(x),intconst(1))]))))].

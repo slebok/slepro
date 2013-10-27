@@ -1,0 +1,19 @@
+- Demonstrate megamodeling; see attic/ontologies
+- Add prelude/rewriting.pro
+- Use strategies in expr language
+- Use strategies in yafpl language
+- Consider a variation on expr with integers
+- QVT/TGG
+- Some (what?) ontology use
+- Concrete syntax
+- Partial evaluation for yafpl
+- Semantics for expr
+- Semantics for figure (GraphViz)
+- Attributed trees
+- Attribute grammars
+- Attribute evaluation
+- Felleisen style semantics
+- Concept extraction and traceability across artifacts
+- Lambda calculi
+- Object calculi
+- Soundness proof

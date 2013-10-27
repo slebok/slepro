@@ -1,0 +1,28 @@
+% The signature of relational schemas
+signature(
+  [ 
+
+    alias(schema, list(sort(table))),
+
+    alias(table, tuple([
+        sort(name),
+        list(sort(column))
+      ])),
+
+    alias(column, tuple([
+        sort(name),
+        sort(type),
+        list(sort(clause))
+      ])),
+
+    symbol(integer, [], type),
+    symbol(varchar, [integer], type),
+
+    symbol(notNull, [], clause),
+    symbol(primaryKey, [], clause),
+    symbol(foreignKey, [sort(name), sort(name)], clause),
+
+    alias(name, atom)
+
+  ]
+).

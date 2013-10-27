@@ -1,0 +1,13 @@
+{
+  class : metamodel,
+  name : singleClass,
+  classifiers : [
+    {
+      class : class,
+      name : aClass,
+      abstract : false,
+      super : [],
+      members : []
+    }
+  ]
+}.

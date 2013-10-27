@@ -1,4 +1,4 @@
-% Service Editor: Structured editor
+% Service EDITOR: A simple metamodel-driven structure editor
 
 % Import
 :- ensure_loaded('../../packages/prelude.pro').
@@ -6,33 +6,24 @@
 :- ensure_loaded('../../packages/mt.pro').
 :- ensure_loaded('../../packages/pp.pro').
 
-% Runtime for editor
+% Server components
 :- ['runtime.pro'].
 :- ['session.pro'].
+:- ['controller.pro'].
 
-% Pages
-:- ['metamodels.pro'].
-:- ['classes.pro'].
-:- ['new.pro'].
-:- ['add.pro'].
-:- ['remove.pro'].
-:- ['edit.pro'].
-:- ['show.pro'].
+% View (pages)
+:- ['view/metamodels.pro'].
+:- ['view/classes.pro'].
+:- ['view/new.pro'].
+:- ['view/add.pro'].
+:- ['view/remove.pro'].
+:- ['view/edit.pro'].
+:- ['view/show.pro'].
 
 % Metamodels
 :- loadMetamodel('../../languages/expr/mm.graph').
 :- loadMetamodel('../../languages/family/mm1.graph').
 :- loadMetamodel('../../languages/mml/mm.graph').
-
-% Handlers
-editor_handlers :-
-  http_handler(root('metamodels'), metamodels_page, []),
-  http_handler(root('classes'), classes_page, []),
-  http_handler(root('edit'), edit_page, []),
-  http_handler(root('show'), show_page, []),
-  http_handler(root('new'), new_page, []),
-  http_handler(root('add'), add_page, []),
-  http_handler(root('remove'), remove_page, []).
 
 % Server
 editor_main :-

@@ -1,14 +1,8 @@
 % Page for constructing a new model
 new_page(Request) :-
 
-  % Start session
-  once((
-    repeat,
-    sleep(0.01),
-    retract(session(S1)),
-    S2 is S1 + 1,
-    assertz(session(S2))
-  )),
+  % Start a new session
+  newSession(S),
 
   % URL parsing
   member(search(L), Request),
@@ -18,7 +12,7 @@ new_page(Request) :-
   % Object creation
   metamodel(MmName, MM),
   newObject(MM, CName, Obj),
-  assertz(state(S1, MmName, Obj)),
+  initSession(S, MmName, Obj),
 
   % Page rendering
-  editObject(S1).
+  editObject(S).

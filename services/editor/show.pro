@@ -10,8 +10,8 @@ show_page(Request) :-
 % Reply for the page
 showObject(S) :-
 
-  % Object retrieval
-  state(S, MmName, Obj0),
+  % Data preparation
+  retrieveSession(S, MmName, Obj0),
   metamodel(MmName, MM1),
   
   % Conformance checking

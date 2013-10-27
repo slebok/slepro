@@ -9,10 +9,10 @@ remove_page(Request) :-
   atom_number(Id1, Id2),
 
   % Object creation
+  retrieveSession(S2, MmName, M1), 
   metamodel(MmName, MM),
-  retract(state(S2, MmName, Obj1)),
-  removeObject(MM, Id2, Obj1, Obj2),
-  assertz(state(S2, MmName, Obj2)),
+  removeObject(MM, Id2, M1, M2),
+  updateSession(S2, M2),
 
   % Page rendering
   editObject(S2).

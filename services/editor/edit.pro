@@ -9,7 +9,7 @@ edit_page(Request) :-
 
 % Reply for the page
 editObject(S) :-
-  state(S, MmName, Obj),
+  retrieveSession(S, MmName, Obj),
   metamodel(MmName, MM),
   editObject(S, MM, Obj, Html),
   % Page assembly 

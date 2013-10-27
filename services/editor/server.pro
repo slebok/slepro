@@ -8,6 +8,7 @@
 
 % Runtime for editor
 :- ['runtime.pro'].
+:- ['session.pro'].
 
 % Pages
 :- ['metamodels.pro'].
@@ -22,9 +23,6 @@
 :- loadMetamodel('../../languages/expr/mm.graph').
 :- loadMetamodel('../../languages/family/mm1.graph').
 :- loadMetamodel('../../languages/mml/mm.graph').
-
-% Session handling
-:- assertz(session(0)).
 
 % Handlers
 editor_handlers :-

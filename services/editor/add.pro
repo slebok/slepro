@@ -11,10 +11,10 @@ add_page(Request) :-
   member((class=ClassN), L),
 
   % Object creation
+  retrieveSession(S2, MmName, M1), 
   metamodel(MmName, MM),
-  retract(state(S2, MmName, Obj1)),
-  addObject(MM, Id2, Key, ClassN, Obj1, Obj2),
-  assertz(state(S2, MmName, Obj2)),
+  addObject(MM, Id2, Key, ClassN, M1, M2),
+  updateSession(S2, M2),
 
   % Page rendering
   editObject(S2).

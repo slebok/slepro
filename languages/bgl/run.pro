@@ -1,0 +1,24 @@
+parseBgl(Text, Term2) :-
+  scannerfullEgl(Text, Term1),
+  require(
+    bglSubset,
+    eglToBgl(Term1, Term2)
+  ).
+
+eglToBgl(Rs1, grammar(Ns2, Rs2)) :-
+  map(eglToBglLhs, Rs1, Ns1),
+  list_to_set(Ns1, Ns2),
+  map(eglToBglRule, Rs1, Rs2).
+
+
+eglToBglLhs(([Label], Lhs, Rhs1), Lhs).
+
+eglToBglRule(
+  ([Label], Lhs, Rhs1),
+  rule(Label, Lhs, Rhs2)
+) :-
+     map(eglToBglSymbol, Rhs1, Rhs2).
+
+eglToBglSymbol(S, S) :-
+    S = t(_)
+  ; S = n(_). 

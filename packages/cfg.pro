@@ -12,6 +12,7 @@
 :- ['languages/bgl/implode.pro'].
 :- ['languages/bgl/explode.pro'].
 :- ['languages/bgl/derive-signature.pro'].
+:- ['languages/bgl/run.pro'].
 
 % Extended Grammar Language (EGL)
 :- multifile xparse/5.
@@ -132,6 +133,13 @@ cfg_main :- runTests((
        (u, classesMapping),
        (i(text), 'languages/expr/mm-relaxed.mml'),
        (o(term), 'languages/expr/mm-relaxed.term')
+     )
+   ),
+
+   test(
+     parseBgl(
+       (i(text), 'languages/expr/consyn.bgl'),
+       (o(term), 'languages/expr/consyn.term')
      )
    ),
 

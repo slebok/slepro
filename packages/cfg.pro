@@ -42,8 +42,7 @@ cfg_main :- runTests((
 %
 
    test(
-     tokens(
-       (u, exprToken),
+     exprScanner(
        (i(text), 'languages/expr/sample-add.expr'),
        (o(term), 'languages/expr/sample-add.tokens')
      )

@@ -1,3 +1,9 @@
+% Recognize a token given a list of options
+token(L, T, I1, I2) :-
+  member(T, L),
+  name(T, S),
+  append(S, I2, I1).
+
 % Map string to token sequence 
 tokens(
     TPred, % predicate for invidual tokens

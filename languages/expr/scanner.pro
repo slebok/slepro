@@ -1,8 +1,7 @@
-% Keywords and special characters
-exprToken(Atom) -->
-  {
-    member(String,
-      ["zero", "succ", "(", ")", "+"]),
-    name(Atom, String) 
-  },
-  String.
+% A scanner for the expr language
+exprScanner(Input, Ts) :-
+  tokens(
+    token(['zero', 'succ', '(', ')', '+']),
+    Input,
+    Ts).
+

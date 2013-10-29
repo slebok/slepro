@@ -1,7 +1,6 @@
 % Substitution
 substitute(_, intconst(I), intconst(I)).
 substitute(_, boolconst(B), boolconst(B)).
-substitute(_, boolconst(B), boolconst(B)).
 substitute((N,E), name(N), E).
 substitute((N1,_), name(N2), name(N2)) :- N1 \= N2.
 substitute(S, if(E1a, E2a, E3a), if(E1b, E2b, E3b)) :-

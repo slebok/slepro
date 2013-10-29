@@ -284,7 +284,7 @@ cfg_main :- runTests((
    test(
      tokens(
        (u, tablesToken),
-       (i(text), 'languages/family/dd.ddl'),
+       (i(text), 'languages/family/dd.sql'),
        (o(term), 'languages/family/dd.tokens')
      )
    ),

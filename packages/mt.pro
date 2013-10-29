@@ -6,9 +6,9 @@
 
 % The classes-to-tables transformation
 :- ['../languages/mml/mappable.pro'].
-:- ['../languages/mml/derive-table.pro'].
-:- ['../languages/mml/derive-table-single.pro'].
-:- ['../languages/mml/derive-table-multi.pro'].
+:- ['../languages/mml/to-ddl/class-to-table.pro'].
+:- ['../languages/mml/to-ddl/single-to-table.pro'].
+:- ['../languages/mml/to-ddl/multi-to-table.pro'].
 
 % Model editing
 :- ['../languages/mml/editing/new-object.pro'].

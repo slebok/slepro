@@ -14,7 +14,7 @@ ppEval(vbox(B1, B2), L3) :-
 % Vector form of vertical composition
 ppEval(vlist(Bs), L) :-
   map(ppEval, Bs, Ls),
-  concat(Ls, L).
+  foldr(append, [], Ls, L).
 
 % Evaluate a horizontal composition
 ppEval(hbox(B1, B2), L3) :-

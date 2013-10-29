@@ -7,9 +7,9 @@ type : simpletype { '->' simpletype }* ;
 [inttype] simpletype :  'Int' ;
 [booltype] simpletype :  'Bool' ;
 
-[apply] expr : name { subexpr }+ ;
 [op] expr : '(' op ')' subexpr subexpr ;
 [subexpr] expr : subexpr ;
+[apply] expr : name { subexpr }+ ;
 [intconst] subexpr : int ;
 [brackets] subexpr : '(' expr ')' ;
 [if] subexpr : 'if' expr 'then' expr 'else' expr ;

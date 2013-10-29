@@ -11,7 +11,7 @@ eglToBgl(Rs1, grammar(Ns2, Rs2)) :-
   map(eglToBglRule, Rs1, Rs2).
 
 
-eglToBglLhs(([Label], Lhs, Rhs1), Lhs).
+eglToBglLhs((_, Lhs, _), Lhs).
 
 eglToBglRule(
   ([Label], Lhs, Rhs1),

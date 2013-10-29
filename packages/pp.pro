@@ -11,6 +11,7 @@
 
 % Language-specific pretty printers
 :- ['../languages/figure/pretty-printer.pro'].
+:- ['../languages/yafpl/pretty-printer.pro'].
 :- ['../languages/graph/pretty-printer.pro'].
 
 % Test target
@@ -73,6 +74,13 @@ pp_main :- runTests((
      ppFigure(
        (i(term), 'languages/figure/sample-line.term'),
        (o(text), 'languages/figure/sample-line.figure')
+     )
+   ),
+
+   test(
+     ppProg(
+       (i(term), 'languages/yafpl/sample-factorial.term'),
+       (o(text), 'languages/yafpl/sample-factorial.hs')
      )
    ),
 

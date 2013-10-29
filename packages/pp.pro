@@ -7,6 +7,7 @@
 
 % Pretty printing engine
 :- ['../languages/ppl/eval.pro'].
+:- ['../languages/ppl/to-string.pro'].
 
 % Language-specific pretty printers
 :- ['../languages/figure/pretty-printer.pro'].

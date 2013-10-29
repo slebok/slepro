@@ -16,14 +16,17 @@
 :- ['../languages/mml/editing/add-object.pro'].
 :- ['../languages/mml/editing/remove-object.pro'].
 
-% Model evolution
+% Metamodel relaxation
 :- ['../languages/mml/relax-cardinality.pro'].
 :- ['../languages/mml/recardinalize.pro'].
-:- ['../languages/mml/obj-add-key.pro']. % TODO: Needed? Appropriate?
-:- ['../languages/mml/obj-remove-key.pro']. % TODO: Needed? Appropriate?
-:- ['../languages/mml/atom-to-ref.pro'].
-:- ['../languages/mml/model-atom-to-ref.pro'].
-:- ['../languages/mml/coupling-atom-to-ref.pro'].
+
+%:- ['../languages/mml/obj-add-key.pro']. % TODO: Needed? Appropriate?
+%:- ['../languages/mml/obj-remove-key.pro']. % TODO: Needed? Appropriate?
+
+% Atom to reference coupled transformation
+:- ['../languages/mml/atom-to-ref/coupling.pro'].
+:- ['../languages/mml/atom-to-ref/mt.pro'].
+:- ['../languages/mml/atom-to-ref/mmt.pro'].
 
 % Test target
 

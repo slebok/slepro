@@ -4,22 +4,28 @@
 :- ensure_loaded('packages/prelude.pro').
 :- ensure_loaded('packages/term.pro').
 
-% Package contributions
-:- ['languages/yafpl/ok-prog.pro'].
-:- ['languages/yafpl/ok-fun.pro'].
-:- ['languages/yafpl/ok-expr.pro'].
-:- ['languages/yafpl/ok-op.pro'].
-:- ['languages/yafpl/big.pro'].
-:- ['languages/yafpl/value.pro'].
-:- ['languages/yafpl/op-value.pro'].
-:- ['languages/yafpl/op-const.pro'].
-:- ['languages/yafpl/small.pro'].
-:- ['languages/yafpl/normal.pro'].
-:- ['languages/yafpl/substitution.pro'].
-:- ['languages/yafpl/reduction.pro'].
-:- ['languages/yafpl/fun-prog.pro'].
-:- ['languages/yafpl/fun-expr.pro'].
-:- ['languages/yafpl/fun-combinators.pro'].
+% Wellness
+:- ['languages/yafpl/wellness/prog.pro'].
+:- ['languages/yafpl/wellness/fun.pro'].
+:- ['languages/yafpl/wellness/expr.pro'].
+:- ['languages/yafpl/wellness/op.pro'].
+
+% Big-step semantics
+:- ['languages/yafpl/big-step/evaluate.pro'].
+:- ['languages/yafpl/big-step/value.pro'].
+:- ['languages/yafpl/big-step/op.pro'].
+
+% Small-step semantics
+:- ['languages/yafpl/small-step/step.pro'].
+:- ['languages/yafpl/small-step/reduction.pro'].
+:- ['languages/yafpl/small-step/op.pro'].
+:- ['languages/yafpl/small-step/normal.pro'].
+:- ['languages/yafpl/small-step/substitution.pro'].
+
+% Denotation semantics
+:- ['languages/yafpl/denotational/prog.pro'].
+:- ['languages/yafpl/denotational/expr.pro'].
+:- ['languages/yafpl/denotational/combinators.pro'].
 
 % Test target
 

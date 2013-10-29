@@ -5,7 +5,7 @@
 :- ensure_loaded('../packages/mm.pro').
 
 % The classes-to-tables transformation
-:- ['../languages/mml/mappable.pro'].
+:- ['../languages/mml/to-ddl/mappable.pro'].
 :- ['../languages/mml/to-ddl/class-to-table.pro'].
 :- ['../languages/mml/to-ddl/single-to-table.pro'].
 :- ['../languages/mml/to-ddl/multi-to-table.pro'].

@@ -1,11 +1,3 @@
-% Map classes to tables
-classesToTables((_, Classifiers), Tables3) :-
-  map(classToTable, Classifiers, Tabless1),
-  concat(Tabless1, Tables1),
-  map(multisToTables, Classifiers, Tabless2),
-  concat(Tabless2, Tables2),
-  append(Tables1, Tables2, Tables3).
-
 % Map each class to a table
 classToTable(
 

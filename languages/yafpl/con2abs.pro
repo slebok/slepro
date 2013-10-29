@@ -2,7 +2,7 @@
 yafplMapping(type, (T1, Ts1), ([T1|Ts2], T2)) :-
   append(Ts2, [T2], Ts1).
 
-% Eliminate brackets in expressions
+% Eliminate layering in expressions
 yafplMapping(expr, subexpr(E), E).
 
 % Eliminate brackets in expressions

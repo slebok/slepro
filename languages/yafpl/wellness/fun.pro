@@ -1,4 +1,4 @@
-% Check function
+% Wellness of function declarations
 okFun(P, ((N, Ts, T), (N, Ns, E))) :-
   set(Ns),
   zip(Ns, Ts, X),

@@ -1,4 +1,4 @@
-% All states are reachable from a single initial
+% All states are reachable from a single initial state
 fsmReachable(Fsm) :-
   findall(
     Id,

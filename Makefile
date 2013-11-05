@@ -8,7 +8,7 @@ test:
 	make mm.test
 	make mt.test
 	make plt.test
-	make fsm.test
+	make fsml.test
 	make dgl.test
 
 %.test:

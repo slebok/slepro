@@ -62,7 +62,7 @@ fsml_main :- runTests((
      wellTypedTerm(
        (i(term), 'languages/fsml/as.term'),
        (u, fsm),
-       (i(term), 'languages/fsml/sample-turnstile-fsm.term')
+       (i(term), 'languages/fsml/sample-turnstile-fsml.term')
      )
    ),
 
@@ -73,20 +73,20 @@ fsml_main :- runTests((
        (i(term), 'languages/fsml/ls.term'),
        (u, layout),
        (u, fsmMapping),
-       (i(text), 'languages/fsml/sample-turnstile.fsm'),
-       (o(term), 'languages/fsml/sample-turnstile-fsm.term')
+       (i(text), 'languages/fsml/sample-turnstile.fsml'),
+       (o(term), 'languages/fsml/sample-turnstile-fsml.term')
      )
    ),
 
    test(
      okFsm(
-       (i(term), 'languages/fsml/sample-turnstile-fsm.term')
+       (i(term), 'languages/fsml/sample-turnstile-fsml.term')
      )
    ),
 
    test(
      fsmToDgl(
-       (i(term), 'languages/fsml/sample-turnstile-fsm.term'),
+       (i(term), 'languages/fsml/sample-turnstile-fsml.term'),
        (o(term), 'languages/fsml/sample-turnstile-dgl.term')
      )
    ),
@@ -100,7 +100,7 @@ fsml_main :- runTests((
 
    test(
      simulateFsm(
-       (i(term), 'languages/fsml/sample-turnstile-fsm.term'),
+       (i(term), 'languages/fsml/sample-turnstile-fsml.term'),
        (i(term), 'languages/fsml/sample-turnstile-input.term'),
        (o(term), 'languages/fsml/sample-turnstile-output.term')
      )
@@ -108,28 +108,28 @@ fsml_main :- runTests((
 
    test(
      statesOfFsm(
-       (i(term), 'languages/fsml/sample-turnstile-fsm.term'),
+       (i(term), 'languages/fsml/sample-turnstile-fsml.term'),
        (o(text), 'languages/fsml/java/State.java')
      )
    ),
 
    test(
      inputsOfFsm(
-       (i(term), 'languages/fsml/sample-turnstile-fsm.term'),
+       (i(term), 'languages/fsml/sample-turnstile-fsml.term'),
        (o(text), 'languages/fsml/java/Input.java')
      )
    ),
 
    test(
      actionsOfFsm(
-       (i(term), 'languages/fsml/sample-turnstile-fsm.term'),
+       (i(term), 'languages/fsml/sample-turnstile-fsml.term'),
        (o(text), 'languages/fsml/java/Action.java')
      )
    ),
 
    test(
      stepperOfFsm(
-       (i(term), 'languages/fsml/sample-turnstile-fsm.term'),
+       (i(term), 'languages/fsml/sample-turnstile-fsml.term'),
        (u, 'TurnstileStepper'),
        (o(text), 'languages/fsml/java/TurnstileStepper.java')
      )

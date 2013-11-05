@@ -1,14 +1,13 @@
 % Well-typed terms
-wellTypedTerm(Sig, Sort, Term) :-
+wellTypedTerm(Decls, Sort, Term) :-
   require(
     appliedSignatureExpected,
-    appliedSignature(Sig)
+    appliedSignature(Decls)
   ),
   require(
     appliedTermExpected,
     appliedTerm(Term)
   ),
-  Sig = signature(Decls),
   wellTypedTerm_(Decls, sort(Sort), Term).
 
 % Apply symbol
@@ -17,9 +16,9 @@ wellTypedTerm_(Decls, sort(Result), Term) :-
   member(symbol(Symbol, Arguments, Result), Decls),
   map(wellTypedTerm_(Decls), Arguments, Terms).
 
-% Apply alias
+% Apply type
 wellTypedTerm_(Decls, sort(Sort), Term) :-
-  member(alias(Sort, Type), Decls),
+  member(type(Sort, Type), Decls),
   wellTypedTerm_(Decls, Type, Term).
 
 % Test for atoms
@@ -39,7 +38,16 @@ wellTypedTerm_(_, term, Term) :-
   appliedTerm(Term).
 
 % Test for lists
-wellTypedTerm_(Decls, list(Type), Terms) :-
+wellTypedTerm_(Decls, star(Type), Terms) :-
+  map(wellTypedTerm_(Decls, Type), Terms).
+wellTypedTerm_(Decls, plus(Type), Terms) :-
+  Terms \= [],
+  map(wellTypedTerm_(Decls, Type), Terms).
+
+% Test for options
+wellTypedTerm_(Decls, option(Type), Terms) :-
+  length(Terms, Len),
+  Len < 2,
   map(wellTypedTerm_(Decls, Type), Terms).
 
 % Base case for tuples

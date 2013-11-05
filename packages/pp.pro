@@ -10,9 +10,9 @@
 :- ['../languages/ppl/to-string.pro'].
 
 % Language-specific pretty printers
-:- ['../languages/figure/pretty-printer.pro'].
-:- ['../languages/yafpl/pretty-printer.pro'].
-:- ['../languages/graph/pretty-printer.pro'].
+:- ['../languages/figure/as-to-cs.pro'].
+:- ['../languages/yafpl/as-to-cs.pro'].
+:- ['../languages/graph/as-to-cs.pro'].
 
 % Test target
 

@@ -26,7 +26,12 @@ reportTesting :-
       ; halt
   ).
 
-% Assertion
+% Assertion with predicate serving as reportable constraint
+require(P) :-
+  P =.. [C|_],
+  require(C, P).
+
+% Assertion with explicit constraint naming
 require(C, P) :-
   ( P -> 
        true

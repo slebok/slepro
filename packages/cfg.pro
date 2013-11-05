@@ -19,7 +19,7 @@
 :- ['languages/egl/parse.pro'].
 %:- ['languages/egl/parse-debug.pro']. % include for debugging parsing
 :- ['languages/egl/scanner.pro'].
-:- ['languages/egl/con2abs.pro'].
+:- ['languages/egl/cs-to-as.pro'].
 :- ['languages/egl/scannerfull.pro'].
 :- ['languages/egl/scannerless.pro'].
 :- ['languages/egl/run.pro'].
@@ -27,11 +27,12 @@
 % Modules for sample languages
 :- ['languages/expr/scanner.pro'].
 :- ['languages/figure/scanner.pro'].
-:- ['languages/figure/con2abs.pro'].
-:- ['languages/mml/con2abs.pro'].
+:- ['languages/figure/cs-to-as.pro'].
+:- ['languages/esl/cs-to-as.pro'].
+:- ['languages/mml/cs-to-as.pro'].
 :- ['languages/ddl/scanner.pro'].
-:- ['languages/ddl/con2abs.pro'].
-:- ['languages/yafpl/con2abs.pro'].
+:- ['languages/ddl/cs-to-as.pro'].
+:- ['languages/yafpl/cs-to-as.pro'].
 
 % Test target
 
@@ -51,7 +52,7 @@ cfg_main :- runTests((
 
    test(
      acceptTopDown(
-       (i(term), 'languages/expr/consyn.term'),
+       (i(term), 'languages/expr/cs.term'),
        (u, expr),
        (i(term), 'languages/expr/sample-add.tokens')
      )
@@ -59,7 +60,7 @@ cfg_main :- runTests((
 
    test(
      acceptBottomUp(
-       (i(term), 'languages/expr/consyn.term'),
+       (i(term), 'languages/expr/cs.term'),
        (u, expr),
        (i(term), 'languages/expr/sample-add.tokens')
      )
@@ -67,7 +68,7 @@ cfg_main :- runTests((
 
    test(
      parseTopDown(
-       (i(term), 'languages/expr/consyn.term'),
+       (i(term), 'languages/expr/cs.term'),
        (u, expr),
        (i(term), 'languages/expr/sample-add.tokens'),
        (o(term), 'languages/expr/sample-add-ptree.term')
@@ -90,7 +91,7 @@ cfg_main :- runTests((
 
    test(
      explode(
-       (i(term), 'languages/expr/consyn.term'),
+       (i(term), 'languages/expr/cs.term'),
        (u, expr),
        (i(term), 'languages/expr/sample-add-prefix.term'),
        (o(term), 'languages/expr/sample-add-ptree.term')
@@ -99,24 +100,24 @@ cfg_main :- runTests((
 
    test(
      wellTypedTerm(
-       (i(term), 'languages/bgl/abssyn.term'),
+       (i(term), 'languages/bgl/as.term'),
        (u, grammar),
-       (i(term), 'languages/expr/consyn.term')
+       (i(term), 'languages/expr/cs.term')
      )
    ),
 
    test(
      bglToSignature(
-       (i(term), 'languages/expr/consyn.term'),
-       (o(term), 'languages/expr/abssyn.term')
+       (i(term), 'languages/expr/cs.term'),
+       (o(term), 'languages/expr/as.term')
      )
    ),
 
    test(
      scannerlessParser(
-       (i(term), 'languages/mml/consyn.term'),
+       (i(term), 'languages/mml/cs.term'),
        (u, metamodel),
-       (i(term), 'languages/mml/lexsyn.term'),
+       (i(term), 'languages/mml/ls.term'),
        (u, layout),
        (u, classesMapping),
        (i(text), 'languages/expr/mm.mml'),
@@ -126,9 +127,9 @@ cfg_main :- runTests((
 
    test(
      scannerlessParser(
-       (i(term), 'languages/mml/consyn.term'),
+       (i(term), 'languages/mml/cs.term'),
        (u, metamodel),
-       (i(term), 'languages/mml/lexsyn.term'),
+       (i(term), 'languages/mml/ls.term'),
        (u, layout),
        (u, classesMapping),
        (i(text), 'languages/expr/mm-relaxed.mml'),
@@ -138,8 +139,8 @@ cfg_main :- runTests((
 
    test(
      parseBgl(
-       (i(text), 'languages/expr/consyn.bgl'),
-       (o(term), 'languages/expr/consyn.term')
+       (i(text), 'languages/expr/cs.bgl'),
+       (o(term), 'languages/expr/cs.term')
      )
    ),
 
@@ -150,15 +151,15 @@ cfg_main :- runTests((
 
    test(
      scannerfullEgl(
-       (i(text), 'languages/figure/consyn.egl'),
-       (o(term), 'languages/figure/consyn.term')
+       (i(text), 'languages/figure/cs.egl'),
+       (o(term), 'languages/figure/cs.term')
      )
    ),
 
    test(
      scannerfullEgl(
-       (i(text), 'languages/figure/lexsyn.egl'),
-       (o(term), 'languages/figure/lexsyn.term')
+       (i(text), 'languages/figure/ls.egl'),
+       (o(term), 'languages/figure/ls.term')
      )
    ),
 
@@ -172,7 +173,7 @@ cfg_main :- runTests((
 
    test(
      scannerfullParser(
-       (i(term), 'languages/figure/consyn.term'),
+       (i(term), 'languages/figure/cs.term'),
        (u, figure),
        (u, fail),
        (i(term), 'languages/figure/sample-line.tokens'),
@@ -182,9 +183,9 @@ cfg_main :- runTests((
 
    test(
      scannerlessParser(
-       (i(term), 'languages/figure/consyn.term'),
+       (i(term), 'languages/figure/cs.term'),
        (u, figure),
-       (i(term), 'languages/figure/lexsyn.term'),
+       (i(term), 'languages/figure/ls.term'),
        (u, layout),
        (u, figureMapping),
        (i(text), 'languages/figure/sample-line.figure'),
@@ -194,9 +195,9 @@ cfg_main :- runTests((
 
    test(
      wellTypedTerm(
-       (i(term), 'languages/egl/abssyn.term'),
+       (i(term), 'languages/egl/as.term'),
        (u, grammar),
-       (i(term), 'languages/figure/consyn.term')
+       (i(term), 'languages/figure/cs.term')
      )
    ),
 
@@ -207,23 +208,23 @@ cfg_main :- runTests((
 
    test(
      scannerfullEgl(
-       (i(text), 'languages/mml/consyn.egl'),
-       (o(term), 'languages/mml/consyn.term')
+       (i(text), 'languages/mml/cs.egl'),
+       (o(term), 'languages/mml/cs.term')
      )
    ),
 
    test(
      scannerfullEgl(
-       (i(text), 'languages/mml/lexsyn.egl'),
-       (o(term), 'languages/mml/lexsyn.term')
+       (i(text), 'languages/mml/ls.egl'),
+       (o(term), 'languages/mml/ls.term')
      )
    ),
 
    test(
      scannerlessParser(
-       (i(term), 'languages/mml/consyn.term'),
+       (i(term), 'languages/mml/cs.term'),
        (u, metamodel),
-       (i(term), 'languages/mml/lexsyn.term'),
+       (i(term), 'languages/mml/ls.term'),
        (u, layout),
        (u, classesMapping),
        (i(text), 'languages/family/mm1.mml'),
@@ -233,9 +234,9 @@ cfg_main :- runTests((
 
    test(
      scannerlessParser(
-       (i(term), 'languages/mml/consyn.term'),
+       (i(term), 'languages/mml/cs.term'),
        (u, metamodel),
-       (i(term), 'languages/mml/lexsyn.term'),
+       (i(term), 'languages/mml/ls.term'),
        (u, layout),
        (u, classesMapping),
        (i(text), 'languages/family/mm2.mml'),
@@ -245,13 +246,13 @@ cfg_main :- runTests((
 
    test(
      appliedSignature(
-       (i(term), 'languages/mml/abssyn.term')
+       (i(term), 'languages/mml/as.term')
      )
    ),
 
    test(
      wellTypedTerm(
-       (i(term), 'languages/mml/abssyn.term'),
+       (i(term), 'languages/mml/as.term'),
        (u, metamodel),
        (i(term), 'languages/family/mm2.term')
      )
@@ -259,9 +260,9 @@ cfg_main :- runTests((
 
    test(
      scannerlessParser(
-       (i(term), 'languages/mml/consyn.term'),
+       (i(term), 'languages/mml/cs.term'),
        (u, metamodel),
-       (i(term), 'languages/mml/lexsyn.term'),
+       (i(term), 'languages/mml/ls.term'),
        (u, layout),
        (u, classesMapping),
        (i(text), 'languages/mml/mm.mml'),
@@ -276,8 +277,8 @@ cfg_main :- runTests((
 
    test(
      scannerlessEgl(
-       (i(text), 'languages/ddl/consyn.egl'),
-       (o(term), 'languages/ddl/consyn.term')
+       (i(text), 'languages/ddl/cs.egl'),
+       (o(term), 'languages/ddl/cs.term')
      )
    ),
 
@@ -291,7 +292,7 @@ cfg_main :- runTests((
 
    test(
      scannerfullParser(
-       (i(term), 'languages/ddl/consyn.term'),
+       (i(term), 'languages/ddl/cs.term'),
        (u, schema), (u, tablesMapping),
        (i(term), 'languages/family/dd.tokens'),
        (o(term), 'languages/family/dd.term')
@@ -305,27 +306,46 @@ cfg_main :- runTests((
 
    test(
      scannerfullEgl(
-       (i(text), 'languages/yafpl/consyn.egl'),
-       (o(term), 'languages/yafpl/consyn.term')
+       (i(text), 'languages/yafpl/cs.egl'),
+       (o(term), 'languages/yafpl/cs.term')
      )
    ),
 
    test(
      scannerfullEgl(
-       (i(text), 'languages/yafpl/lexsyn.egl'),
-       (o(term), 'languages/yafpl/lexsyn.term')
+       (i(text), 'languages/yafpl/ls.egl'),
+       (o(term), 'languages/yafpl/ls.term')
      )
    ),
 
    test(
      scannerlessParser(
-       (i(term), 'languages/yafpl/consyn.term'),
+       (i(term), 'languages/yafpl/cs.term'),
        (u, program),
-       (i(term), 'languages/yafpl/lexsyn.term'),
+       (i(term), 'languages/yafpl/ls.term'),
        (u, layout),
        (u, yafplMapping),
        (i(text), 'languages/yafpl/sample-factorial.hs'),
        (o(term), 'languages/yafpl/sample-factorial.term')
+     )
+   ),
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Extended Signature Language (ESL)
+%
+
+   test(
+     scannerlessEgl(
+       (i(text), 'languages/esl/cs.egl'),
+       (o(term), 'languages/esl/cs.term')
+     )
+   ),
+
+   test(
+     scannerlessEgl(
+       (i(text), 'languages/esl/ls.egl'),
+       (o(term), 'languages/esl/ls.term')
      )
    ),
 
@@ -336,15 +356,15 @@ cfg_main :- runTests((
 
    test(
      appliedSignature(
-       (i(term), 'languages/bgl/abssyn.term')
+       (i(term), 'languages/bgl/as.term')
      )
    ),
 
    test(
      wellTypedTerm(
-       (i(term), 'languages/esl/abssyn.term'),
+       (i(term), 'languages/esl/as.term'),
        (u, signature),
-       (i(term), 'languages/bgl/abssyn.term')
+       (i(term), 'languages/bgl/as.term')
      )
    ),
 
@@ -355,59 +375,59 @@ cfg_main :- runTests((
 
    test(
      scannerfullEgl(
-       (i(text), 'languages/egl/consyn.egl'),
-       (o(term), 'languages/egl/consyn.term')
+       (i(text), 'languages/egl/cs.egl'),
+       (o(term), 'languages/egl/cs.term')
      )
    ),
 
    test(
      scannerlessEgl(
-       (i(text), 'languages/egl/consyn.egl'),
-       (o(term), 'languages/egl/consyn.term')
+       (i(text), 'languages/egl/cs.egl'),
+       (o(term), 'languages/egl/cs.term')
      )
    ),
 
    test(
      scannerfullEgl(
-       (i(text), 'languages/egl/lexsyn.egl'),
-       (o(term), 'languages/egl/lexsyn.term')
+       (i(text), 'languages/egl/ls.egl'),
+       (o(term), 'languages/egl/ls.term')
      )
    ),
 
    test(
      scannerlessEgl(
-       (i(text), 'languages/egl/lexsyn.egl'),
-       (o(term), 'languages/egl/lexsyn.term')
+       (i(text), 'languages/egl/ls.egl'),
+       (o(term), 'languages/egl/ls.term')
      )
    ),
 
    test(
      appliedSignature(
-       (i(term), 'languages/egl/abssyn.term')
+       (i(term), 'languages/egl/as.term')
      )
    ),
 
    test(
      wellTypedTerm(
-       (i(term), 'languages/esl/abssyn.term'),
+       (i(term), 'languages/esl/as.term'),
        (u, signature),
-       (i(term), 'languages/egl/abssyn.term')
+       (i(term), 'languages/egl/as.term')
      )
    ),
 
    test(
      wellTypedTerm(
-       (i(term), 'languages/egl/abssyn.term'),
+       (i(term), 'languages/egl/as.term'),
        (u, grammar),
-       (i(term), 'languages/egl/consyn.term')
+       (i(term), 'languages/egl/cs.term')
      )
    ),
 
    test(
      wellTypedTerm(
-       (i(term), 'languages/egl/abssyn.term'),
+       (i(term), 'languages/egl/as.term'),
        (u, grammar),
-       (i(term), 'languages/egl/lexsyn.term')
+       (i(term), 'languages/egl/ls.term')
      )
    )
 

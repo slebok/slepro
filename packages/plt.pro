@@ -33,7 +33,7 @@ plt_main :- runTests((
 
    test(
      wellTypedTerm(
-       (i(term), 'languages/yafpl/abssyn.term'),
+       (i(term), 'languages/yafpl/as.term'),
        (u, program),
        (i(term), 'languages/yafpl/sample-factorial.term')
      )

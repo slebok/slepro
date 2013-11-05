@@ -1,14 +1,29 @@
+- An FSM language
+  - Concrete syntax for FSMs
+  - Code generator for Java
+  - Export to GraphViz
+  - Simulation as semantics
+  - Determinism/Termination as static semantics
+- Grow a language like Anya
+  * SimplTrivial.rsc
+  * SimplVars.rsc
+  * SimplFuns.rsc
+  * SimplExpr.rsc?
 - Demonstrate megamodeling; see attic/ontologies
+- Add operators for figures
+- What other cool but simple DSL?
+- Something based on a solver
 - Add prelude/rewriting.pro
 - Use strategies in expr language
 - Use strategies in yafpl language
 - Consider a variation on expr with integers
-- QVT/TGG
+- QVT/TGG/ATL
 - Some (what?) ontology use
-- Concrete syntax
+- Concrete object syntax
 - Partial evaluation for yafpl
 - Semantics for expr
 - Semantics for figure (GraphViz)
+- Name binding etc.
 - Attributed trees
 - Attribute grammars
 - Attribute evaluation

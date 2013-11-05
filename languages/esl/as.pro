@@ -1,16 +1,14 @@
 % An applied signature
-appliedSignature(Sig) :-
+appliedSignature(Decls) :-
 
   require(
     appliedTermExpected,
-    appliedTerm(Sig)),
+    appliedTerm(Decls)),
 
-  Sig = signature(Decls),
-
-  % No confusion of symbols and aliases
+  % No confusion of symbols and types
   \+ (
     member(symbol(_, _, Sort), Decls),
-    member(alias(Sort, _), Decls)
+    member(type(Sort, _), Decls)
   ),
 
   % No double declarations of symbols
@@ -23,10 +21,10 @@ appliedSignature(Sig) :-
     )
   ),
 
-  % No double declarations of aliases
+  % No double declarations of types
   \+ (
-    member(alias(Sort, Type1), Decls),
-    member(alias(Sort, Type2), Decls),
+    member(type(Sort, Type1), Decls),
+    member(type(Sort, Type2), Decls),
     \+ Type1 == Type2
   ),
 
@@ -38,8 +36,8 @@ appliedDecl(symbol(_, Arguments, Result)) :-
   map(appliedType, Arguments),
   appliedSort(Result).
 
-% A declaration of an alias
-appliedDecl(alias(Sort, Type)) :-
+% A declaration of a type
+appliedDecl(type(Sort, Type)) :-
   appliedSort(Sort),
   appliedType(Type).
 
@@ -59,7 +57,11 @@ appliedType(boolean).
 appliedType(term).
 appliedType(sort(Sort)) :- 
   appliedSort(Sort).
-appliedType(list(Type)) :- 
+appliedType(star(Type)) :- 
+  appliedType(Type).
+appliedType(plus(Type)) :- 
+  appliedType(Type).
+appliedType(option(Type)) :- 
   appliedType(Type).
 appliedType(tuple(Types)) :-
   map(appliedType, Types).

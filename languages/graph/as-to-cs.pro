@@ -1,4 +1,4 @@
-% Render print graphs
+% Render graphs
 ppGraph(G, S) :-
   once(ppGraph_(text('.'), G, B)),
   pp(B, S).

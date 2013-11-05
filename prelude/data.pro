@@ -59,3 +59,9 @@ repeat(X, N, [X|Xs]) :-
   N > 0,
   M is N - 1,
   repeat(X, M, Xs).
+
+% Intersperse a separator between elements
+intersperse(_, [], []).
+intersperse(_, [H], [H]).
+intersperse(X, [H1,H2|T1], [H1,X|T2]) :-
+  intersperse(X, [H2|T1], T2).

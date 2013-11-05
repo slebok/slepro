@@ -7,7 +7,7 @@
 :- ensure_loaded('../packages/graph.pro').
 
 % Metamodels at the term level
-:- ['../languages/mml/abssyn.pro'].
+:- ['../languages/mml/as.pro'].
 :- ['../languages/mml/term-chase.pro'].
 :- ['../languages/mml/term-to-graph.pro'].
 
@@ -129,7 +129,7 @@ mm_main :- runTests((
 
    test(
      wellTypedTerm(
-       (i(term), 'languages/mml/abssyn.term'),
+       (i(term), 'languages/mml/as.term'),
        (u, metamodel),
        (i(term), 'languages/mml/mm.term')
      )
@@ -137,7 +137,7 @@ mm_main :- runTests((
 
    test(
      wellTypedTerm(
-       (i(term), 'languages/ddl/abssyn.term'),
+       (i(term), 'languages/ddl/as.term'),
        (u, schema),
        (i(term), 'languages/family/dd.term')
      )

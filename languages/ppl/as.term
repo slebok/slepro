@@ -4,6 +4,7 @@ signature(
     symbol(text, [atom], box),
     symbol(hbox, [sort(box), sort(box)], box),
     symbol(hlist, [list(sort(box))], box),
+    symbol(hseplist, [sort(box), list(sort(box))], box),
     symbol(vbox, [sort(box), sort(box)], box),
     symbol(vlist, [list(sort(box))], box),
     symbol(indent, [sort(box)], box)

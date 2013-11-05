@@ -1,8 +1,0 @@
-signature(
-  [
-    alias(figure, list(sort(element))),
-    symbol(line, [sort(point), sort(point)], element),
-    symbol(circle, [sort(point), integer], element),
-    alias(point, tuple([integer, integer]))
-  ]
-).

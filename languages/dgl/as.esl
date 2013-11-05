@@ -1,0 +1,10 @@
+type graph = (node*, edge*) ;
+type node = (id, label, shape, style?) ;
+type edge = (id, id, label?) ;
+type id = atom ;
+type label = atom ;
+symbol box : -> shape ;
+symbol ellipse : -> shape ;
+symbol bold : -> style ;
+symbol dotted : -> style ;
+symbol filled : -> style ;

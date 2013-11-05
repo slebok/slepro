@@ -1,0 +1,24 @@
+% The signature of extended context-free grammars
+[ 
+  % Grammars are lists (sets) of rules
+  type(grammar, star(sort(rule))),
+  type(rule, tuple([star(sort(label)),sort(nonterminal),sort(symbols)])),
+
+  % Lists of symbols
+  type(symbols, star(sort(symbol))),
+    
+  % Classification of grammar symbols
+  symbol(t, [sort(terminal)], symbol), % terminals are symbols
+  symbol(n, [sort(nonterminal)], symbol), % nonterminals as well
+  symbol(p, [sort(nonterminal)], symbol), % parameters as well
+  symbol(star, [sort(symbols)], symbol), % "*"
+  symbol(plus, [sort(symbols)], symbol), % "+"
+  symbol(option, [sort(symbols)], symbol), % "?"
+
+  % Primitive symbols and names
+  type(nonterminal, atom),
+  type(parameter, atom),
+  type(terminal, atom),
+  type(label, atom)
+
+].

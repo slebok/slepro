@@ -27,9 +27,20 @@ ppEval(hlist(Bs), L) :-
   map(ppEval, Bs, Ls),
   foldr(happend, [], Ls, L).
 
+% hlist with separator 
+ppEval(hseplist(B, Bs1), L) :-
+  intersperse(B, Bs1, Bs2),
+  map(ppEval, Bs2, Ls),
+  foldr(happend, [], Ls, L).
+
 % Apply indentation
 ppEval(indent(B), L) :-
   ppEval(hbox(text(' '), B), L).
+
+% Failure of rendering
+ppEval(B, _) :-
+  format('Rendering failed: ~w~n', [B]),
+  fail.
 
 % Horizontal composition of boxes (consisting of many lines)
 happend(L1, L2, L3) :-

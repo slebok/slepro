@@ -1,0 +1,8 @@
+fsm : { state }* ;
+state : initial 'state' id '{' { transition }* '}' ;
+[initial] initial : 'initial' ;
+[noninitial] initial : ;
+transition : input { '/' action }? { '->' id }? ';' ;
+id : name ;
+input : name ;
+action : name ;

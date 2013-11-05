@@ -9,11 +9,11 @@
 :- ['../languages/bsl/applied-term.pro'].
 
 % Basic signatures
-:- ['../languages/bsl/abssyn.pro'].
+:- ['../languages/bsl/as.pro'].
 :- ['../languages/bsl/conformance.pro'].
 
 % Applied terms and signatures
-:- ['../languages/esl/abssyn.pro'].
+:- ['../languages/esl/as.pro'].
 :- ['../languages/esl/conformance.pro'].
 
 % Test target
@@ -51,13 +51,13 @@ term_main :- runTests((
 
    test(
      signature(
-       (i(term), 'languages/expr/abssyn.term')
+       (i(term), 'languages/expr/as.term')
      )
    ),
 
    test(
      manySortedTerm(
-       (i(term), 'languages/expr/abssyn.term'),
+       (i(term), 'languages/expr/as.term'),
        (i(term), 'languages/expr/sample-add-prefix.term'),
        (u, expr)
      )
@@ -70,13 +70,13 @@ term_main :- runTests((
 
    test(
      appliedSignature(
-       (i(term), 'languages/figure/abssyn.term')
+       (i(term), 'languages/figure/as.term')
      )
    ),
 
    test(
      wellTypedTerm(
-       (i(term), 'languages/figure/abssyn.term'),
+       (i(term), 'languages/figure/as.term'),
        (u, figure),
        (i(term), 'languages/figure/sample-line.term')
      )
@@ -84,23 +84,23 @@ term_main :- runTests((
 
    test(
      appliedSignature(
-       (i(term), 'languages/esl/abssyn.term')
+       (i(term), 'languages/esl/as.term')
      )
    ),
 
    test(
      wellTypedTerm(
-       (i(term), 'languages/esl/abssyn.term'),
+       (i(term), 'languages/esl/as.term'),
        (u, signature),
-       (i(term), 'languages/figure/abssyn.term')
+       (i(term), 'languages/figure/as.term')
      )
    ),
 
    test(
      wellTypedTerm(
-       (i(term), 'languages/esl/abssyn.term'),
+       (i(term), 'languages/esl/as.term'),
        (u, signature),
-       (i(term), 'languages/esl/abssyn.term')
+       (i(term), 'languages/esl/as.term')
      )
    )
 

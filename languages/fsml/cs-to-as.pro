@@ -1,14 +1,14 @@
-% Mapping for states
-fsmMapping(state, (I1, N, Ts1), (I2, N, Ts2)) :-
-  toBoolean((I1==initial), I2),
-  map(fsmToSelf(N), Ts1, Ts2).
-
 % Lexical mapping for name
-fsmMapping(name, String, Atom) :-
+fsmlMapping(name, String, Atom) :-
   name(Atom, String).
 
-% Make target state mandatory
-fsmToSelf(_, (I, A, [S]), (I, A, S)).
+% Mapping for states
+fsmlMapping(state, (I1, N, Ts1), (I2, N, Ts2)) :-
+  toBoolean((I1==initial), I2),
+  map(normalizeTargetState(N), Ts1, Ts2).
 
-% Make self the target state
-fsmToSelf(N, (I, A, []), (I, A, N)).
+% Make target state mandatory
+normalizeTargetState(_, (I, A, [S]), (I, A, S)).
+
+% Fill in missing target state as the source state
+normalizeTargetState(N, (I, A, []), (I, A, N)).

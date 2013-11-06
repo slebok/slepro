@@ -10,6 +10,7 @@
 % Modules for FSM
 :- ['languages/fsml/cs-to-as.pro'].
 :- ['languages/fsml/ok.pro'].
+:- ['languages/fsml/ok/initial.pro'].
 :- ['languages/fsml/ok/distinct.pro'].
 :- ['languages/fsml/ok/resolvable.pro'].
 :- ['languages/fsml/ok/deterministic.pro'].
@@ -72,7 +73,7 @@ fsml_main :- runTests((
        (u, fsm),
        (i(term), 'languages/fsml/ls.term'),
        (u, layout),
-       (u, fsmMapping),
+       (u, fsmlMapping),
        (i(text), 'languages/fsml/sample-turnstile.fsml'),
        (o(term), 'languages/fsml/sample-turnstile-fsml.term')
      )

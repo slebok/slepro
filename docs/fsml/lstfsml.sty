@@ -1,0 +1,13 @@
+\NeedsTeXFormat{LaTeX2e}%
+\ProvidesPackage{lstfsml}[2013/02/10 Haskell Support for Listings]%
+\RequirePackage{listings}%
+%
+\lstdefinelanguage{fsml}%
+{
+keywords={,
+  initial,
+  state,
+},%
+   sensitive,%
+   morestring=[b]'%
+  }[keywords,comments,strings]%

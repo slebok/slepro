@@ -9,9 +9,10 @@
 \usepackage{comment}
 \usepackage{boxedminipage}
 \usepackage{amssymb}
-\usepackage{listings,lsthaskell,lstprolog,lstegl,lstesl,lstfsml}
+\usepackage{listings,lsthaskell,lstprolog,lstegl,lstesl,lstfsml,lstjava,lstdot}
 
 \newcommand{\m}[1]{\ensuremath{\mathit{#1}}}
+\newcommand{\slepro}{\textsc{SlePro}}
 \newcommand{\concept}[1]{\emph{#1}}
 \definecolor{codebackground}{rgb}{0.97,0.97,0.97}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
@@ -29,16 +30,18 @@
 \newcommand{\codefigure}[3]{
 \begin{figure}[t!]
 \begin{boxedminipage}{\hsize}
-\mbox{}\hfill{}{\small\textsf{\href{http://github.com/slebok/slepro/tree/master/#2}{#2}}}
+\mbox{}\hfill{}{\small\textit{\href{http://github.com/slebok/slepro/tree/master/#2}{#2}}}
 \lstinputlisting[language=#3]{../../#2}
 \end{boxedminipage}
 \caption{#1.}
 \label{#2}
+\medskip
 \end{figure}}
 
 \lstset{%
   fontadjust=true,%
   showstringspaces=false,%
+  basicstyle=\small\sffamily,%
   keywordstyle=\color{keyword},%
   commentstyle=\color{comment}\rmfamily\itshape\small,%
   columns=fullflexible,%
@@ -53,16 +56,6 @@
 aboveskip = 0pt,
 belowskip = 0pt,
   %breaklines=true
-}
-
-\lstdefinestyle{haskell}{
-  language=Haskell,
-  basicstyle=\small\color{ncode}\ttfamily,%
-}
-
-\lstdefinestyle{prolog}{
-  language=Prolog,
-  basicstyle=\small\color{ncode}\ttfamily,%
 }
 
 \newcommand{\wikipediafn}[2]{\footnote{\url{#1}---last visited #2.}}
@@ -89,7 +82,8 @@ belowskip = 0pt,
   code-generation semantics for representing and executing FSMs in
   Java. The key motivation for the present model of FSML to be
   explainable exhaustively in terms of simple formalisms and idioms,
-  all layered on top of Prolog.
+  all layered on top of Prolog. The FSML development is part of the
+  \slepro{} project; see \url{https://github.com/slebok/slepro}.
 
 \bigskip
 
@@ -106,7 +100,7 @@ belowskip = 0pt,
 \noindent
 \textbf{Version}
 
-0.000001 as of 4 November 2013.
+0.00001 as of 8 November 2013.
 
 \medskip
 
@@ -115,10 +109,6 @@ belowskip = 0pt,
 
 \url{https://github.com/slebok/slepro/tree/master/docs/fsml}.
 \end{abstract}
-
-% \begin{keyword} 
-% ???
-% \end{keyword}
 
 \end{frontmatter}
 
@@ -174,10 +164,18 @@ FSMs. Specifically, we will model several aspects of FSML:
 \end{itemize}
 
 This primer is concluded by some `food for thought' in
-\S\ref{S:concl}. That is, we state shortcomings or issues of
-incompleteness of the language model approach at hand, thereby also
-motivating reproductions of the model as well as variations on the
-model, possibly leveraging diverse metaprogramming settings.
+\S\ref{S:concl}. That is, we critically discuss the language model at
+hand as well as the underlying approach, thereby also motivating
+reproductions of the model as well as variations on the model,
+possibly leveraging diverse technologies and techniques.
+
+The FSML development is part of the \slepro{} project. All software
+artifacts of this document and all support infrastructure is available
+through the repository of the project:
+
+\begin{center}
+\url{https://github.com/slebok/slepro}
+\end{center}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -202,11 +200,11 @@ languages/fsml/cs.egl}{%
 egl}
 
 Let us define the syntax in terms of a context-free grammar. We use an
-EGL grammar, where EGL stands for extended grammar language and can be
-regarded as a variation on the Extended Backus Naur Form. EGL is an
-ad-hoc grammar notation that is provided by the same project that
-hosts the present FSML model. In particular, EGL grammars can be
-executed for the purpose of parsing, but we omit all such details
+EGL grammar, where EGL stands for `extended grammar language' and can
+be regarded as a variation on the Extended Backus Naur Form. EGL is an
+ad-hoc grammar notation that is provided by the \slepro{} project; see
+\S\ref{A:egl} for a self-description. In particular, EGL grammars can
+be executed for the purpose of parsing, but we omit all such details
 here. See \autoref{languages/fsml/cs.egl} for the grammar. It can be
 assumed that the concrete textual syntax, as illustrated in
 \autoref{languages/fsml/sample-turnstile.fsml}, can be parsed indeed
@@ -249,16 +247,17 @@ esl}
 
 Let us define the abstract syntax in terms of a signature that defines
 all valid FSM terms. We use an ESL signature, where ESL stands for
-extended signature language and can be regarded as (quite) a variation
-on notations familiar from algebraic specification or (less) a
-variation on type systems used in logic or functional programming. ESL
-is an ad-hoc signature notation that is provided by the same project
-that hosts the present FSML model. In particular, ESL grammars can be
-executed for conformance checking to see whether a given term conforms
-to a given signature, but we omit all such details here. See
+`extended signature language' and can be regarded as (quite) a
+variation on notations familiar from algebraic specification or (less)
+a variation on type systems used in logic or functional
+programming. ESL is an ad-hoc signature notation that is provided by
+the \slepro{} project; see \S\ref{A:esl} for a syntax definition of
+the signature notation. In particular, ESL grammars can be executed
+for conformance checking to see whether a given term conforms to a
+given signature, but we omit all such details here. See
 \autoref{languages/fsml/as.esl} for the signature. The term in
-\autoref{languages/fsml/sample-turnstile-fsml.term} conforms indeed
-to the present signature.
+\autoref{languages/fsml/sample-turnstile-fsml.term} conforms indeed to
+the present signature.
 
 \codefigure{%
 Concrete to abstract syntax mapping for FSML}{%
@@ -276,7 +275,7 @@ conform to the signature for the abstract syntax. The mapping is
 defined by a Prolog predicate \emph{fsmlMapping}; see the Prolog
 clauses in \autoref{languages/fsml/cs-to-as.pro}.
 
-The syntax definition approach of the present project assumes such
+The syntax definition approach of the \slepro{} project assumes such
 mappings are indeed predicates with three arguments \m{N}, \m{T1},
 \m{T2} as follows. \m{N} is the nonterminal (according to the grammar
 for the concrete syntax) whose parse trees are to be mapped, i.e.,
@@ -388,28 +387,278 @@ additional states; see \autoref{languages/fsml/ok/closure.pro}.
 \section{The reference semantics for FSML}
 \label{S:semantics}
 
-TBD
+So far we relies on an intuitive understanding of the FSML semantics,
+which is reasonable in so far that the notion of finite state machines
+is pretty fundamental and familiar. Nevertheless, we are bound to
+provide a precise and executable reference semantics of the language
+which can then be hold accountable by other language-based software
+components, e.g., a code generator (see next section) or a
+refactoring. 
+
+We speak of a reference semantics here to emphasize that this
+semantics may not be practically useful immediately. That is, we
+will define the semantics of a FSM by a simulation judgement which
+assumes that all input is provided upfront and all output (the action
+sequence) is provided upon completion of input processing. This is a
+batch model, which is useful in a formal semantics, but it is not
+useful for using FSMs in interactive systems.
+
+\codefigure{%
+Semantics of FSML}{%
+languages/fsml/simulation.pro}{%
+prolog}
+
+See \autoref{languages/fsml/simulation.pro} for the semantics; the
+judgements are expressed in Prolog. The clause at the top selects the
+initial state of the FSM and enters the simulation with that state and
+the complete input. The remaining two clauses describe the iteration
+over the input such that a suitable transition is looked up in each
+step and action (if any) and the new state are paired up as an element in
+the output so that simulation proceeds with the new state and the
+remaining input.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{The code generator for FSML}
 \label{S:generator}
 
-TBD
+A practically useful interpretation of FSML would be achieved, if we
+enabled interactive execution of the FSMs in the context of some
+programming environment. We pick Java as our target here. We describe
+a code generator which translates FSMs into Java code. The generated
+code can be augmented with hand-written components specifically for
+the intended semantics of actions. The Java representation of FSMs
+meets the requirement that execution is step-by-step. That is, a
+transition is transparently realized including the potential
+performance of an action whenever an input item arrives.
+
+There are many different ways to generate imperative/OO code for
+FSMs. We pick one particular option here--without loss of
+generality. The chosen option can be said to be data-centric in that
+FSMs are represented in an appropriate container-based data structure,
+whereas the execution of FSMs relies on the interpretation of said
+data structure. Further, the programmer-defined meaning of actions is
+provided by a handler which interpreters action names.
+
+\codefigure{%
+Java representation of the states for the turnstile example}{%
+languages/fsml/java/State.java}{%
+java}
+
+\codefigure{%
+Java representation of the inputs for the turnstile example}{%
+languages/fsml/java/Input.java}{%
+java}
+
+\codefigure{%
+Java representation of the actions for the turnstile example}{%
+languages/fsml/java/Action.java}{%
+java}
+
+\codefigure{%
+Code generation for state type}{%
+languages/fsml/to-java/state.pro}{%
+prolog}
+
+\autoref{languages/fsml/java/State.java}--\autoref{languages/fsml/java/Action.java}
+shows (generated) Java enum types for the states, inputs, and
+actions. Obviously, these sets are trivially obtainable from the
+abstract syntactical representation of an FSM. In
+\autoref{languages/fsml/to-java/state.pro}, this is illustrated for
+the enum type for states. The predicate collects all (declared) state
+ids and assembles an enum type, subject to a suitable abstract syntax
+of Java; see \S\ref{A:java} for a summary of the (abstract) Java
+syntax used by the code generator. Finally, the Java declaration is
+pretty printed; see the use of \emph{ppJavaDecl/2} in the figure,
+subject to a pretty printer for the Java language. The generator
+predicates for the enum types for inputs and actions are quite
+similar.
+
+\codefigure{%
+Generic interface for action handers}{%
+languages/fsml/java/Handler.java}{%
+java}
+
+\codefigure{%
+A trivial interpretation of the turnstile actions}{%
+languages/fsml/java/TurnstileHandler.java}{%
+java}
+
+\autoref{languages/fsml/java/Handler.java} shows a generic, i.e.,
+FSM-independent interface for defining handlers for FSM
+actions. \autoref{languages/fsml/java/TurnstileHandler.java} shows a
+trivial implementation of said interface for the turnstile
+example. The actions simply print out the names of the actions, but it
+is clear that arbitrary functionality can be plugged into FSM
+execution in this manner. 
+
+\codefigure{%
+Generic class for FSM execution}{%
+languages/fsml/java/Stepper.java}{%
+java}
+
+\autoref{languages/fsml/java/Stepper.java} shows essentially the
+runtime for FSMs. This is generic code which is appropriately
+parameterized in the types for states, inputs, and actions. The class
+relies on a table for holding the transitions in the form of a map
+from states to maps from inputs to pairs of optional actions and
+states. There is an appropriate \emph{add} method which makes it easy
+to insert into this non-basic container. The class is also prepared to
+keep track of and make use of a handler for the involved actions. The
+class is called \emph{Stepper} because its key method is the one for
+performing a step (a transition) based on an actual input item.
+
+\codefigure{%
+Configuration of a stepper for the turnstile example}{%
+languages/fsml/java/TurnstileStepper.java}{%
+java}
+
+\autoref{languages/fsml/java/TurnstileStepper.java} shows the
+generated code for the turnstile-specific \emph{Stepper} subclass. The
+class instantiates the generic parameters of the \emph{Stepper} class
+to the turnstile-specific enum types for states, inputs, and actions,
+which were shown earlier. Also, the class encodes all transitions of
+the turnstile FSM via appropriate calls to the \emph{add} method, as
+part of the constructor. The initial state is also set up and the
+turnstile-specific handler is communicated as well.
+
+\codefigure{%
+Code generation for stepper subclass}{%
+languages/fsml/to-java/stepper.pro}{%
+prolog}
+
+\autoref{languages/fsml/to-java/stepper.pro} shows the code generation
+predicate for stepper subclasses. The predicate refers to more
+elements of the Java language: several expression forms (e.g.,
+`null'), assignment statements, method calls, and class
+declarations. In a final step, the constructed abstract syntactical
+representation is passed to the pretty printer for Java.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{The visual syntax of FSML}
 \label{S:visual}
 
-TBD
+It remains to define the visual syntax of FSML, as it was illustrated
+in \autoref{F:turnstile}. A visual syntax definition may serve these
+major purposes: actual representation (visualization) and
+editing. Indeed, we want this syntax to be complemented by rendering
+support. We do not consider editing here.
+
+\codefigure{%
+The FSM of \autoref{F:turnstile} in the abstract syntax of the DGL language}{%
+languages/fsml/sample-turnstile-dgl.term}{%
+prolog}
+
+The visualization in \autoref{F:turnstile} renders an FSM as a
+graph. There are nodes and edges; both of them can be labeled; edges
+are directed; nodes are of a certain shape (an ellipse here) and style
+(regular or
+filled). \autoref{languages/fsml/sample-turnstile-dgl.term} represents
+represents the graph in the abstract (Prolog-based) syntax of a simple
+graph description based on the DGL notation provided by the \slepro{}
+project. DGL stands for `dot-based graph language'; see \S\ref{A:dgl}
+for this notation. Nodes are quadruplets of the form (\m{Id},
+\m{Label}, \m{Shape}, \m{Style}); edges are triplets of the form
+(\m{FromId}, \m{ToId}, \m{OptionalLabel}).
+
+\codefigure{%
+The FSM of \autoref{F:turnstile} in the dot language}{%
+languages/fsml/sample-turnstile.dot}{%
+dot}
+
+The DGL processor translates the graph into a specification according
+to the \emph{dot} language of
+\emph{GraphViz}\footnote{\url{http://www.graphviz.org/}}; see
+\autoref{languages/fsml/sample-turnstile.dot}. The GraphViz tool
+directly renders the dot specification as shown \autoref{F:turnstile}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Food for thought}
 \label{S:concl}
 
-TBD
+Let us discuss some characteristics, limitations, or opportunities
+for alternative or additional components. In this manner, we prepare
+for a good number of experiments that could be carried out---either to
+learn more about DSLs or to demonstrate other technologies and
+techniques:
+
+\begin{description}
+
+\item[Leverage a programming ecosystem] The FSML model of
+  this document directly relies on Prolog or language modeling
+  notations that are in turn implemented in Prolog, as part of the
+  \slepro{} project. Alternatively, one could model (implement) FSML
+  also in some existing programming ecosystem, e.g., in Java, Ruby, or
+  Python, also subject to the use of appropriate libraries, parser
+  generators, and other tools. This may enable interesting comparison
+  across programming languages and ecosystems.
+
+\item[Leverage a language workbench] Language modeling is readily
+  addressed by so-called language workbenches such as Rascal or
+  Spoofax. Thus, it would only be natural to exercise such workbenches
+  for the present DSL scenario. In fact, the overall domain of FSMs is
+  generally a popular one, when it comes DSL modeling
+  (implementation). Thus, some similar model may readily exist for
+  some of these workbenches.
+
+\item[Leverage model-driven engineering] Another existing approach to
+  language modeling is based on model-driven engineering (MDE). For
+  instance, one could use EMF and GMF for language modeling, thereby
+  covering abstract and visual syntax for graphical editors. The
+  actual functionality (such as constraints, semantics, and code
+  generator) could leverage a programming language which readily
+  collaborates with the chosen MDE approach, e.g., Java in the case of
+  EMF/GMF. Some of this functionality could also be expressed with
+  model transformations in designated languages, e.g., ATL or
+  QVT. Further, specific model-to-text and text-to-model technologies
+  may be leveraged in the context of MDE.
+
+\item[Concrete object syntax] The FSML model of the present document
+  leverages abstract syntax for all the notations that need to be
+  manipulated: FSML, Java, and DGL. Some metaprogramming systems and
+  language workbenches also support concrete object syntax, e.g.,
+  Stratego and TXL. In this manner, less syntaxes need to be defined,
+  metaprograms remain closer to the notation that one may be used for
+  the manipulated artifacts. In the future, support for concrete
+  object syntax may be added to \slepro.
+
+\item[Template-based code generation] The FSML model underlying the
+  present document leverages pretty-printing combinators for mapping
+  abstract to concrete syntax. In fact, these mapping components are
+  not shown in the document because they are concerned with languages
+  other than FSML, namely Java and DGL. Nevertheless, it may be
+  worthwhile to investigate other options for mapping abstract to
+  concrete syntax---in particular, template-based code generation or
+  model-to-text transformations, as mentioned earlier in the context
+  of MDE.
+
+\item[Alternative code generation schemes] The code generator favors
+  one particular scheme such that FSMs are essentially represented as
+  data and actions are to be plugged into FSM execution through
+  appropriate handlers. Several other schemes for the OO
+  representation of FSMs are known. For instance, transitions may also
+  be represented as control-flow code, i.e., by using if or switch
+  statements dispatching on states and inputs. Alternatively, states
+  may also be thought of as objects with transitions modeled as
+  polymorphic methods. Without caring much here about the pros and
+  cons of these approaches, we could simply want to study them from
+  the technical point of view of code generation.  In fact, we picked
+  the data-centric approach, as it was obvious that code generation is
+  straightforward in this case.
+
+\item[An editor for FSML] Language support may also include editing
+  support as in the sense of a structure editor for concrete textual
+  syntax or a graphical editor for concrete visual syntax (perhaps
+  based on GMF, as mentioned earlier).
+
+\item[A proper FSML-based application] The value of the FSML language
+  may be more obvious, if we managed to demonstrate it in an actual
+  application such as a concrete turnstile system. One could be
+  looking at embedded systems scenarios, for example.
+
+\end{description}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -422,5 +671,79 @@ TBD
 %\bibliography{paper}
 
 }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\appendix
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagebreak
+
+\section{Grammar of EGL grammars}
+\label{A:egl}
+
+\codefigure{%
+EGL grammar of EGL grammars}{%
+languages/egl/cs.egl}{%
+egl}
+
+EGL was used for the concrete syntax definition of FSML in
+\S\ref{S:textual}. EGL is an EBNF-like notation. See
+\autoref{languages/egl/cs.egl} for a self-description of the grammar notation.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagebreak
+
+\section{Grammar of ESL signature}
+\label{A:esl}
+
+\codefigure{%
+EGL grammar of ESL signatures}{%
+languages/esl/cs.egl}{%
+esl}
+
+ESL was used for the abstract syntax definition of FSML in
+\S\ref{S:abstract}. ESL is a type-declaration notation inspired by
+algebraic signatures, term algebras, and algebraic data types.  See
+\autoref{languages/esl/cs.egl} for the concrete syntax of the
+notation. ESL is also used in some of the appendix sections that follow.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagebreak
+
+\section{Abstract syntax of a Java subset}
+\label{A:java}
+
+\codefigure{%
+ESL signature for the abstract syntax of a Java subset}{%
+languages/java/as.esl}{%
+esl}
+
+See \autoref{languages/java/as.esl}. The subset is assumed by the code
+generator of \S\ref{S:generator}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagebreak
+
+\section{Abstract syntax of DGL}
+\label{A:dgl}
+
+\codefigure{%
+ESL signature for the abstract syntax of DGL}{%
+languages/dgl/as.esl}{%
+esl}
+
+We used DGL in \S\ref{S:visual} to export FSMs as graphs in a manner
+that they can be visualized. DGL is a simple graph description
+language. DGL stands `dot-based graph language' to hint at the fact
+that the abstract syntax of DGL can be (is) rendered in the dot
+language of Graphviz. The abstract syntax of DGL is shown in
+\autoref{languages/dgl/as.esl}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \end{document}

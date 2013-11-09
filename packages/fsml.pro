@@ -16,12 +16,12 @@
 :- ['languages/fsml/ok/deterministic.pro'].
 :- ['languages/fsml/ok/reachable.pro'].
 :- ['languages/fsml/ok/closure.pro'].
-:- ['languages/fsml/fsm-to-dgl.pro'].
+:- ['languages/fsml/to-dgl.pro'].
 :- ['languages/fsml/simulation.pro'].
-:- ['languages/fsml/fsm-to-java/state.pro'].
-:- ['languages/fsml/fsm-to-java/input.pro'].
-:- ['languages/fsml/fsm-to-java/action.pro'].
-:- ['languages/fsml/fsm-to-java/stepper.pro'].
+:- ['languages/fsml/to-java/state.pro'].
+:- ['languages/fsml/to-java/input.pro'].
+:- ['languages/fsml/to-java/action.pro'].
+:- ['languages/fsml/to-java/stepper.pro'].
 
 % Test target
 

@@ -1,0 +1,19 @@
+\NeedsTeXFormat{LaTeX2e}%
+\ProvidesPackage{lstdot}[2013/11/09 dot support for listings]%
+\RequirePackage{listings}%
+%
+\lstdefinelanguage{dot}%
+{
+numbers=none,
+keywords={%
+    digraph,%
+    label,%
+    shape,%
+    style,%
+    ellipse,%
+    filled,%
+ },%
+   sensitive,%
+   morestring=[b]',%
+   morestring=[b]"%
+  }[keywords,comments,strings]%

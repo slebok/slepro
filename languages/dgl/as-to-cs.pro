@@ -44,8 +44,8 @@ ppDglEdge(
 ) :-
      Label = [L] ->
          Bs = [
-           text(' [label="'),
+           text(' [label=" '),
            text(L),
-           text('"]')
+           text(' "]')
          ]
        ; Bs = [].

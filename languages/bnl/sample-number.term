@@ -1,1 +1,5 @@
-number(bits(one,bits(zero,bit(one))),rational(bits(zero,bit(one)))).
+% 101.01 in abstract syntax
+number(
+  bits(one,bits(zero,bit(one))),
+  rational(bits(zero,bit(one)))
+).

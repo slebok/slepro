@@ -1,0 +1,1 @@
+number(bits(one,bits(zero,bit(one))),rational(bits(zero,bit(one)))).

@@ -1,5 +1,5 @@
 eglMapping(qstring, (_, String, _), Atom) :-
-  name(Atom, String).
+  atom_codes(Atom, String).
 
 eglMapping(name, String, Atom) :-
   name(Atom, String).

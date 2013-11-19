@@ -3,7 +3,7 @@ eglToken(qstring(Atom)) -->
   char(quote),
   star(char(noQuote), String),
   char(quote),
-  { name(Atom, String) }.
+  { atom_codes(Atom, String) }.
 
 % Names consisting of alphabetic characters
 eglToken(name(Atom)) -->

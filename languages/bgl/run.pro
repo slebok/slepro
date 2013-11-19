@@ -22,3 +22,7 @@ eglToBglRule(
 eglToBglSymbol(S, S) :-
     S = t(_)
   ; S = n(_). 
+
+parseTopDownAndImplode(G, R, I, T2) :-
+  parseTopDown(G, R, I, T1),
+  implode(T1, T2).

@@ -10,7 +10,13 @@ test:
 	make plt.test
 	make fsml.test
 	make dgl.test
+	make bnl.test
 
 %.test:
 	@echo Testing package $* ...
 	@swipl -q -f packages/$*.pro -g $*_main
+
+# The new ueber-approach
+ueber:
+	swipl -f .ueber
+

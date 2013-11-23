@@ -1,0 +1,6 @@
+:- load('tuple-term.pro').
+:- load('prefix-term.pro').
+:- load('applied-term.pro').
+:- load('as.pro').
+:- load('conformance.pro').
+

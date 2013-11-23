@@ -1,0 +1,13 @@
+:- load('accept-bu.pro').
+:- load('accept-td.pro').
+:- load('derive-signature.pro').
+:- load('explode.pro').
+:- load('implode.pro').
+:- load('parse-td.pro').
+:- load('run.pro').
+:- load('unparse.pro').
+
+% as.term
+
+:- interpret(elementOf, [bgl(text)], textElementOfBgl, []).
+:- interpret(elementOf, [bgl(term)], termElementOfBgl, []).

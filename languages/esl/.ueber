@@ -1,0 +1,26 @@
+:- load('as.pro').
+%:- ... as.term ...
+:- load('conformance.pro').
+:- load('cs-to-as.pro').
+%:- ... cs.egl ...
+%:- ... cs.term ...
+%:- ... ls.egl ...
+%:- ... ls.term ...
+
+/*
+
+   test(
+     appliedSignature(
+       (i(term), 'languages/esl/as.term')
+     )
+   ),
+
+   test(
+     wellTypedTerm(
+       (i(term), 'languages/esl/as.term'),
+       (u, signature),
+       (i(term), 'languages/esl/as.term')
+     )
+   )
+
+*/

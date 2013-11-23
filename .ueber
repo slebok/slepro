@@ -1,0 +1,6 @@
+:- ['languages/ueber/runtime.pro'].
+:- enter(prelude).
+:- enter(languages).
+%:- listing(interpretation/4).
+:- run.
+:- halt.

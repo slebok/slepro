@@ -1,0 +1,26 @@
+:- load('cs.dcg').
+:- load('conversion1.dcg').
+:- load('conversion2.dcg').
+:- load('conversion1.pro').
+:- load('conversion2.pro').
+:- load('solver.pro').
+
+:- interpret(elementOf, [bnl(text)], bglElementOf, ['cs.term']).
+:- interpret(elementOf, [bnl(term)], bslElementOf, ['as.term']).
+
+:- elementOf('cs.bgl', bgl(text)).
+:- elementOf('cs.term', bgl(term)).
+:- elementOf('as.term', bsl(term)).
+:- elementOf('sample.txt', bnl(text)).
+:- elementOf('sample.term', bnl(term)).
+:- elementOf('sample.tokens', term).
+:- elementOf('sample.formula', term).
+:- elementOf('sample.value', term).
+
+:- mapsTo(parseBgl, 'cs.bgl', 'cs.term').
+:- mapsTo(bglToBsl, 'cs.term', 'as.term').
+:- mapsTo(charsToTokens, 'sample.txt', 'sample.tokens').
+:- mapsTo(csConvert_, 'sample.tokens', 'sample.value').
+:- mapsTo(csConvert__, 'sample.tokens', 'sample.formula').
+:- mapsTo(asConvert_, 'sample.term', 'sample.value').
+:- mapsTo(asConvert__, 'sample.term', 'sample.formula').

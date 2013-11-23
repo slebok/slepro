@@ -1,0 +1,13 @@
+:- load('cs-to-as.pro').
+:- load('parse.pro').
+% :- load('parse-debug.pro').
+:- load('run.pro').
+:- load('scanner.pro').
+:- load('scannerfull.pro').
+:- load('scannerless.pro').
+
+% cs.egl
+% cs.term
+% ls.egl
+% ls.term
+% as.term

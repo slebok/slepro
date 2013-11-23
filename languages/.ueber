@@ -1,0 +1,5 @@
+:- enter(bsl).
+:- enter(esl).
+:- enter(bgl).
+:- enter(egl).
+:- enter(bnl).

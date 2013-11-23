@@ -1,0 +1,6 @@
+:- load('data.pro').
+:- load('higher-order.pro').
+:- load('io.pro').
+:- load('test.pro').
+:- load('scanning.pro').
+:- load('http.pro').

@@ -1,3 +1,5 @@
+:- multifile xparse/5.
+
 % The case for terminals
 xparse(Config, t(T), [], Input0, Input1) :-
   Config = (_, ParseTerminal, _, _),

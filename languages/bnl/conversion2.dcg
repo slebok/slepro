@@ -1,3 +1,6 @@
+csConvert__(X, Term) :-
+  number__(Term, X, []).
+
 number__(Val1+Val2)
  -->
   bits__(Len1-1, Len1, Val1),

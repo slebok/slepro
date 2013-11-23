@@ -13,7 +13,8 @@ runTests(Tests) :-
 
 initTesting :-
   nb_setval(true, 0),
-  nb_setval(fail, 0).
+  nb_setval(fail, 0),
+  nb_setval(problems, 0).
 
 reportTesting :-
   nb_getval(true, Trues),
@@ -142,11 +143,13 @@ showTestArgs(P1, [H|T]) :-
   showTestArgs(P2, T).
 
 showTestArg((i(_), F)) :-
-  write(F).
+  write(F), !.
 showTestArg((o(_), F)) :-
   F \= (_, _),
-  write(F).
+  write(F), !.
 showTestArg((o(_), F, _)) :-
-  write(F).
+  write(F), !.
 showTestArg((u, T)) :-
-  write(T).
+  write(T), !.
+showTestArg(T) :-
+  write(T), !.

@@ -17,45 +17,45 @@ bnl_main :- runTests((
 
    test(
      number(
-       (i(term), 'languages/bnl/sample-number.tokens'),
+       (i(term), 'languages/bnl/sample.tokens'),
        (u, [])
      )
    ),
 
    test(
      number_(
-       (o(term), 'languages/bnl/sample-value.term'),
-       (i(term), 'languages/bnl/sample-number.tokens'),
+       (o(term), 'languages/bnl/sample.value'),
+       (i(term), 'languages/bnl/sample.tokens'),
        (u, [])
      )
    ),
 
    test(
      number__(
-       (o(term), 'languages/bnl/sample-formula.term'),
-       (i(term), 'languages/bnl/sample-number.tokens'),
+       (o(term), 'languages/bnl/sample.formula'),
+       (i(term), 'languages/bnl/sample.tokens'),
        (u, [])
      )
    ),
 
    test(
      solve(
-       (i(term), 'languages/bnl/sample-formula.term'),
-       (o(term), 'languages/bnl/sample-value.term')
+       (i(term), 'languages/bnl/sample.formula'),
+       (o(term), 'languages/bnl/sample.value')
      )
    ),
 
    test(
-     convert_(
-       (i(term), 'languages/bnl/sample-number.term'),
-       (o(term), 'languages/bnl/sample-value.term')
+     asConvert_(
+       (i(term), 'languages/bnl/sample.term'),
+       (o(term), 'languages/bnl/sample.value')
      )
    ),
 
    test(
-     convert__(
-       (i(term), 'languages/bnl/sample-number.term'),
-       (o(term), 'languages/bnl/sample-formula.term')
+     asConvert__(
+       (i(term), 'languages/bnl/sample.term'),
+       (o(term), 'languages/bnl/sample.formula')
      )
    ),
 
@@ -67,7 +67,7 @@ bnl_main :- runTests((
    ),
 
    test(
-     bglToSignature(
+     bglToBsl(
        (i(term), 'languages/bnl/cs.term'),
        (o(term), 'languages/bnl/as.term')
      )
@@ -82,7 +82,7 @@ bnl_main :- runTests((
    test(
      manySortedTerm(
        (i(term), 'languages/bnl/as.term'),
-       (i(term), 'languages/bnl/sample-number.term'),
+       (i(term), 'languages/bnl/sample.term'),
        (u, number)
      )
    ),
@@ -91,8 +91,8 @@ bnl_main :- runTests((
      parseTopDownAndImplode(
        (i(term), 'languages/bnl/cs.term'),
        (u, number),
-       (i(term), 'languages/bnl/sample-number.tokens'),
-       (o(term), 'languages/bnl/sample-number.term')
+       (i(term), 'languages/bnl/sample.tokens'),
+       (o(term), 'languages/bnl/sample.term')
      )
    )
 

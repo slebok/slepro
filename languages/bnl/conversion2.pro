@@ -1,4 +1,4 @@
-convert__(number(Bits, Rest), Val1+Val2) :-
+asConvert__(number(Bits, Rest), Val1+Val2) :-
   convertBits__(Bits, Len1-1, Len1, Val1),
   convertRest__(Rest, Val2).
 

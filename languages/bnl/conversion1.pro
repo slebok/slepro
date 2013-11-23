@@ -1,6 +1,6 @@
 :- use_module(library(clpr)).
 
-convert_(number(Bits, Rest), Val0) :-
+asConvert_(number(Bits, Rest), Val0) :-
   convertBits_(Bits, Pos1, Len1, Val1),
   convertRest_(Rest, Val2),
   { Pos1 =:= Len1 - 1 },

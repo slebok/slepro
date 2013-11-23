@@ -18,5 +18,5 @@ test:
 
 # The new ueber-approach
 ueber:
-	swipl -f .ueber
+	@swipl -q -f .ueber
 

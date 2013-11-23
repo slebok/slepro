@@ -1,5 +1,5 @@
 % Convert a grammar to a signature
-bglToSignature(
+bglToBsl(
     grammar(Nonterminals, Rules),
     signature(Sorts, STypes)
   ) :-

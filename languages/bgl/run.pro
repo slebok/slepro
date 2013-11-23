@@ -1,8 +1,13 @@
+textElementOfBgl(Text) :-
+  parseBgl(Text, _).
+
+
 parseBgl(Text, Term2) :-
   scannerfullEgl(Text, Term1),
   require(
     bglSubset,
-    eglToBgl(Term1, Term2)
+    eglToBgl(Term1, Term2):- interpret(elementOf, [bgl(text)], textElementOfBgl, []).
+
   ).
 
 eglToBgl(Rs1, grammar(Ns2, Rs2)) :-

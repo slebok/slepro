@@ -1,5 +1,8 @@
 :- use_module(library(clpr)).
 
+csConvert_(X, Val) :-
+  number_(Val, X, []).
+
 number_(Val0) -->
   bits_(Pos1, Len1, Val1),
   rest_(Val2),

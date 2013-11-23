@@ -15,7 +15,6 @@
 :- ['languages/bgl/run.pro'].
 
 % Extended Grammar Language (EGL)
-:- multifile xparse/5.
 :- ['languages/egl/parse.pro'].
 %:- ['languages/egl/parse-debug.pro']. % include for debugging parsing
 :- ['languages/egl/scanner.pro'].
@@ -107,7 +106,7 @@ cfg_main :- runTests((
    ),
 
    test(
-     bglToSignature(
+     bglToBsl(
        (i(term), 'languages/expr/cs.term'),
        (o(term), 'languages/expr/as.term')
      )

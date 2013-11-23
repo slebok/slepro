@@ -5,17 +5,17 @@
 :- load('conversion2.pro').
 :- load('solver.pro').
 
-:- interpret(elementOf, [bnl(text)], bglElementOf, ['cs.term']).
-:- interpret(elementOf, [bnl(term)], bslElementOf, ['as.term']).
+:- interpret(elementOf, [bnl(tokens)], bglElementOf, ['cs.term']).
+:- interpret(elementOf, [bnl(term)], flip(bslTermElementOf), ['as.term']).
 
 :- elementOf('cs.bgl', bgl(text)).
 :- elementOf('cs.term', bgl(term)).
 :- elementOf('as.term', bsl(term)).
-:- elementOf('sample.txt', bnl(text)).
+:- elementOf('sample.tokens', bnl(tokens)).
 :- elementOf('sample.term', bnl(term)).
-:- elementOf('sample.tokens', term).
 :- elementOf('sample.formula', term).
 :- elementOf('sample.value', term).
+:- elementOf('sample.txt', text).
 
 :- mapsTo(parseBgl, 'cs.bgl', 'cs.term').
 :- mapsTo(bglToBsl, 'cs.term', 'as.term').

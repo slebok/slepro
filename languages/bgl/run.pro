@@ -13,7 +13,6 @@ eglToBgl(Rs1, grammar(Ns2, Rs2)) :-
   list_to_set(Ns1, Ns2),
   map(eglToBglRule, Rs1, Rs2).
 
-
 eglToBglLhs((_, Lhs, _), Lhs).
 
 eglToBglRule(

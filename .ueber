@@ -1,6 +1,8 @@
 :- ['languages/ueber/runtime.pro'].
+:- init.
 :- enter(prelude).
 :- enter(languages).
-%:- listing(interpretation/4).
+:- interpret(elementOf, [term], succeed, []).
+:- interpret(elementOf, [text], succeed, []).
 :- run.
 :- halt.

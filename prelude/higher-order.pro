@@ -1,3 +1,9 @@
+% Success of arity 1
+succeed(_).
+
+% Success of arity 2
+succeed(_, _).
+
 % Failure at arity 1
 fail(_) :- fail.
 

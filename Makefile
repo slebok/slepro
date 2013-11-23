@@ -10,7 +10,6 @@ test:
 	make plt.test
 	make fsml.test
 	make dgl.test
-	make bnl.test
 
 %.test:
 	@echo Testing package $* ...

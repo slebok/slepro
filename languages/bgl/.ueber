@@ -5,9 +5,8 @@
 :- load('implode.pro').
 :- load('parse-td.pro').
 :- load('run.pro').
+:- load('api.pro').
 :- load('unparse.pro').
 
-% as.term
-
 :- interpret(elementOf, [bgl(text)], textElementOfBgl, []).
-:- interpret(elementOf, [bgl(term)], termElementOfBgl, []).
+:- interpret(elementOf, [bgl(term)], flip(eslTermElementOf), ['as.term']).

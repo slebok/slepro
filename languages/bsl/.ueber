@@ -3,4 +3,6 @@
 :- load('applied-term.pro').
 :- load('as.pro').
 :- load('conformance.pro').
+:- load('api.pro').
 
+:- interpret(elementOf, [bsl(term)], signature, []).

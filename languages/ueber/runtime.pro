@@ -40,7 +40,14 @@ enter(RelDir) :-
   nb_setval(ueber_level, L1),
   nb_setval(ueber_dir, Dir).
 
-% Pre-process elementOf/3 relationship
+% Pre-process language declaration
+language(Lang, Pred, ArgsRel) :-
+  ueber_indent,
+  format('* language(~q, ~q, ~q)~n',[Lang, Pred, ArgsRel]),
+  map(ueber_absolute, ArgsRel, ArgsAbs),
+  assertz(interpretation(language(Lang, Pred, ArgsAbs))).
+  
+% Pre-process elementOf/2 relationship
 elementOf(Rel, Lang) :-
   ueber_absolute(Rel, Abs),
   ueber_indent,
@@ -54,11 +61,6 @@ mapsTo(F, ArgRel, ResRel) :-
   ueber_indent,
   format('* mapsTo(~q, ~q, ~q)~n',[F, ArgRel, ResRel]),
   assertz(relationship(mapsTo(F, ArgAbs, ResAbs))).
-
-% Pre-process interpretation
-interpret(Sym, Dis, Inter, ArgsRel) :-
-  map(ueber_absolute, ArgsRel, ArgsAbs),
-  assertz(interpretation(Sym, Dis, Inter, ArgsAbs)).
   
 % Make a pseudo-absolute filename
 ueber_absolute(Rel, Abs) :-
@@ -83,14 +85,14 @@ evaluate(R) :-
 
 evaluate_(elementOf(File, Lang)) :-
   require(
-    elementOfInterpretation,
-    interpretation(elementOf, [Lang], P, Args1)
+    declarationOfLanguage(Lang),
+    interpretation(language(Lang, Pred, Args1))
   ),
   readFile(File, Content),
   append(Args1, [Content], Args2),
   require(
-    elementOfSuccess,
-    apply(P, Args2)
+    elementOf(Lang),
+    apply(Pred, Args2)
   ).
 
 evaluate_(mapsTo(F, FileIn, FileOut)) :-
@@ -103,7 +105,7 @@ evaluate_(mapsTo(F, FileIn, FileOut)) :-
 
 readFile(File, Content) :-
   require(
-    associatedLanguage,
+    languageOf(File),
     relationship(elementOf(File, Lang))
   ),
   ( textLanguage(Lang), readTextFile(File, Content)

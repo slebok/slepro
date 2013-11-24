@@ -7,8 +7,8 @@
 :- load('api.pro').
 :- load('unparse.pro').
 
-:- interpret(elementOf, [bgl(text)], textElementOfBgl, []).
-:- interpret(elementOf, [bgl(term)], flip(eslTermElementOf), ['as.term']).
+:- language(bgl(text), textElementOfBgl, []).
+:- language(bgl(term), flip(eslTermElementOf), ['as.term']).
 
 :- elementOf('as.esl', esl(text)).
 :- elementOf('as.term', esl(term)).

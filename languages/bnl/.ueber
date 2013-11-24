@@ -5,8 +5,8 @@
 :- load('conversion2.pro').
 :- load('solver.pro').
 
-:- interpret(elementOf, [bnl(tokens(term))], bglElementOf, ['cs.term']).
-:- interpret(elementOf, [bnl(term)], flip(bslTermElementOf), ['as.term']).
+:- language(bnl(tokens(term)), bglElementOf, ['cs.term']).
+:- language(bnl(term), flip(bslTermElementOf), ['as.term']).
 
 :- elementOf('cs.bgl', bgl(text)).
 :- elementOf('cs.term', bgl(term)).

@@ -2,6 +2,6 @@
 :- init.
 :- enter(prelude).
 :- enter(languages).
-:- interpret(elementOf, [text], succeed, []).
+:- language(text, succeed, []).
 :- run.
 :- halt.

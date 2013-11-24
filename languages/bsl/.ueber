@@ -4,9 +4,9 @@
 :- load('conformance.pro').
 :- load('api.pro').
 
-:- interpret(elementOf, [bsl(term)], signature, []).
-:- interpret(elementOf, [tuple(term)], tupleTerm, []).
-:- interpret(elementOf, [prefix(term)], prefixTerm, []).
+:- language(bsl(term), signature, []).
+:- language(tuple(term), tupleTerm, []).
+:- language(prefix(term), prefixTerm, []).
 
 :- elementOf('sample.bsl', bsl(term)).
 :- elementOf('sample.tupleTerm', tuple(term)).

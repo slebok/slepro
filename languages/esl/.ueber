@@ -4,9 +4,9 @@
 :- load('api.pro').
 :- load('cs-to-as.pro').
 
-:- interpret(elementOf, [term], appliedTerm, []).
-:- interpret(elementOf, [esl(text)], eglElementOf(eslMapping), ['cs.term', 'ls.term']).
-:- interpret(elementOf, [esl(term)], appliedSignature, []).
+:- language(term, appliedTerm, []).
+:- language(esl(text), eglElementOf(eslMapping), ['cs.term', 'ls.term']).
+:- language(esl(term), appliedSignature, []).
 
 :- elementOf('as.term', esl(term)).
 :- elementOf('cs.egl', egl(text)).

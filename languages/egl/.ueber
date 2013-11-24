@@ -4,8 +4,8 @@
 :- load('scanner.pro').
 :- load('api.pro').
 
-:- interpret(elementOf, [egl(text)], textElementOfEgl, []).
-:- interpret(elementOf, [egl(term)], flip(eslTermElementOf), ['as.term']).
+:- language(egl(text), textElementOfEgl, []).
+:- language(egl(term), flip(eslTermElementOf), ['as.term']).
 
 :- elementOf('as.term', esl(term)).
 :- elementOf('cs.egl', egl(text)).

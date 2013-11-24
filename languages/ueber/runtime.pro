@@ -46,6 +46,13 @@ language(Lang, Pred, ArgsRel) :-
   format('* language(~q, ~q, ~q)~n',[Lang, Pred, ArgsRel]),
   map(ueber_absolute, ArgsRel, ArgsAbs),
   assertz(interpretation(language(Lang, Pred, ArgsAbs))).
+
+% Pre-process parser declaration
+parser(LangIn, LangOut, Pred, ArgsRel) :-
+  ueber_indent,
+  format('* parser(~q, ~q, ~q, ~q)~n',[LangIn, LangOut, Pred, ArgsRel]),
+  map(ueber_absolute, ArgsRel, ArgsAbs),
+  assertz(interpretation(parser(LangIn, LangOut, Pred, ArgsAbs))).
   
 % Pre-process elementOf/2 relationship
 elementOf(Rel, Lang) :-
@@ -54,7 +61,15 @@ elementOf(Rel, Lang) :-
   format('* elementOf(~q, ~q)~n',[Rel, Lang]),
   assertz(relationship(elementOf(Abs, Lang))).
 
-% Pre-process mapsTo/3 relationship
+% Pre-process parsesTo relationship
+parsesTo(ArgRel, ResRel) :-
+  ueber_absolute(ArgRel, ArgAbs),
+  ueber_absolute(ResRel, ResAbs),
+  ueber_indent,
+  format('* parsesTo(~q, ~q)~n',[ArgRel, ResRel]),
+  assertz(relationship(parsesTo(ArgAbs, ResAbs))).
+
+% Pre-process mapsTo relationship
 mapsTo(F, ArgRel, ResRel) :-
   ueber_absolute(ArgRel, ArgAbs),
   ueber_absolute(ResRel, ResAbs),
@@ -101,6 +116,27 @@ evaluate_(mapsTo(F, FileIn, FileOut)) :-
   require(
     mapsToExpected,
     apply(F, [ContentIn, ContentOut])
+  ).
+
+evaluate_(parsesTo(FileIn, FileOut)) :-
+  require(
+    languageOf(FileIn),
+    relationship(elementOf(FileIn, LangIn))
+  ),
+  require(
+    languageOf(FileOut),
+    relationship(elementOf(FileOut, LangOut))
+  ),
+  require(
+    parserFromTo(LangIn, LangOut),
+    interpretation(parser(LangIn, LangOut, Pred, Args1))
+  ),
+  readFile(FileIn, ContentIn),
+  readFile(FileOut, ContentOut),
+  append(Args1, [ContentIn, ContentOut], Args2),
+  require(
+    mapsToExpected,
+    apply(Pred, Args2)
   ).
 
 readFile(File, Content) :-

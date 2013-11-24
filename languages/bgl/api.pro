@@ -1,17 +1,16 @@
-bglElementOf(File, I) :-
-  bglParse(File, I, _).
-bglParse(File, I, T) :-
-  readTermFile(File, G),  
-  G = grammar([R|_], _),
-  parseTopDownAndImplode(G, R, I, T).
+bglLanguage(File, Text) :-
+  bglParser(File, Text, _).
+bglLanguage(Pred, File, Text) :-
+  bglParser(Pred, File, Text, _).
+bglParser(File, Text, Term) :-
+  bglParser(id, File, Text, Term).
+bglParser(Pred, File, Text1, Term) :-
+  apply(Pred, [Text1, Text2]),
+  readTermFile(File, Grammar),  
+  Grammar = grammar([Root|_], _),
+  parseTopDownAndImplode(Grammar, Root, Text2, Term).
 
-% Turn string into list of singleton character atoms
-charsToTokens(String1, L2) :-
-  append(String2, [10], String1),
-  map(singleton, String2, L1),
-  map(flip(atom_codes), L1, L2).
-
-textElementOfBgl(Text) :-
+elementOfBgl(Text) :-
   parseBgl(Text, _).
 
 parseBgl(Text, Term2) :-

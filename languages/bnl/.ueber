@@ -1,3 +1,4 @@
+:- load('api.pro').
 :- load('cs.dcg').
 :- load('conversion1.dcg').
 :- load('conversion2.dcg').
@@ -5,19 +6,26 @@
 :- load('conversion2.pro').
 :- load('solver.pro').
 
-:- language(bnl(tokens(term)), bglElementOf, ['cs.term']).
-:- language(bnl(term), flip(bslTermElementOf), ['as.term']).
+:- language(bnl(term), bslLanguage, ['as.term']).
+:- language(bnl(tokens(term)), bglLanguage, ['cs.term']).
+:- language(bnl(text), bglLanguage(charsToTokens), ['cs.term']).
+
+:- parser(bnl(tokens(term)), bnl(term), bglParser, ['cs.term']).
+:- parser(bnl(text), bnl(term), bglParser(charsToTokens), ['cs.term']).
 
 :- elementOf('cs.bgl', bgl(text)).
 :- elementOf('cs.term', bgl(term)).
 :- elementOf('as.term', bsl(term)).
+:- elementOf('sample.txt', bnl(text)).
 :- elementOf('sample.tokens', bnl(tokens(term))).
 :- elementOf('sample.term', bnl(term)).
 :- elementOf('sample.formula', term).
 :- elementOf('sample.value', term).
-:- elementOf('sample.txt', text).
 
-:- mapsTo(parseBgl, 'cs.bgl', 'cs.term').
+:- parsesTo('cs.bgl', 'cs.term').
+:- parsesTo('sample.tokens', 'sample.term').
+:- parsesTo('sample.txt', 'sample.term').
+
 :- mapsTo(bglToBsl, 'cs.term', 'as.term').
 :- mapsTo(charsToTokens, 'sample.txt', 'sample.tokens').
 :- mapsTo(csConvert_, 'sample.tokens', 'sample.value').

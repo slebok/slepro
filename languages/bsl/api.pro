@@ -1,5 +1,5 @@
 % Membership test
-bslTermElementOf(Term, File) :-
+bslLanguage(File, Term) :-
   readTermFile(File, Sig),
   Sig = signature([Sort|_], _),
   manySortedTerm(Sig, Term, Sort).

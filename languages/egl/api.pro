@@ -1,8 +1,8 @@
-eglElementOf(Mapping, FileCs, FileLs, Text) :-
-  eglParse(layout, Mapping, FileCs, FileLs, Text, _).
-eglElementOf(Layout, Mapping, FileCs, FileLs, Text) :-
-  eglParse(Layout, Mapping, FileCs, FileLs, Text, _).
-eglParse(Layout, Mapping, FileCs, FileLs, Text, Term) :-
+eglLanguage(Mapping, FileCs, FileLs, Text) :-
+  eglParser(Mapping, FileCs, FileLs, Text, _).
+eglParser(Mapping, FileCs, FileLs, Text, Term) :-
+  eglParser(layout, Mapping, FileCs, FileLs, Text, Term).
+eglParser(Layout, Mapping, FileCs, FileLs, Text, Term) :-
   readTermFile(FileCs, CfSyn),  
   readTermFile(FileLs, LexSyn),
   CfSyn = [(_,Root,_)|_],

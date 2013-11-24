@@ -5,8 +5,10 @@
 :- load('cs-to-as.pro').
 
 :- language(term, appliedTerm, []).
-:- language(esl(text), eglElementOf(eslMapping), ['cs.term', 'ls.term']).
+:- language(esl(text), eglLanguage(eslMapping), ['cs.term', 'ls.term']).
 :- language(esl(term), appliedSignature, []).
+
+:- parser(esl(text), esl(term), eglParser(eslMapping), ['cs.term', 'ls.term']).
 
 :- elementOf('as.term', esl(term)).
 :- elementOf('cs.egl', egl(text)).
@@ -14,5 +16,5 @@
 :- elementOf('ls.egl', egl(text)).
 :- elementOf('ls.term', egl(term)).
 
-:- mapsTo(parseEgl, 'cs.egl', 'cs.term').
-:- mapsTo(parseEgl, 'ls.egl', 'ls.term').
+:- parsesTo('cs.egl', 'cs.term').
+:- parsesTo('ls.egl', 'ls.term').

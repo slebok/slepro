@@ -12,16 +12,14 @@
 :- ['languages/bgl/implode.pro'].
 :- ['languages/bgl/explode.pro'].
 :- ['languages/bgl/derive-signature.pro'].
-:- ['languages/bgl/run.pro'].
+:- ['languages/bgl/api.pro'].
 
 % Extended Grammar Language (EGL)
 :- ['languages/egl/parse.pro'].
 %:- ['languages/egl/parse-debug.pro']. % include for debugging parsing
 :- ['languages/egl/scanner.pro'].
 :- ['languages/egl/cs-to-as.pro'].
-:- ['languages/egl/scannerfull.pro'].
-:- ['languages/egl/scannerless.pro'].
-:- ['languages/egl/run.pro'].
+:- ['languages/egl/api.pro'].
 
 % Modules for sample languages
 :- ['languages/expr/scanner.pro'].

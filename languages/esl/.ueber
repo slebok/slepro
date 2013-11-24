@@ -1,29 +1,18 @@
+:- load('applied-term.pro').
 :- load('as.pro').
-%:- ... as.term ...
 :- load('conformance.pro').
 :- load('api.pro').
 :- load('cs-to-as.pro').
-%:- ... cs.egl ...
-%:- ... cs.term ...
-%:- ... ls.egl ...
-%:- ... ls.term ...
 
+:- interpret(elementOf, [term], appliedTerm, []).
+:- interpret(elementOf, [esl(text)], eglElementOf(eslMapping), ['cs.term', 'ls.term']).
 :- interpret(elementOf, [esl(term)], appliedSignature, []).
 
-/*
+:- elementOf('as.term', esl(term)).
+:- elementOf('cs.egl', egl(text)).
+:- elementOf('cs.term', egl(term)).
+:- elementOf('ls.egl', egl(text)).
+:- elementOf('ls.term', egl(term)).
 
-   test(
-     appliedSignature(
-       (i(term), 'languages/esl/as.term')
-     )
-   ),
-
-   test(
-     wellTypedTerm(
-       (i(term), 'languages/esl/as.term'),
-       (u, signature),
-       (i(term), 'languages/esl/as.term')
-     )
-   )
-
-*/
+:- mapsTo(parseEgl, 'cs.egl', 'cs.term').
+:- mapsTo(parseEgl, 'ls.egl', 'ls.term').

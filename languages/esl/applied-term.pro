@@ -4,6 +4,6 @@ appliedTerm(Term) :-
   atom(Symbol),
   map(appliedTerm, Terms).
 
-% Integers as applied terms
+% Numbers as applied terms
 appliedTerm(Term) :-
-  integer(Term).
+  number(Term).

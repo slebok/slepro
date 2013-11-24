@@ -6,7 +6,7 @@
 % Term representations
 :- ['../languages/bsl/tuple-term.pro'].
 :- ['../languages/bsl/prefix-term.pro'].
-:- ['../languages/bsl/applied-term.pro'].
+:- ['../languages/esl/applied-term.pro'].
 
 % Basic signatures
 :- ['../languages/bsl/as.pro'].

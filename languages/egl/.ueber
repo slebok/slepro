@@ -1,13 +1,14 @@
 :- load('cs-to-as.pro').
 :- load('parse.pro').
 % :- load('parse-debug.pro').
-:- load('run.pro').
 :- load('scanner.pro').
-:- load('scannerfull.pro').
-:- load('scannerless.pro').
+:- load('api.pro').
 
-% cs.egl
-% cs.term
-% ls.egl
-% ls.term
-% as.term
+:- interpret(elementOf, [egl(text)], textElementOfEgl, []).
+:- interpret(elementOf, [egl(term)], flip(eslTermElementOf), ['as.term']).
+
+:- elementOf('as.term', esl(term)).
+:- elementOf('cs.egl', egl(text)).
+:- elementOf('cs.term', egl(term)).
+:- elementOf('ls.egl', egl(text)).
+:- elementOf('ls.term', egl(term)).

@@ -1,8 +1,13 @@
 :- load('tuple-term.pro').
 :- load('prefix-term.pro').
-:- load('applied-term.pro').
 :- load('as.pro').
 :- load('conformance.pro').
 :- load('api.pro').
 
 :- interpret(elementOf, [bsl(term)], signature, []).
+:- interpret(elementOf, [tuple(term)], tupleTerm, []).
+:- interpret(elementOf, [prefix(term)], prefixTerm, []).
+
+:- elementOf('sample.bsl', bsl(term)).
+:- elementOf('sample.tupleTerm', tuple(term)).
+:- elementOf('sample.prefixTerm', prefix(term)).

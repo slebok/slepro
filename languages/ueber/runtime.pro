@@ -92,14 +92,6 @@ evaluate_(elementOf(File, Lang)) :-
     elementOfSuccess,
     apply(P, Args2)
   ).
-  
-readFile(File, Content) :-
-  require(
-    associatedLanguage,
-    relationship(elementOf(File, Lang))
-  ),
-  ( textLanguage(Lang), readTextFile(File, Content)
-  ; termLanguage(Lang), readTermFile(File, Content) ).
 
 evaluate_(mapsTo(F, FileIn, FileOut)) :-
   readFile(FileIn, ContentIn),
@@ -109,7 +101,16 @@ evaluate_(mapsTo(F, FileIn, FileOut)) :-
     apply(F, [ContentIn, ContentOut])
   ).
 
-textLanguage(text).
-textLanguage(X) :- X =.. [_,text].
+readFile(File, Content) :-
+  require(
+    associatedLanguage,
+    relationship(elementOf(File, Lang))
+  ),
+  ( textLanguage(Lang), readTextFile(File, Content)
+  ; termLanguage(Lang), readTermFile(File, Content) ).
 
-termLanguage(X) :- \+ textLanguage(X).
+textLanguage(text).
+textLanguage(X) :- X =.. [_,Y], textLanguage(Y).
+
+termLanguage(term).
+termLanguage(X) :- X =.. [_,Y], termLanguage(Y).

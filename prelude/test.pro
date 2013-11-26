@@ -39,7 +39,7 @@ require(C, P) :-
      ; 
        nb_getval(problems, X1),
        ( X1 == 0 -> nl; true ), 
-       format('Assertion failed: ~w~n', [C]),
+       format('Assertion failed: ~q~n', [C]),
        X2 is X1 + 1,
        nb_setval(problems, X2),
        fail

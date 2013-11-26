@@ -8,8 +8,8 @@ test:
 	make mm.test
 	make mt.test
 	make plt.test
-	make fsml.test
 	make dgl.test
+	make java.test
 
 %.test:
 	@echo Testing package $* ...

@@ -1,0 +1,7 @@
+[
+  language(ueber(term), eslLanguage, ['as.term']),
+  parsesTo('as.esl', 'as.term'),
+  elementOf('as.esl', esl(text)),
+  elementOf('as.term', esl(term)),
+  elementOf('.ueber', ueber(term))
+].

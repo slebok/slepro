@@ -1,16 +1,4 @@
-:- load('cs-to-as.pro').
-:- load('parse.pro').
-% :- load('parse-debug.pro').
-:- load('scanner.pro').
-:- load('api.pro').
+[
+  syntax(egl)
+].
 
-:- language(egl(text), eglLanguage(eglMapping), ['cs.term', 'ls.term']).
-:- language(egl(term), eslLanguage, ['as.term']).
-
-:- parser(egl(text), egl(term), eglParser(eglMapping), ['cs.term', 'ls.term']).
-
-:- elementOf('as.term', esl(term)).
-:- elementOf('cs.egl', egl(text)).
-:- elementOf('cs.term', egl(term)).
-:- elementOf('ls.egl', egl(text)).
-:- elementOf('ls.term', egl(term)).

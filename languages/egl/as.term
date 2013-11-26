@@ -2,7 +2,7 @@
 [ 
   % Grammars are lists (sets) of rules
   type(grammar, star(sort(rule))),
-  type(rule, tuple([star(sort(label)),sort(nonterminal),sort(symbols)])),
+  type(rule, tuple([option(sort(label)),sort(nonterminal),sort(symbols)])),
 
   % Lists of symbols
   type(symbols, star(sort(symbol))),

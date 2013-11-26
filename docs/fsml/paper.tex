@@ -100,7 +100,7 @@ belowskip = 0pt,
 \noindent
 \textbf{Version}
 
-0.00001 as of 8 November 2013.
+0.00002 as of 25 November 2013.
 
 \medskip
 
@@ -128,7 +128,7 @@ belowskip = 0pt,
 
 \begin{figure}[t!]
 \vspace{-77\in}
-\includegraphics[width=\textwidth]{../../languages/fsml/sample-turnstile.pdf}
+\includegraphics[width=\textwidth]{../../languages/fsml/sample.pdf}
 \vspace{-150\in}
 \caption{A finite state machine for turnstiles.}
 \label{F:turnstile}
@@ -184,7 +184,7 @@ through the repository of the project:
 
 \codefigure{%
 The FSM of \autoref{F:turnstile} in concrete textual syntax}{%
-languages/fsml/sample-turnstile.fsml}{%
+languages/fsml/sample.fsml}{%
 fsml}
 
 A textual syntax may break down an FSM into `state declarations',
@@ -192,7 +192,7 @@ i.e., states with the associated transitions. Each transition
 identifies the relevant input, the optional action, and the target
 state. In fact, if the target state is omitted, then this is taken to
 mean that the transition's target is the current state. See
-\autoref{languages/fsml/sample-turnstile.fsml} for an illustration.
+\autoref{languages/fsml/sample.fsml} for an illustration.
 
 \codefigure{%
 Context-free grammar for the concrete syntax of FSML}{%
@@ -207,7 +207,7 @@ ad-hoc grammar notation that is provided by the \slepro{} project; see
 be executed for the purpose of parsing, but we omit all such details
 here. See \autoref{languages/fsml/cs.egl} for the grammar. It can be
 assumed that the concrete textual syntax, as illustrated in
-\autoref{languages/fsml/sample-turnstile.fsml}, can be parsed indeed
+\autoref{languages/fsml/sample.fsml}, can be parsed indeed
 with the present grammar.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -225,10 +225,10 @@ the sense of term algebras or algebraic specifications.
 
 \codefigure{%
 The FSM of \autoref{F:turnstile} in abstract syntax}{%
-languages/fsml/sample-turnstile-fsml.term}{%
+languages/fsml/sample.term}{%
 prolog}
 
-See \autoref{languages/fsml/sample-turnstile-fsml.term} for an
+See \autoref{languages/fsml/sample.term} for an
 illustration. The abstract syntax describes a FSM as a list of state
 declarations, which are in turn tuples (triplets) of the form (\m{V},
 \m{Id}, \m{Ts}) where \m{V} is a Boolean saying whether the state is
@@ -256,7 +256,7 @@ the signature notation. In particular, ESL grammars can be executed
 for conformance checking to see whether a given term conforms to a
 given signature, but we omit all such details here. See
 \autoref{languages/fsml/as.esl} for the signature. The term in
-\autoref{languages/fsml/sample-turnstile-fsml.term} conforms indeed to
+\autoref{languages/fsml/sample.term} conforms indeed to
 the present signature.
 
 \codefigure{%
@@ -547,14 +547,14 @@ support. We do not consider editing here.
 
 \codefigure{%
 The FSM of \autoref{F:turnstile} in the abstract syntax of the DGL language}{%
-languages/fsml/sample-turnstile-dgl.term}{%
+languages/fsml/sample.dgl}{%
 prolog}
 
 The visualization in \autoref{F:turnstile} renders an FSM as a
 graph. There are nodes and edges; both of them can be labeled; edges
 are directed; nodes are of a certain shape (an ellipse here) and style
 (regular or
-filled). \autoref{languages/fsml/sample-turnstile-dgl.term} represents
+filled). \autoref{languages/fsml/sample.dgl} represents
 represents the graph in the abstract (Prolog-based) syntax of a simple
 graph description based on the DGL notation provided by the \slepro{}
 project. DGL stands for `dot-based graph language'; see \ref{A:dgl}
@@ -564,13 +564,13 @@ for this notation. Nodes are quadruplets of the form (\m{Id},
 
 \codefigure{%
 The FSM of \autoref{F:turnstile} in the dot language}{%
-languages/fsml/sample-turnstile.dot}{%
+languages/fsml/sample.dot}{%
 dot}
 
 The DGL processor translates the graph into a specification according
 to the \emph{dot} language of
 \emph{GraphViz}\footnote{\url{http://www.graphviz.org/}}; see
-\autoref{languages/fsml/sample-turnstile.dot}. The GraphViz tool
+\autoref{languages/fsml/sample.dot}. The GraphViz tool
 directly renders the dot specification as shown \autoref{F:turnstile}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

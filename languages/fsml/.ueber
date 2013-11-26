@@ -1,0 +1,20 @@
+[
+  enter(ok),
+  enter('to-java'),
+  enter('java'),
+  syntax(fsml),
+  sample(fsml),
+  language(fsml(ok(term)), okFsm, []),
+  elementOf('sample.term', fsml(ok(term))),
+  elementOf('sample.input', term),
+  elementOf('sample.output', term),
+  elementOf('sample.dgl', dgl(term)),
+  elementOf('sample.dot', dot(text)),
+  mapsTo(fsmToDgl, ['sample.term'], ['sample.dgl']),
+  mapsTo(ppDgl, ['sample.dgl'], ['sample.dot']),
+  mapsTo(simulateFsm, ['sample.term', 'sample.input'], ['sample.output']),
+  mapsTo(statesOfFsm, ['sample.term'], ['java/State.java']),
+  mapsTo(inputsOfFsm, ['sample.term'], ['java/Input.java']),
+  mapsTo(actionsOfFsm, ['sample.term'], ['java/Action.java']),
+  mapsTo(stepperOfFsm('TurnstileStepper'), ['sample.term'], ['java/TurnstileStepper.java'])
+].

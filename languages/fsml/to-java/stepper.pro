@@ -1,4 +1,4 @@
-stepperOfFsm(Fsm, N, Text) :-
+stepperOfFsm(N, Fsm, Text) :-
 
   % Map transitions to calls to the stepper's "add" method
   findall(S,

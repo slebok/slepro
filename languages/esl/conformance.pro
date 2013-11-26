@@ -22,12 +22,24 @@ wellTypedTerm_(Decls, sort(Sort), Term) :-
   wellTypedTerm_(Decls, Type, Term).
 
 % Test for atoms
+wellTypedTerm_(_, term, Term) :-
+  appliedTerm(Term).
+
+% Test for atoms
 wellTypedTerm_(_, atom, Term) :-
   atom(Term).
 
 % Test for integers
 wellTypedTerm_(_, integer, Term) :-
   integer(Term).
+
+% Test for floats
+wellTypedTerm_(_, float, Term) :-
+  float(Term).
+
+% Test for numbers
+wellTypedTerm_(_, number, Term) :-
+  number(Term).
 
 % Test for Booleans
 wellTypedTerm_(_, boolean, Term) :-

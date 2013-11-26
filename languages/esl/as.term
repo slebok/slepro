@@ -21,8 +21,11 @@
     decl),
 
   % Different kind of term types
+  symbol(term, [], typeexpr), % untyped terms
   symbol(atom, [], typeexpr), % primitive type "atom"
   symbol(integer, [], typeexpr), % ... "integer"
+  symbol(float, [], typeexpr), % ... "float"
+  symbol(number, [], typeexpr), % ... "number"
   symbol(boolean, [], typeexpr), % ... "boolean"
   symbol(sort, [atom], typeexpr), % sort reference
   symbol(star, [sort(typeexpr)], typeexpr), % list types

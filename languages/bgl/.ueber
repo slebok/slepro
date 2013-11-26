@@ -1,16 +1,10 @@
-:- load('accept-bu.pro').
-:- load('accept-td.pro').
-:- load('derive-signature.pro').
-:- load('explode.pro').
-:- load('implode.pro').
-:- load('parse-td.pro').
-:- load('api.pro').
-:- load('unparse.pro').
+[
+  language(bgl(text), elementOfBgl, []),
+  language(bgl(term), eslLanguage, ['as.term']),
 
-:- language(bgl(text), elementOfBgl, []).
-:- language(bgl(term), eslLanguage, ['as.term']).
+  parser(bgl(text), bgl(term), parseBgl, []),
 
-:- parser(bgl(text), bgl(term), parseBgl, []).
+  elementOf('as.esl', esl(text)),
+  elementOf('as.term', esl(term))
+].
 
-:- elementOf('as.esl', esl(text)).
-:- elementOf('as.term', esl(term)).

@@ -1,0 +1,13 @@
+[
+  language(dgl(term), eslLanguage, ['as.term']),
+
+  elementOf('as.esl', esl(text)),
+  elementOf('as.term', esl(term)),
+  elementOf('sample-graph.term', dgl(term)),
+  elementOf('sample-graph.dot', dot(text)),
+
+  parsesTo('as.esl', 'as.term'),
+
+  mapsTo(ppDgl, ['sample-graph.term'], ['sample-graph.dot'])
+].
+

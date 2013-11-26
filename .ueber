@@ -1,7 +1,16 @@
-:- ['languages/ueber/runtime.pro'].
+% This is not quite an .ueber file.
+% This is to bootstrap the ueber process.
+
+:- ['prelude/data.pro'].
+:- ['prelude/higher-order.pro'].
+:- ['prelude/io.pro'].
+:- ['prelude/test.pro'].
+:- ['prelude/scanning.pro'].
+:- ['prelude/http.pro'].
+:- ['prelude/ueber.pro'].         
+
 :- init.
-:- enter(prelude).
-:- enter(languages).
 :- language(text, succeed, []).
+:- enter(languages).
 :- run.
 :- halt.

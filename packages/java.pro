@@ -14,6 +14,12 @@
 java_main :- runTests((
 
    test(
+     appliedSignature(
+       (i(term), 'languages/java/as.term')
+     )
+   ),
+
+   test(
      scannerlessParser(
        (i(term), 'languages/esl/cs.term'),
        (u, signature),

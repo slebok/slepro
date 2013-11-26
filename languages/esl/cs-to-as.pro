@@ -6,6 +6,8 @@ eslMapping(factor, tuple(T, Ts), tuple([T|Ts])).
 eslMapping(name, String, Atom) :-
   name(Atom, String).
 
+eslMapping(args, [X, Y], [X|Y]).
+
 eslCardinality(T, none, T).
 eslCardinality(T1, star(C), T2) :-
   eslCardinality(star(T1), C, T2).

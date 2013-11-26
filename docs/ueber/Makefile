@@ -11,7 +11,7 @@ clean:
 	rm -f *.pdf *.toc *.blg *.bbl *.log *.aux *.dvi *.ps *.out *.spl
 
 upload: create-webdir
-	scp -r -p paper.pdf ${ssh-user}:${www-dir}/fsml.pdf
+	scp -r -p paper.pdf ${ssh-user}:${www-dir}/ueber.pdf
 
 upload-html:
 #	scp -r -p index.html ${ssh-user}:${www-dir}

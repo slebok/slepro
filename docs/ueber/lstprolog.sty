@@ -1,0 +1,13 @@
+\NeedsTeXFormat{LaTeX2e}%
+\ProvidesPackage{lstprolog}[2013/09/08 Prolog Support for Listings]%
+\RequirePackage{listings}%
+%
+\lstdefinelanguage{prolog}%
+{
+numbers=none,
+keywords={%
+  },%
+   sensitive,%
+   morecomment=[l]\%,%
+  morestring=[b]"'%
+  }[keywords,comments,strings]%

@@ -1,0 +1,138 @@
+\documentclass[preprint,authoryear,12pt]{noelsarticle}
+%\documentclass[preprint,12pt]{elsarticle}
+%\documentclass[final,3p,times,authoryear]{elsarticle}
+%\documentclass[final,3p,times]{elsarticle}
+
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage{verbatim}
+\usepackage{comment}
+\usepackage{boxedminipage}
+\usepackage{amssymb}
+\usepackage{listings,lsthaskell,lstprolog,lstegl,lstesl,lstfsml,lstjava,lstdot}
+
+\newcommand{\m}[1]{\ensuremath{\mathit{#1}}}
+\newcommand{\slepro}{\textsc{SlePro}}
+\newcommand{\concept}[1]{\emph{#1}}
+\definecolor{codebackground}{rgb}{0.97,0.97,0.97}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{keyword}{rgb}{0.5,0.0,0.5}
+\definecolor{comment}{rgb}{0.3,0.5,0.3}
+\definecolor{code}{rgb}{0.0,0.0,0.3}
+\definecolor{ncode}{rgb}{0.0,0.3,0.3}
+\definecolor{scode}{rgb}{0.3,0.0,0.3}
+\definecolor{static}{rgb}{0.0,0.0,0.3}
+\newcommand{\ncode}[1]{\texttt{\textup{\color{ncode}#1}}}
+\newcommand{\jcode}[1]{\texttt{\textup{\color{code}#1}}}
+\newcommand{\scode}[1]{\texttt{\textup{\color{scode}#1}}}
+\newcommand{\static}[1]{\texttt{\textsl{\color{static}#1}}}
+
+\newcommand{\codefigure}[3]{
+\begin{figure}[t!]
+\begin{boxedminipage}{\hsize}
+\mbox{}\hfill{}{\small\textit{\href{http://github.com/slebok/slepro/tree/master/#2}{#2}}}
+\lstinputlisting[language=#3]{../../#2}
+\end{boxedminipage}
+\caption{#1.}
+\label{#2}
+\medskip
+\end{figure}}
+
+\lstset{%
+  fontadjust=true,%
+  showstringspaces=false,%
+  basicstyle=\small\sffamily,%
+  keywordstyle=\color{keyword},%
+  commentstyle=\color{comment}\rmfamily\itshape\small,%
+  columns=fullflexible,%
+  tabsize=2,
+%  numbers=left,                   % where to put the line-numbers
+  numberstyle=\tiny\color{gray},  % the style that is used for the line-numbers
+  backgroundcolor=\color{codebackground},
+  stepnumber=2,                   % the step between two line-numbers
+%  numbersep=5pt,                  % how far the line-numbers are from the code
+ % aboveskip=1.5\medskipamount,%
+ % belowskip=1.5\medskipamount,
+aboveskip = 0pt,
+belowskip = 0pt,
+  %breaklines=true
+}
+
+\newcommand{\wikipediafn}[2]{\footnote{\url{#1}---last visited #2.}}
+\newcommand{\ooo}[1]{\textsf{101#1}}
+\newcommand{\ueber}{\textsc{ueber}}
+
+%% \biboptions{comma,round}
+% \biboptions{}
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{The megamodeling language \ueber}
+
+\author{Ralf L\"ammel and Andrei Varanovich}
+
+\address{Software Languages Team\\University of Koblenz-Landau, Germany}
+
+\begin{abstract}
+  We describe the megamodeling language \ueber, as it is used for
+  modeling the linguistic architecture in the \slepro{} project; see
+  \url{https://github.com/slebok/slepro}.
+
+\bigskip
+
+\begin{comment}
+\noindent
+\textbf{Acknowledgement}: {\small This document and the underlying
+  development are parts of a broader effort on language modeling and
+  software language engineering---joint work with \emph{Anya Helene
+    Bagge}, University of Bergen. Helpful interaction with and
+  feedback by Andrei Varanovich, University of Koblenz-Landau, is also
+  gratefully acknowledged.}
+\end{comment}
+
+\medskip
+
+\noindent
+\textbf{Version}
+
+0.00001 as of 26 November 2013.
+
+\medskip
+
+\noindent
+\textbf{Repository location of document}: 
+
+\url{https://github.com/slebok/slepro/tree/master/docs/ueber}.
+\end{abstract}
+
+\end{frontmatter}
+
+\pagebreak
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\tableofcontents
+
+\pagebreak
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{???}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+{\small
+
+%\nocite{FreeDictionary}
+%\setlength{\bibsep}{4pt}
+%\bibliographystyle{elsarticle-harv}
+%\bibliographystyle{elsarticle-num}
+%\bibliography{paper}
+
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

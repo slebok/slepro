@@ -1,0 +1,33 @@
+\NeedsTeXFormat{LaTeX2e}%
+\ProvidesPackage{lstjava}[2013/11/09 Java Support for Listings]%
+\RequirePackage{listings}%
+%
+\lstdefinelanguage{java}%
+{
+numbers=none,
+keywords={%
+    extends,%
+    import,%
+    abstract,%
+    null,%
+    this,%
+    public,%
+    protected,%
+    private,%
+    new,%
+    if,%
+    final,%
+    enum,%
+    switch,%
+    case,%
+    void,%
+    class,%
+    break,%
+    implements,%
+  },%
+   sensitive,%
+   morecomment=[l]//,%
+   morecomment=[s]{{-}{-}},%
+   morestring=[b]',%
+   morestring=[b]"%
+  }[keywords,comments,strings]%

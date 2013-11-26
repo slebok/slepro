@@ -45,7 +45,16 @@ set(List1) :-
 
 % Zip two lists to a list of pairs
 zip([], [], []).
-zip([H1|T1], [H2|T2], [(H1, H2)|T12]) :- zip(T1, T2, T12).
+zip([H1|T1], [H2|T2], [(H1, H2)|T12]) :-
+  zip(T1, T2, T12).
+
+zip([], [], [], []).
+zip([H1|T1], [H2|T2], [H3|T3], [(H1, H2, H3)|T123]) :-
+  zip(T1, T2, T3, T123).
+
+zip([], [], [], [], []).
+zip([H1|T1], [H2|T2], [H3|T3], [H4|T4], [(H1, H2, H3, H4)|T1234]) :-
+  zip(T1, T2, T3, T4, T1234).
 
 % Unzip a list of pairs to two lists
 unzip(L12, L1, L2) :- zip(L1, L2, L12).

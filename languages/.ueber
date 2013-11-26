@@ -1,4 +1,5 @@
 [
+  enter(text),
   enter(esl),
   enter(ueber),
   enter(bnl),

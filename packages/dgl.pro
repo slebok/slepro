@@ -4,7 +4,9 @@
 :- ensure_loaded('packages/prelude.pro').
 :- ensure_loaded('packages/term.pro').
 :- ensure_loaded('packages/cfg.pro').
-:- ensure_loaded('packages/pp.pro').
+
+:- consult('languages/ppl/eval.pro').
+:- consult('languages/ppl/to-string.pro').
 
 % Modules for DGL
 :- ['languages/dgl/as-to-cs.pro'].

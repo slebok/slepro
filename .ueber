@@ -10,7 +10,6 @@
 :- ['prelude/ueber.pro'].         
 
 :- init.
-:- language(text, succeed, []).
 :- enter(languages).
 :- run.
 :- halt.

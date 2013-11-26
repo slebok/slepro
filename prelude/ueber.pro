@@ -24,6 +24,7 @@ enter(RelDir) :-
   expand_file_name(DcgWildcard, DcgFiles),
   append(ProFiles, DcgFiles, Files),
   map(load, Files),
+%  elementOf('.ueber', ueber(term)),
   atom_concat(AbsDir, '/.ueber', File),
   readTermFile(File, Term),
   maplist(call, Term),
@@ -42,6 +43,13 @@ language(Lang, Pred, ArgsRel) :-
   format(' * language(~q, ~q, ~q)~n',[Lang, Pred, ArgsRel]),
   map(ueber_absolute, ArgsRel, ArgsAbs),
   assertz(interpretation(language(Lang, Pred, ArgsAbs))).
+
+% Pre-process equivalence declaration
+equivalence(Lang, Pred, ArgsRel) :-
+  ueber_indent,
+  format(' * equivalence(~q, ~q, ~q)~n',[Lang, Pred, ArgsRel]),
+  map(ueber_absolute, ArgsRel, ArgsAbs),
+  assertz(interpretation(equivalence(Lang, Pred, ArgsAbs))).
 
 % Pre-process parser declaration
 parser(LangIn, LangOut, Pred, ArgsRel) :-
@@ -72,6 +80,10 @@ mapsTo(F, ArgsRel, RessRel) :-
   ueber_indent,
   format(' * mapsTo(~q, ~q, ~q)~n',[F, ArgsRel, RessRel]),
   assertz(relationship(mapsTo(F, ArgsAbs, RessAbs))).
+
+% Pre-process pattern applications
+pattern(X) :-
+  call(X).
   
 % Make a pseudo-absolute filename
 ueber_absolute(Rel, Abs) :-

@@ -1,0 +1,5 @@
+[
+  language(text, succeed, []),
+  equivalence(text, textEq, [])
+].
+

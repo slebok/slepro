@@ -1,0 +1,18 @@
+\NeedsTeXFormat{LaTeX2e}%
+\ProvidesPackage{lsthaskell}[2013/02/10 Haskell Support for Listings]%
+\RequirePackage{listings}%
+%
+\lstdefinelanguage{Haskell}%
+{
+numbers=none,
+keywords={%
+    where,%
+    if,%
+    then,%
+    else,%
+  },%
+   sensitive,%
+   morecomment=[l]--,%
+   morecomment=[s]{{-}{-}},%
+   morestring=[b]"%
+  }[keywords,comments,strings]%

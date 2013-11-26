@@ -1,9 +1,29 @@
-/*
-
-as.term		test-hbox.txt	test-text.txt	
-	test-indent.txt	test-vbox.txt
-
-*/
-
 [
+  % PPL -- the Pretty Printing Language
+  language(ppl(term), eslLanguage, ['as.term']),
+
+  % Samples of PPL
+  elementOf('test-text.ppl', ppl(term)),
+  elementOf('test-vbox.ppl', ppl(term)),
+  elementOf('test-vlist.ppl', ppl(term)),
+  elementOf('test-hbox.ppl', ppl(term)),
+  elementOf('test-hlist.ppl', ppl(term)),
+  elementOf('test-hseplist.ppl', ppl(term)),
+  elementOf('test-indent.ppl', ppl(term)),
+
+  % Pretty printing baselines
+  elementOf('test-text.txt', text),
+  elementOf('test-vbox.txt', text),
+  elementOf('test-hbox.txt', text),
+  elementOf('test-hseplist.txt', text),
+  elementOf('test-indent.txt', text),
+
+  % Applications of the evaluator
+  mapsTo(pp, ['test-text.ppl'], ['test-text.txt']),
+  mapsTo(pp, ['test-vbox.ppl'], ['test-vbox.txt']),
+  mapsTo(pp, ['test-vlist.ppl'], ['test-vbox.txt']),
+  mapsTo(pp, ['test-hbox.ppl'], ['test-hbox.txt']),
+  mapsTo(pp, ['test-hlist.ppl'], ['test-hbox.txt']),
+  mapsTo(pp, ['test-hseplist.ppl'], ['test-hseplist.txt']),
+  mapsTo(pp, ['test-indent.ppl'], ['test-indent.txt'])
 ].

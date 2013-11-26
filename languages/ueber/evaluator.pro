@@ -25,16 +25,15 @@ evaluate_(elementOf(File, Lang)) :-
 evaluate_(mapsTo(F, FilesIn, FilesOut)) :-
   map(readFile, FilesIn, ContentsIn),
   map(readFile, FilesOut, Expected),
+  map(getLanguage, FilesOut, LangsOut),
   map(succeed, Expected, Actual),
   append(ContentsIn, Actual, Args),
+  zip(FilesOut, LangsOut, Expected, Actual, ZArgs),
   require(
     mappable(F, FilesIn),
     apply(F, Args)
   ),
-  require(
-    expecedVersusActual(Expected, Actual),
-    append(ContentsIn, Expected, Args)  
-  ).
+  map(equiv, ZArgs).
 
 evaluate_(parsesTo(FileIn, FileOut)) :-
   require(
@@ -62,12 +61,26 @@ evaluate_(parsesTo(FileIn, FileOut)) :-
   ).
 
 readFile(File, Content) :-
+  getLanguage(File, Lang),
+  ( textLanguage(Lang), readTextFile(File, Content)
+  ; termLanguage(Lang), readTermFile(File, Content) ).
+
+getLanguage(File, Lang) :-
   require(
     languageOf(File),
     relationship(elementOf(File, Lang))
+  ).
+
+equiv((File, Lang, Expected, Actual)) :-
+  ( interpretation(equivalence(Lang, Pred, Args1)) ->
+        true
+      ; Pred = (==), Args1 = [] 
   ),
-  ( textLanguage(Lang), readTextFile(File, Content)
-  ; termLanguage(Lang), readTermFile(File, Content) ).
+  append(Args1, [Expected, Actual], Args2),
+  require(
+    equiv(File, Lang, Expected, Actual),
+    apply(Pred, Args2) 
+  ).
 
 textLanguage(text).
 textLanguage(X) :- X =.. [_,Y], textLanguage(Y).

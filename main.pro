@@ -1,6 +1,4 @@
-% This is not quite an .ueber file.
-% This is to bootstrap the ueber process.
-
+% Load the prelude of SLEPRO
 :- ['prelude/data.pro'].
 :- ['prelude/higher-order.pro'].
 :- ['prelude/io.pro'].
@@ -9,7 +7,8 @@
 :- ['prelude/http.pro'].
 :- ['prelude/ueber.pro'].         
 
+% UEBER-based processing of all code
 :- init.
-:- enter(languages).
+:- preprocess(languages).
 :- run.
 :- halt.

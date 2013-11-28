@@ -1,14 +1,2 @@
 [
-  enter(text),
-  enter(esl),
-  enter(ueber),
-  enter(bnl),
-  enter(bsl),
-  enter(bgl),
-  enter(egl),
-  enter(java),
-  enter(dgl),
-  enter(fsml),
-  enter(ppl),
-  enter(dot)
 ].

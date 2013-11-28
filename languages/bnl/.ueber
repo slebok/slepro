@@ -1,10 +1,11 @@
 [
-  language(bnl(term), bslLanguage, ['as.term']),
-  language(bnl(tokens(term)), bglLanguage, ['cs.term']),
-  language(bnl(text), bglLanguage(charsToTokens), ['cs.term']),
+  language(bnl(term)),
+  language(bnl(tokens(term))),
+  language(bnl(text)),
 
-  parser(bnl(tokens(term)), bnl(term), bglParser, ['cs.term']),
-  parser(bnl(text), bnl(term), bglParser(charsToTokens), ['cs.term']),
+  membership(bnl(term), bslLanguage, ['as.term']),
+  membership(bnl(tokens(term)), bglLanguage, ['cs.term']),
+  membership(bnl(text), bglLanguage(charsToTokens), ['cs.term']),
 
   elementOf('cs.bgl', bgl(text)),
   elementOf('cs.term', bgl(term)),
@@ -15,9 +16,12 @@
   elementOf('sample.formula', term),
   elementOf('sample.value', term),
 
-  parsesTo('cs.bgl', 'cs.term'),
-  parsesTo('sample.tokens', 'sample.term'),
-  parsesTo('sample.txt', 'sample.term'),
+  function(parser, [bnl(tokens(term))], [bnl(term)], bglParser, ['cs.term']),
+  function(parser, [bnl(text)], [bnl(term)], bglParser(charsToTokens), ['cs.term']),
+
+  mapsTo(parser, ['cs.bgl'], ['cs.term']),
+  mapsTo(parser, ['sample.tokens'], ['sample.term']),
+  mapsTo(parser, ['sample.txt'], ['sample.term']),
 
   mapsTo(bglToBsl, ['cs.term'], ['as.term']),
   mapsTo(charsToTokens, ['sample.txt'], ['sample.tokens']),

@@ -9,7 +9,7 @@
 \usepackage{comment}
 \usepackage{boxedminipage}
 \usepackage{amssymb}
-\usepackage{listings,lsthaskell,lstprolog,lstegl,lstesl,lstfsml,lstjava,lstdot}
+\usepackage{listings,lsthaskell,lstprolog,lstegl,lstesl,lstfsml,lstjava,lstdot,lsttext,lstueber}
 
 \newcommand{\m}[1]{\ensuremath{\mathit{#1}}}
 \newcommand{\slepro}{\textsc{SlePro}}
@@ -60,7 +60,9 @@ belowskip = 0pt,
 
 \newcommand{\wikipediafn}[2]{\footnote{\url{#1}---last visited #2.}}
 \newcommand{\ooo}[1]{\textsf{101#1}}
-\newcommand{\ueber}{\textsc{ueber}}
+\newcommand{\ueber}{\textsf{ueber}}
+\newcommand{\ppl}{\textsf{ppl}}
+\newcommand{\esl}{\textsf{esl}}
 
 %% \biboptions{comma,round}
 % \biboptions{}
@@ -77,8 +79,8 @@ belowskip = 0pt,
 
 \begin{abstract}
   We describe the megamodeling language \ueber, as it is used for
-  modeling the linguistic architecture in the \slepro{} project; see
-  \url{https://github.com/slebok/slepro}.
+  modeling the linguistic architecture of the Prolog-based \slepro{}
+  project; see \url{https://github.com/slebok/slepro}.
 
 \bigskip
 
@@ -119,17 +121,88 @@ belowskip = 0pt,
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{???}
+\section{Introducing \ueber}
+
+The notion of megamodel has been defined and used in different ways in
+software engineering. We favor here the view that a megamodel models
+the architecture of a software system with particular focus on the
+involved languages, technologies, and general software
+concepts~\citep{FavreLV12}
+
+In this document, we present a particular megamodeling language,
+\ueber, which is used for megamodeling the Prolog-based \slepro{}
+project, which is essentially a repository of language modeling
+artifacts: parsers, translators, semantics definitions, etc.
+
+In the following example, we demonstrate \ueber{} in a way as if we
+were testing a language processor. Megamodeling is in no way focused
+or restricted to software testing, but it happens that the particular
+setup of the \slepro{} repository lets megamodeling be useful for
+testing.
+
+\codefigure{%
+A \ppl{} expresion composing text literals vertically}{%
+languages/ppl/test/vbox.ppl}{%
+prolog}
+
+\codefigure{%
+The text rendered for the \ppl{} expression of \autoref{languages/ppl/test/vbox.ppl}}{%
+languages/ppl/test/vbox.txt}{%
+text}
+
+We are concerned with a simple language \ppl---the Pretty Printing
+Language.\footnote{\url{https://github.com/slebok/slepro/tree/master/languages/ppl}}
+This language offers a number of simple composition combinators for
+composing text vertically and horizontally. Consider the \ppl{}
+expression of \autoref{languages/ppl/test/vbox.ppl}. \ppl{} comes with
+a simple evaluation semantics that essentially renders the \ppl{}
+expressions; see \autoref{languages/ppl/test/vbox.txt}.
+
+\codefigure{%
+Evaluation rule for vertical boxes}{%
+languages/ppl/eval/vbox.pro}{%
+prolog}
+
+\codefigure{%
+Final rendering step: turn lists of lines into a single string}{%
+languages/ppl/to-string.pro}{%
+prolog}
+
+\autoref{languages/ppl/eval/vbox.pro} shows one rule of the evaluator
+for \ppl{} terms---the rule for vertical
+composition. \autoref{languages/ppl/to-string.pro} shows the trivial
+conversion from lists of lines to a single string. This is a
+straigthforward Prolog-based implementation of the pretty printing
+combinators. The details do not matter much to the megamodeling
+discussion that follows.
+
+\codefigure{%
+Syntax of \ppl{} terms}{%
+languages/ppl/as.esl}{%
+esl}
+
+The syntax of all \ppl{} terms is defined in
+\autoref{languages/ppl/as.esl}. We use a simple language, \esl, for
+term algebras or algebraic data types, which we do not discuss here in
+detail. The notation should be straightforward; we declare a number of
+different symbols (`constructors') for different kinds of \ppl{}
+combinators. The sample term of \autoref{languages/ppl/test/vbox.ppl}
+conforms to the signature.
+
+\codefigure{%
+A megamodel for testing \ueber}{%
+languages/ppl/test/.ueber}{%
+ueber}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 {\small
 
-%\nocite{FreeDictionary}
 %\setlength{\bibsep}{4pt}
-%\bibliographystyle{elsarticle-harv}
+\bibliographystyle{elsarticle-harv}
 %\bibliographystyle{elsarticle-num}
-%\bibliography{paper}
+\bibliography{paper}
 
 }
 

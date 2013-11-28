@@ -16,5 +16,5 @@ test:
 
 # The new ueber-approach
 ueber:
-	@swipl -q -f .ueber
+	@swipl -q -f main.pro
 

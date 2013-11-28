@@ -1,14 +1,7 @@
 [
-  language(java(text), succeed, []),
-  language(java(term), eslLanguage, ['as.term']),
-
-  elementOf('as.esl', esl(text)),
-  elementOf('as.term', esl(term)),
+  language(java(text)),
+  abstractSyntax(java),
   elementOf('sample-enum.term', java(term)),
   elementOf('sample-enum.java', java(text)),
-
-  parsesTo('as.esl', 'as.term'),
-
   mapsTo(ppJavaDecl, ['sample-enum.term'], ['sample-enum.java'])
 ].
-

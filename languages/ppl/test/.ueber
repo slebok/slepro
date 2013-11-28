@@ -1,0 +1,26 @@
+[
+  % Samples of PPL
+  elementOf('text.ppl', ppl(term)),
+  elementOf('vbox.ppl', ppl(term)),
+  elementOf('vlist.ppl', ppl(term)),
+  elementOf('hbox.ppl', ppl(term)),
+  elementOf('hlist.ppl', ppl(term)),
+  elementOf('hseplist.ppl', ppl(term)),
+  elementOf('indent.ppl', ppl(term)),
+
+  % Pretty printing baselines
+  elementOf('text.txt', text),
+  elementOf('vbox.txt', text),
+  elementOf('hbox.txt', text),
+  elementOf('hseplist.txt', text),
+  elementOf('indent.txt', text),
+
+  % Applications of the evaluator
+  mapsTo(pp, ['text.ppl'], ['text.txt']),
+  mapsTo(pp, ['vbox.ppl'], ['vbox.txt']),
+  mapsTo(pp, ['vlist.ppl'], ['vbox.txt']),
+  mapsTo(pp, ['hbox.ppl'], ['hbox.txt']),
+  mapsTo(pp, ['hlist.ppl'], ['hbox.txt']),
+  mapsTo(pp, ['hseplist.ppl'], ['hseplist.txt']),
+  mapsTo(pp, ['indent.ppl'], ['indent.txt'])
+].

@@ -1,35 +1,45 @@
+:- ['languages/ueber/macros/sample.pro'].
+:- ['languages/ueber/macros/abstractSyntax.pro'].
+:- ['languages/ueber/macros/syntax.pro'].
 :- nb_setval(ueber_level, 1).
-:- nb_setval(ueber_dir, '').
+:- nb_setval(ueber_dir, '.').
 
 init :-
   format('Megamodel preprocessing:~n', []).
 
-% Enter a new subdirectory and preprocess the .ueber file
-enter(RelDir) :-
-  nb_getval(ueber_level, L1),
-  L2 is L1 + 1,
-  nb_setval(ueber_level, L2),
-  ueber_indent,
-  format('> enter(~q)~n',[RelDir]),
-  nb_getval(ueber_dir, Dir),
-  (  
-    Dir == '' ->
-        AbsDir = RelDir
-      ; atomic_list_concat([Dir, '/', RelDir], AbsDir)
-  ),
-  nb_setval(ueber_dir, AbsDir),
-  atom_concat(AbsDir, '/*.pro', ProWildcard),
-  atom_concat(AbsDir, '/*.dcg', DcgWildcard),
-  expand_file_name(ProWildcard, ProFiles),
-  expand_file_name(DcgWildcard, DcgFiles),
-  append(ProFiles, DcgFiles, Files),
-  map(load, Files),
-%  elementOf('.ueber', ueber(term)),
-  atom_concat(AbsDir, '/.ueber', File),
+% Check directory to be ueber-preprocessable
+preprocess(Dir) :-
+  atom_concat(Dir, '/.ueber', File),
+  ( exists_file(File) ->
+        preprocess(Dir, File)
+      ;
+        true
+  ).
+
+% Preprocess directory and .ueber file
+preprocess(Dir, File) :-
   readTermFile(File, Term),
+  nb_getval(ueber_level, OldLevel),
+  Level is OldLevel + 1,
+  nb_setval(ueber_level, Level),
+  nb_getval(ueber_dir, OldDir),
+  nb_setval(ueber_dir, Dir),
+  ueber_indent,
+  format('> enter(~q)~n',[Dir]),
+  atom_concat(Dir, '/*.pro', ProWildcard),
+  atom_concat(Dir, '/*.dcg', DcgWildcard),
+  expand_file_name(ProWildcard, ProFiles),
+  map(load, ProFiles),
+  expand_file_name(DcgWildcard, DcgFiles),
+  map(load, DcgFiles),
+%  elementOf('.ueber', ueber(term)),
   maplist(call, Term),
-  nb_setval(ueber_level, L1),
-  nb_setval(ueber_dir, Dir).
+  atom_concat(Dir, '/*', Wildcard),
+  expand_file_name(Wildcard, Files),
+  filter(exists_directory, Files, Dirs),
+  map(preprocess, Dirs),
+  nb_setval(ueber_level, OldLevel),
+  nb_setval(ueber_dir, OldDir).
 
 % Load a Prolog file
 load(File) :-
@@ -81,8 +91,8 @@ mapsTo(F, ArgsRel, RessRel) :-
   format(' * mapsTo(~q, ~q, ~q)~n',[F, ArgsRel, RessRel]),
   assertz(relationship(mapsTo(F, ArgsAbs, RessAbs))).
 
-% Pre-process pattern applications
-pattern(X) :-
+% Pre-process macro applications
+macro(X) :-
   call(X).
   
 % Make a pseudo-absolute filename

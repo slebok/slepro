@@ -1,4 +1,4 @@
-stepperOfFsm(N, Fsm, Text) :-
+stepperOfFsm(Fsm, Text) :-
 
   % Map transitions to calls to the stepper's "add" method
   findall(S,
@@ -23,12 +23,12 @@ stepperOfFsm(N, Fsm, Text) :-
   SI = assign(name(state), select(name('State'),locked)), % State initialization
 
   % Stepper subclass
-  Class = class(public, false, N, [],
-    [typeapp('Stepper', 
+  Class = class(public, false, 'Stepper', [],
+    [typeapp('StepperBase', 
       [typename('State'), typename('Input'), typename('Action')])],
     [constr(
       public,
-      [(typeapp('Handler', [typename('Action')]), handler)],
+      [(typeapp('HandlerBase', [typename('Action')]), handler)],
       [HA,SI|Ss])]),
 
   % Render the class

@@ -1,10 +1,10 @@
 // Turnstile-specific, handwritten code
-public class TurnstileDemo {
+public class Demo {
     public static void main(String [] args) {
-	TurnstileHandler handler =
-	    new TurnstileHandler();
-	TurnstileStepper stepper =
-	    new TurnstileStepper(handler);
+	Handler handler =
+	    new Handler();
+	Stepper stepper =
+	    new Stepper(handler);
 	stepper.step(Input.ticket);
 	stepper.step(Input.pass);
 	stepper.step(Input.ticket);

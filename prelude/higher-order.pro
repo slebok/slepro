@@ -111,6 +111,13 @@ peek(P, X, X) :- apply(P, [X, _]).
 % Negation for accumulators
 not(P, X, X) :- \+ peek(P, X, X).
 
+% Filter a list according to a predicate
+filter(_, [], []).
+filter(P, [H|T], R) :-
+  apply(P, [H]) ->
+      filter(P, T, Q), R = [H|Q]
+    ; filter(P, T, R).
+
 % A map that also filters
 mapfilter(_, [], []).
 mapfilter(P, [H1|T1], L) :-

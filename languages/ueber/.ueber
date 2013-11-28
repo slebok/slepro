@@ -1,7 +1,8 @@
 [
-  language(ueber(term), eslLanguage, ['as.term']),
-  parsesTo('as.esl', 'as.term'),
+  language(ueber(term)),
+  membership(ueber(term), eslLanguage, ['as.term']),
   elementOf('as.esl', esl(text)),
   elementOf('as.term', esl(term)),
-  elementOf('.ueber', ueber(term))
+  elementOf('.ueber', ueber(term)),
+  mapsTo(parser, ['as.esl'], ['as.term'])
 ].

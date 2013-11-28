@@ -1,9 +1,11 @@
 [
-  language(term, appliedTerm, []),
-  language(esl(text), eglLanguage(eslMapping), ['cs.term', 'ls.term']),
-  language(esl(term), appliedSignature, []),
+  language(term),
+  language(esl(text)),
+  language(esl(term)),
 
-  parser(esl(text), esl(term), eglParser(eslMapping), ['cs.term', 'ls.term']),
+  membership(term, appliedTerm, []),
+  membership(esl(text), eglLanguage(eslMapping), ['cs.term', 'ls.term']),
+  membership(esl(term), appliedSignature, []),
 
   elementOf('as.term', esl(term)),
   elementOf('cs.egl', egl(text)),
@@ -11,6 +13,8 @@
   elementOf('ls.egl', egl(text)),
   elementOf('ls.term', egl(term)),
 
-  parsesTo('cs.egl', 'cs.term'),
-  parsesTo('ls.egl', 'ls.term')
+  function(parser, [esl(text)], [esl(term)], eglParser(eslMapping), ['cs.term', 'ls.term']),
+
+  mapsTo(parser, ['cs.egl'], ['cs.term']),
+  mapsTo(parser, ['ls.egl'], ['ls.term'])
 ].

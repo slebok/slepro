@@ -1,8 +1,10 @@
 [
-  language(bsl(term), signature, []),
-  language(tuple(term), tupleTerm, []),
-  language(prefix(term), prefixTerm, []),
-
+  language(bsl(term)),
+  language(tuple(term)),
+  language(prefix(term)),
+  membership(bsl(term), signature, []),
+  membership(tuple(term), tupleTerm, []),
+  membership(prefix(term), prefixTerm, []),
   elementOf('sample.bsl', bsl(term)),
   elementOf('sample.tupleTerm', tuple(term)),
   elementOf('sample.prefixTerm', prefix(term))

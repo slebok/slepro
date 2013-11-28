@@ -1,4 +1,4 @@
 [
-  pattern(syntax(egl))
+  macro(syntax(egl))
 ].
 

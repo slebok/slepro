@@ -1,5 +1,3 @@
 [
-  language(dot(text), succeed, [])
+  language(dot(text))
 ].
-
-

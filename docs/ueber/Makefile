@@ -2,8 +2,8 @@ ssh-user = softlang@linux.uni-koblenz.de
 www-dir = /home/softlang/www/slepro
 
 paper.pdf: *.tex *.bib Makefile *.sty
-#	pdflatex paper
-#	bibtex paper
+	pdflatex paper
+	bibtex paper
 	pdflatex paper
 	pdflatex paper
 

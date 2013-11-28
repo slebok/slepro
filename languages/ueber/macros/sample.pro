@@ -5,4 +5,4 @@ sample(Lang) :-
   atom_concat('sample.', Lang, TextSample),
   elementOf(TextSample, TextLang),
   elementOf('sample.term', TermLang),
-  parsesTo(TextSample, 'sample.term').
+  mapsTo(parser, [TextSample], ['sample.term']).

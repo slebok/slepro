@@ -7,7 +7,6 @@ symbol elementOf : file x lang -> udecl ;
 symbol mapsTo : func x file+ x file+ -> udecl ;
 symbol macro : goal -> udecl ;
 type file = atom ;
-type dir = atom ;
 type func = atom ;
 type lang = term ;
 type goal = term ;

@@ -1,3 +1,4 @@
 [
-  language(dot(text))
+  language(dot(text)),
+  membership(dot(text), succeed, [])
 ].

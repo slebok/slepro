@@ -48,48 +48,46 @@ load(File) :-
   consult(File).
 
 % Pre-process language declaration
-language(Lang, Pred, ArgsRel) :-
+language(Lang) :-
   ueber_indent,
-  format(' * language(~q, ~q, ~q)~n',[Lang, Pred, ArgsRel]),
+  format(' * language(~q)~n',[Lang]),
+  assertz(declaration(language(Lang))).
+
+% Pre-process language declaration
+membership(Lang, Pred, ArgsRel) :-
+  ueber_indent,
+  format(' * membership(~q, ~q, ~q)~n',[Lang, Pred, ArgsRel]),
   map(ueber_absolute, ArgsRel, ArgsAbs),
-  assertz(interpretation(language(Lang, Pred, ArgsAbs))).
+  assertz(declaration(membership(Lang, Pred, ArgsAbs))).
 
 % Pre-process equivalence declaration
 equivalence(Lang, Pred, ArgsRel) :-
   ueber_indent,
   format(' * equivalence(~q, ~q, ~q)~n',[Lang, Pred, ArgsRel]),
   map(ueber_absolute, ArgsRel, ArgsAbs),
-  assertz(interpretation(equivalence(Lang, Pred, ArgsAbs))).
+  assertz(declaration(equivalence(Lang, Pred, ArgsAbs))).
 
 % Pre-process parser declaration
-parser(LangIn, LangOut, Pred, ArgsRel) :-
+function(Func, LangsIn, LangsOut, Pred, ArgsRel) :-
   ueber_indent,
-  format(' * parser(~q, ~q, ~q, ~q)~n',[LangIn, LangOut, Pred, ArgsRel]),
+  format(' * function(~q, ~q, ~q, ~q, ~q)~n',[Func, LangsIn, LangsOut, Pred, ArgsRel]),
   map(ueber_absolute, ArgsRel, ArgsAbs),
-  assertz(interpretation(parser(LangIn, LangOut, Pred, ArgsAbs))).
+  assertz(declaration(function(Func, LangsIn, LangsOut, Pred, ArgsAbs))).
   
 % Pre-process elementOf/2 relationship
 elementOf(Rel, Lang) :-
   ueber_absolute(Rel, Abs),
   ueber_indent,
   format(' * elementOf(~q, ~q)~n',[Rel, Lang]),
-  assertz(relationship(elementOf(Abs, Lang))).
-
-% Pre-process parsesTo relationship
-parsesTo(ArgRel, ResRel) :-
-  ueber_absolute(ArgRel, ArgAbs),
-  ueber_absolute(ResRel, ResAbs),
-  ueber_indent,
-  format(' * parsesTo(~q, ~q)~n',[ArgRel, ResRel]),
-  assertz(relationship(parsesTo(ArgAbs, ResAbs))).
+  assertz(declaration(elementOf(Abs, Lang))).
 
 % Pre-process mapsTo relationship
-mapsTo(F, ArgsRel, RessRel) :-
+mapsTo(Func, ArgsRel, RessRel) :-
   map(ueber_absolute, ArgsRel, ArgsAbs),
   map(ueber_absolute, RessRel, RessAbs),
   ueber_indent,
-  format(' * mapsTo(~q, ~q, ~q)~n',[F, ArgsRel, RessRel]),
-  assertz(relationship(mapsTo(F, ArgsAbs, RessAbs))).
+  format(' * mapsTo(~q, ~q, ~q)~n',[Func, ArgsRel, RessRel]),
+  assertz(declaration(mapsTo(Func, ArgsAbs, RessAbs))).
 
 % Pre-process macro applications
 macro(X) :-

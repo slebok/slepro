@@ -1,6 +1,7 @@
 [
-  language(java(text)),
   abstractSyntax(java),
+  language(java(text)),
+  membership(java(text), succeed, []),
   elementOf('sample-enum.term', java(term)),
   elementOf('sample-enum.java', java(text)),
   mapsTo(ppJavaDecl, ['sample-enum.term'], ['sample-enum.java'])

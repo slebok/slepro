@@ -1,5 +1,5 @@
 abstractSyntax(Lang) :-
-  TermLang =.. [ppl, term],
+  TermLang =.. [Lang, term],
   elementOf('as.esl', esl(text)),
   elementOf('as.term', esl(term)),
   mapsTo(parser, ['as.esl'], ['as.term']),

@@ -2,11 +2,11 @@
 syntax(Lang) :-
   TextLang =.. [Lang, text],
   TermLang =.. [Lang, term],
+  language(TextLang),
+  language(TermLang),
   ConSyn = ['cs.term', 'ls.term'],
   AbsSyn = ['as.term'],
   atom_concat(Lang, 'Mapping', Mapping),
-  language(TextLang),
-  language(TermLang),
   membership(TextLang, eglLanguage(Mapping), ConSyn),
   membership(TermLang, eslLanguage, AbsSyn),
   function(parser, [TextLang], [TermLang], eglParser(Mapping), ConSyn),

@@ -1,28 +1,62 @@
 % Run the megamodel
 run :-
   format('~nMegamodel execution:~n', []),
-  findall(R, relationship(R), L),
+  findall(D, declaration(D), L),
   initTesting,
   map(evaluate, L).
 
-% Evaluate a relationship
-evaluate(R) :-
-  format(' * ~q~n',[R]),
-  evaluate_(R).
+% Evaluate a udecl
+evaluate(D) :-
+  format(' * ~q~n',[D]),
+  once(evaluate_(D)).
 
+evaluate_(language(_)).
+
+evaluate_(membership(Lang, _, _)) :-
+  requireLanguage(Lang).
+
+evaluate_(equivalence(Lang, _, _)) :-
+  requireLanguage(Lang).
+    
 evaluate_(elementOf(File, Lang)) :-
   require(
-    declarationOfLanguage(Lang),
-    interpretation(language(Lang, Pred, Args1))
+    declarationOfMembership(Lang),
+    declaration(membership(Lang, Pred, Args1))
   ),
   readFile(File, Content),
   append(Args1, [Content], Args2),
   require(
-    elementOf(Lang),
+    elementOf(File, Lang),
     apply(Pred, Args2)
   ).
 
-evaluate_(mapsTo(F, FilesIn, FilesOut)) :-
+evaluate_(function(_, LangsIn, LangsOut, _, _)) :-
+  map(requireLanguage, LangsIn),
+  map(requireLanguage, LangsOut).
+
+% Apply a declared function
+evaluate_(mapsTo(Func, FilesIn, FilesOut)) :-
+  declaration(function(Func, _, _, _, _)),
+  require(
+    resolution(Func, FilesIn, FilesOut),
+    (
+      declaration(function(Func, LangsIn, LangsOut, Pred1, ArgsAbs)),
+      map(getLanguage, FilesIn, LangsIn),
+      map(getLanguage, FilesOut, LangsOut)
+    )
+  ),
+  Pred1 =.. [Sym|PredArgs],
+  append(PredArgs, ArgsAbs, AllArgs),
+  Pred2 =.. [Sym|AllArgs],
+  mapTo(Pred2, FilesIn, FilesOut).
+
+% Apply a predicate as a function
+evaluate_(mapsTo(Func, FilesIn, FilesOut)) :-
+  \+ declaration(function(Func, _, _, _, _)),
+  mapTo(Func, FilesIn, FilesOut).
+
+% Predicate application to files
+mapTo(Pred, FilesIn, FilesOut) :-
   map(readFile, FilesIn, ContentsIn),
   map(readFile, FilesOut, Expected),
   map(getLanguage, FilesOut, LangsOut),
@@ -30,23 +64,25 @@ evaluate_(mapsTo(F, FilesIn, FilesOut)) :-
   append(ContentsIn, Actual, Args),
   zip(FilesOut, LangsOut, Expected, Actual, ZArgs),
   require(
-    mappable(F, FilesIn),
-    apply(F, Args)
+    mappable(Pred, FilesIn),
+    apply(Pred, Args)
   ),
   map(equiv, ZArgs).
 
+
+/*
 evaluate_(parsesTo(FileIn, FileOut)) :-
   require(
     languageOf(FileIn),
-    relationship(elementOf(FileIn, LangIn))
+    declaration(elementOf(FileIn, LangIn))
   ),
   require(
     languageOf(FileOut),
-    relationship(elementOf(FileOut, LangOut))
+    declaration(elementOf(FileOut, LangOut))
   ),
   require(
     parserFromTo(LangIn, LangOut),
-    interpretation(parser(LangIn, LangOut, Pred, Args1))
+    declaration(parser(LangIn, LangOut, Pred, Args1))
   ),
   readFile(FileIn, ContentIn),
   readFile(FileOut, Expected),
@@ -59,20 +95,27 @@ evaluate_(parsesTo(FileIn, FileOut)) :-
     expecedVersusActual(Expected, Actual),
     append(Args1, [ContentIn, Expected], Args2)  
   ).
+*/
 
 readFile(File, Content) :-
-  getLanguage(File, Lang),
+  require(
+    languageOf(File),
+    getLanguage(File, Lang)
+  ),
   ( textLanguage(Lang), readTextFile(File, Content)
   ; termLanguage(Lang), readTermFile(File, Content) ).
 
-getLanguage(File, Lang) :-
+requireLanguage(Lang) :-
   require(
-    languageOf(File),
-    relationship(elementOf(File, Lang))
+    declarationOfLanguage(Lang),
+    declaration(language(Lang))
   ).
 
+getLanguage(File, Lang) :-
+  declaration(elementOf(File, Lang)).
+
 equiv((File, Lang, Expected, Actual)) :-
-  ( interpretation(equivalence(Lang, Pred, Args1)) ->
+  ( declaration(equivalence(Lang, Pred, Args1)) ->
         true
       ; Pred = (==), Args1 = [] 
   ),

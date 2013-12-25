@@ -1,4 +1,4 @@
-:- ['languages/ueber/macros/sample.pro'].
+:- ['languages/ueber/macros/parse.pro'].
 :- ['languages/ueber/macros/abstractSyntax.pro'].
 :- ['languages/ueber/macros/syntax.pro'].
 :- nb_setval(ueber_level, 1).
@@ -33,7 +33,7 @@ preprocess(Dir, File) :-
   expand_file_name(DcgWildcard, DcgFiles),
   map(load, DcgFiles),
 %  elementOf('.ueber', ueber(term)),
-  maplist(call, Term),
+  maplist(declare, Term),
   atom_concat(Dir, '/*', Wildcard),
   expand_file_name(Wildcard, Files),
   filter(exists_directory, Files, Dirs),
@@ -48,58 +48,87 @@ load(File) :-
   consult(File).
 
 % Pre-process language declaration
-language(Lang) :-
+declare(language(Lang)) :-
   ueber_indent,
   format(' * language(~q)~n',[Lang]),
   assertz(declaration(language(Lang))).
 
 % Pre-process language declaration
-membership(Lang, Pred, ArgsRel) :-
+declare(membership(Lang, Pred, ArgsRel)) :-
   ueber_indent,
   format(' * membership(~q, ~q, ~q)~n',[Lang, Pred, ArgsRel]),
   map(ueber_absolute, ArgsRel, ArgsAbs),
   assertz(declaration(membership(Lang, Pred, ArgsAbs))).
 
 % Pre-process equivalence declaration
-equivalence(Lang, Pred, ArgsRel) :-
+declare(equivalence(Lang, Pred, ArgsRel)) :-
   ueber_indent,
   format(' * equivalence(~q, ~q, ~q)~n',[Lang, Pred, ArgsRel]),
   map(ueber_absolute, ArgsRel, ArgsAbs),
   assertz(declaration(equivalence(Lang, Pred, ArgsAbs))).
 
 % Pre-process parser declaration
-function(Func, LangsIn, LangsOut, Pred, ArgsRel) :-
+declare(function(Func, LangsIn, LangsOut, Pred, ArgsRel)) :-
   ueber_indent,
   format(' * function(~q, ~q, ~q, ~q, ~q)~n',[Func, LangsIn, LangsOut, Pred, ArgsRel]),
   map(ueber_absolute, ArgsRel, ArgsAbs),
   assertz(declaration(function(Func, LangsIn, LangsOut, Pred, ArgsAbs))).
   
 % Pre-process elementOf/2 relationship
-elementOf(Rel, Lang) :-
+declare(elementOf(Rel, Lang)) :-
   ueber_absolute(Rel, Abs),
   ueber_indent,
   format(' * elementOf(~q, ~q)~n',[Rel, Lang]),
   assertz(declaration(elementOf(Abs, Lang))).
 
+% Pre-process negated elementOf/2 relationship
+declare(not(elementOf(Rel, Lang))) :-
+  ueber_absolute(Rel, Abs),
+  ueber_indent,
+  format(' * not(elementOf(~q, ~q))~n',[Rel, Lang]),
+  assertz(declaration(not(elementOf(Abs, Lang)))).
+
 % Pre-process mapsTo relationship
-mapsTo(Func, ArgsRel, RessRel) :-
+declare(mapsTo(Func, ArgsRel, RessRel)) :-
   map(ueber_absolute, ArgsRel, ArgsAbs),
   map(ueber_absolute, RessRel, RessAbs),
   ueber_indent,
   format(' * mapsTo(~q, ~q, ~q)~n',[Func, ArgsRel, RessRel]),
   assertz(declaration(mapsTo(Func, ArgsAbs, RessAbs))).
 
+% Pre-process negated mapsTo relationship
+declare(not(mapsTo(Func, ArgsRel, RessRel))) :-
+  map(ueber_absolute, ArgsRel, ArgsAbs),
+  map(ueber_absolute, RessRel, RessAbs),
+  ueber_indent,
+  format(' * not(mapsTo(~q, ~q, ~q))~n',[Func, ArgsRel, RessRel]),
+  assertz(declaration(not(mapsTo(Func, ArgsAbs, RessAbs)))).
+
 % Pre-process macro applications
-macro(X) :-
+declare(macro(X)) :-
   call(X).
   
 % Make a pseudo-absolute filename
-ueber_absolute(Rel, Abs) :-
+ueber_absolute(Rel, Abs2) :-
   nb_getval(ueber_dir, Dir),
   (  
     Dir == '' ->
-        Abs = Rel
-      ; atomic_list_concat([Dir, '/', Rel], Abs)
+        Abs1 = Rel
+      ; atomic_list_concat([Dir, '/', Rel], Abs1)
+  ),
+  ueber_normalize(Abs1, Abs2).
+
+% Normalize ".." for uniqueness
+ueber_normalize(Atom1, Atom3) :-
+  name(Atom1, Str1),
+  ( append(Str2, [0'/, 0'., 0'., 0'/|Str3], Str1) ->
+        append(Str4, [0'/|Str5], Str2),
+        \+ member(0'/, Str5),
+        concat([Str4, [0'/], Str3], Str6),
+        name(Atom2, Str6),
+        ueber_normalize(Atom2, Atom3)
+      ;
+        Atom3 = Atom1 
   ).
 
 % Indentation

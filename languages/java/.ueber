@@ -1,5 +1,5 @@
 [
-  abstractSyntax(java),
+  macro(abstractSyntax(java)),
   language(java(text)),
   membership(java(text), succeed, []),
   elementOf('sample-enum.term', java(term)),

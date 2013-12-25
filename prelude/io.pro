@@ -6,6 +6,11 @@ readTextFile(File, Text) :-
   read_stream_to_codes(Input, Text),
   close(Input).
 
+writeTextFile(File, Text) :-
+  open(File, write, Output, []),
+  format(Output, '~s', [Text]),
+  close(Output).
+
 readTermFile(File, Term) :-
   require(
     fileExpected(File),
@@ -16,3 +21,8 @@ readTermFile(File, Term) :-
     read(Input, Term)
   ),
   close(Input).
+
+writeTermFile(File, Term) :-
+  open(File, write, Output, []),
+  format(Output, '~q.', [Term]),
+  close(Output).

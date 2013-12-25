@@ -1,8 +1,4 @@
 [
-  language(ueber(term)),
-  membership(ueber(term), eslLanguage, ['as.term']),
-  elementOf('as.esl', esl(text)),
-  elementOf('as.term', esl(term)),
-  elementOf('.ueber', ueber(term)),
-  mapsTo(parser, ['as.esl'], ['as.term'])
+  macro(abstractSyntax(ueber)),
+  elementOf('.ueber', ueber(term))
 ].

@@ -100,7 +100,7 @@ belowskip = 0pt,
 \noindent
 \textbf{Version}
 
-0.00002 as of 25 November 2013.
+0.00003 as of 25 December 2013.
 
 \medskip
 
@@ -168,6 +168,8 @@ This primer is concluded by some `food for thought' in
 hand as well as the underlying approach, thereby also motivating
 reproductions of the model as well as variations on the model,
 possibly leveraging diverse technologies and techniques.
+
+Various technical details are separated out into the appendix.
 
 The FSML development is part of the \slepro{} project. All software
 artifacts of this document and all support infrastructure is available
@@ -319,20 +321,19 @@ See \autoref{languages/fsml/ok.pro} for the Prolog specification
 listing the named constraints that we consider here. Each constraint
 gives rise to a separate predicate considered below. Here is short
 summary. Constraint \emph{fsmSingleInitial} is meant to ensure that
-there is only a single state declaration for an initial
-state. Constraint \emph{fsmDistinctIds} is meant to ensure that the
-state ids of the state declarations are distinct. Constraint
-\emph{fsmResolvable} is meant to ensure that all referenced target
-states are declared. Constraint \emph{fsmDeterministic} is meant
-to ensure that each given input uniquely defines the target state to
-be transitioned to, if any. Constraint \emph{fsmReachable} is meant to
-ensure that all declared states are reachable from the
-initial state. In \autoref{languages/fsml/ok.pro}, all constraint
-predicates are surround by an application of the meta-predicate
-\emph{require/1}, which is simply there for better error
-reporting. That is, if the argument of \emph{require/1} fails, then
-this is reported immediately, as opposed to simply propagating failure
-silently.
+there is exactly one initial state declaration. Constraint
+\emph{fsmDistinctIds} is meant to ensure that the state ids of the
+state declarations are distinct. Constraint \emph{fsmResolvable} is
+meant to ensure that all referenced target states are
+declared. Constraint \emph{fsmDeterministic} is meant to ensure that
+each given input uniquely defines the target state to be transitioned
+to, if any. Constraint \emph{fsmReachable} is meant to ensure that all
+declared states are reachable from the initial state. In
+\autoref{languages/fsml/ok.pro}, all constraint predicates are
+surround by an application of the meta-predicate \emph{require/1},
+which is simply there for better error reporting. That is, if the
+argument of \emph{require/1} fails, then this is reported immediately,
+as opposed to simply propagating failure silently.
 
 \codefigure{%
 There is only a single state declaration for an initial state}{%
@@ -340,9 +341,20 @@ languages/fsml/ok/initial.pro}{%
 prolog}
 
 \codefigure{%
+A negative test case: \autoref{languages/fsml/sample.fsml} with a second initial state}{%
+languages/fsml/tests/initialNotOk.fsml}{%
+fsml}
+
+\codefigure{%
 The state ids of the state declarations are distinct}{%
 languages/fsml/ok/distinct.pro}{%
 prolog}
+
+\codefigure{%
+A negative test case: \autoref{languages/fsml/sample.fsml} with a
+double declaration of state `locked'}{%
+languages/fsml/tests/idsNotOk.fsml}{%
+fsml}
 
 \codefigure{%
 All referenced target states are declared}{%
@@ -350,9 +362,22 @@ languages/fsml/ok/resolvable.pro}{%
 prolog}
 
 \codefigure{%
+A negative test case: \autoref{languages/fsml/sample.fsml} with a
+unresolvable state reference `unlockkked'}{%
+languages/fsml/tests/resolutionNotOk.fsml}{%
+fsml}
+
+\codefigure{%
 Each given input uniquely defines the target state to be transitioned to, if any}{%
 languages/fsml/ok/deterministic.pro}{%
 prolog}
+
+\codefigure{%
+A negative test case: \autoref{languages/fsml/sample.fsml} with a
+nondeterministic transition; see the double occurrence of `ticket' in
+state `locked'}{%
+languages/fsml/tests/determinismNotOk.fsml}{%
+fsml}
 
 \codefigure{%
 All declared states are reachable from the initial state}{%
@@ -360,12 +385,21 @@ languages/fsml/ok/reachable.pro}{%
 prolog}
 
 \codefigure{%
+A negative test case: \autoref{languages/fsml/sample.fsml} with an
+unreachable state `unlocked'}{%
+languages/fsml/tests/reachabilityNotOk.fsml}{%
+fsml}
+
+\codefigure{%
 Fixed point computation needed in \autoref{languages/fsml/ok/reachable.pro}}{%
 languages/fsml/ok/closure.pro}{%
 prolog}
 
 All constraints are specified in
-\autoref{languages/fsml/ok/initial.pro}--\autoref{languages/fsml/ok/closure.pro}. The
+\autoref{languages/fsml/ok/initial.pro}--\autoref{languages/fsml/ok/closure.pro}.
+We also show negative test cases that hence illustrate violation of
+the constraints; these cases are derived by minimalistic mutation of
+the sample FSM of \autoref{languages/fsml/sample.fsml}. The
 constraints are relatively simple to express using Prolog's
 meta-predicate \emph{findall/3} which serves here for queries into the
 terms of the abstract syntax. For instance, in
@@ -394,6 +428,25 @@ provide a precise and executable reference semantics of the language
 which can then be hold accountable by other language-based software
 components, e.g., a code generator (see next section) or a
 refactoring. 
+
+\codefigure{%
+A possible input sequence for FSM of
+\autoref{languages/fsml/sample.fsml}}{%
+languages/fsml/sample.input}{%
+prolog}
+
+\codefigure{%
+The output for 
+\autoref{languages/fsml/sample.input}}{%
+languages/fsml/sample.output}{%
+prolog}
+
+Let us set up a test case for the FSM of
+\autoref{languages/fsml/sample.fsml}. That is, a valid input sequence
+for the FSM is shown in \autoref{languages/fsml/sample.input} and the
+corresponding output in terms of actions and state changes is shown in
+\autoref{languages/fsml/sample.input}. We shall define a semantics
+that indeed transforms the input into the output.
 
 We speak of a reference semantics here to emphasize that this
 semantics may not be practically useful immediately. That is, we
@@ -476,17 +529,17 @@ similar.
 
 \codefigure{%
 Generic interface for action handers}{%
-languages/fsml/java/Handler.java}{%
+languages/fsml/java/HandlerBase.java}{%
 java}
 
 \codefigure{%
 A trivial interpretation of the turnstile actions}{%
-languages/fsml/java/TurnstileHandler.java}{%
+languages/fsml/java/Handler.java}{%
 java}
 
-\autoref{languages/fsml/java/Handler.java} shows a generic, i.e.,
+\autoref{languages/fsml/java/HandlerBase.java} shows a generic, i.e.,
 FSM-independent interface for defining handlers for FSM
-actions. \autoref{languages/fsml/java/TurnstileHandler.java} shows a
+actions. \autoref{languages/fsml/java/Handler.java} shows a
 trivial implementation of said interface for the turnstile
 example. The actions simply print out the names of the actions, but it
 is clear that arbitrary functionality can be plugged into FSM
@@ -494,10 +547,10 @@ execution in this manner.
 
 \codefigure{%
 Generic class for FSM execution}{%
-languages/fsml/java/Stepper.java}{%
+languages/fsml/java/StepperBase.java}{%
 java}
 
-\autoref{languages/fsml/java/Stepper.java} shows essentially the
+\autoref{languages/fsml/java/StepperBase.java} shows essentially the
 runtime for FSMs. This is generic code which is appropriately
 parameterized in the types for states, inputs, and actions. The class
 relies on a table for holding the transitions in the form of a map
@@ -505,17 +558,17 @@ from states to maps from inputs to pairs of optional actions and
 states. There is an appropriate \emph{add} method which makes it easy
 to insert into this non-basic container. The class is also prepared to
 keep track of and make use of a handler for the involved actions. The
-class is called \emph{Stepper} because its key method is the one for
+class is called \emph{StepperBase} because its key method is the one for
 performing a step (a transition) based on an actual input item.
 
 \codefigure{%
 Configuration of a stepper for the turnstile example}{%
-languages/fsml/java/TurnstileStepper.java}{%
+languages/fsml/java/Stepper.java}{%
 java}
 
-\autoref{languages/fsml/java/TurnstileStepper.java} shows the
-generated code for the turnstile-specific \emph{Stepper} subclass. The
-class instantiates the generic parameters of the \emph{Stepper} class
+\autoref{languages/fsml/java/Stepper.java} shows the generated code
+for the turnstile-specific subclass of the \emph{StepperBase}
+class. The generic parameters of \emph{StepperBase} are instantiated
 to the turnstile-specific enum types for states, inputs, and actions,
 which were shown earlier. Also, the class encodes all transitions of
 the turnstile FSM via appropriate calls to the \emph{add} method, as
@@ -523,16 +576,16 @@ part of the constructor. The initial state is also set up and the
 turnstile-specific handler is communicated as well.
 
 \codefigure{%
-Code generation for stepper subclass}{%
+Code generation for stepper class}{%
 languages/fsml/to-java/stepper.pro}{%
 prolog}
 
 \autoref{languages/fsml/to-java/stepper.pro} shows the code generation
-predicate for stepper subclasses. The predicate refers to more
-elements of the Java language: several expression forms (e.g.,
-`null'), assignment statements, method calls, and class
-declarations. In a final step, the constructed abstract syntactical
-representation is passed to the pretty printer for Java.
+predicate for steppers. The predicate refers to more elements of the
+Java language: several expression forms (e.g., `null'), assignment
+statements, method calls, and class declarations. In a final step, the
+constructed abstract syntactical representation is passed to the
+pretty printer for Java.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -553,8 +606,7 @@ prolog}
 The visualization in \autoref{F:turnstile} renders an FSM as a
 graph. There are nodes and edges; both of them can be labeled; edges
 are directed; nodes are of a certain shape (an ellipse here) and style
-(regular or
-filled). \autoref{languages/fsml/sample.dgl} represents
+(regular or filled). \autoref{languages/fsml/sample.dgl} represents
 represents the graph in the abstract (Prolog-based) syntax of a simple
 graph description based on the DGL notation provided by the \slepro{}
 project. DGL stands for `dot-based graph language'; see \ref{A:dgl}
@@ -743,6 +795,41 @@ language. DGL stands `dot-based graph language' to hint at the fact
 that the abstract syntax of DGL can be (is) rendered in the dot
 language of Graphviz. The abstract syntax of DGL is shown in
 \autoref{languages/dgl/as.esl}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagebreak
+
+\codefigure{%
+A negative test case: \autoref{languages/fsml/sample.fsml} with a syntax error; see `innnitial'}{%
+languages/fsml/tests/parserError.fsml}{%
+fsml}
+
+\codefigure{%
+A negative test case: an input for
+\autoref{languages/fsml/sample.fsml} which contains an invalid input symbol}{%
+languages/fsml/tests/illegalSymbol.input}{%
+prolog}
+
+\codefigure{%
+A negative test case: an input for
+\autoref{languages/fsml/sample.fsml} which contains an infeasible
+input symbol in the pool position---the initial state `locked' does
+not accept the `mute' input}{%
+languages/fsml/tests/infeasibleSymbol.input}{%
+prolog}
+
+\section{Additional test cases for the specification}
+\label{A:testing}
+
+Let us add a few more negative test cases in addition to the
+illustrations of constraint violation of \S\ref{S:ok}.  A simple
+parsing error is caused by the input of
+\autoref{languages/fsml/tests/parserError.fsml}.
+\autoref{languages/fsml/tests/illegalSymbol.input} and
+\autoref{languages/fsml/tests/infeasibleSymbol.input} demonstrate two
+major scenarios for failure of `simulation' according to
+\S\ref{S:semantics}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

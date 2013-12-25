@@ -34,6 +34,18 @@ skip(P, _, X) :- apply(P, [X]).
 % Skip one argument with a binary predicate
 skip(P, _, X, Y) :- apply(P, [X, Y]).
 
+% Try an argument predicate; fall back to true in case of failure
+try(P) :-
+  P ->
+      true
+    ; true.
+
+% Try an argument predicate; fall back to true in case of failure
+try(P, X) :-
+  apply(P, [X]) ->
+      true
+    ; true.
+
 % Try an argument predicate; fall back to ID in case of failure
 try(P, X, Y) :-
   apply(P, [X, Y]) ->

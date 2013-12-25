@@ -37,13 +37,17 @@ require(C, P) :-
   ( P -> 
        true
      ; 
-       nb_getval(problems, X1),
-       ( X1 == 0 -> nl; true ), 
-       format('Assertion failed: ~q~n', [C]),
-       X2 is X1 + 1,
-       nb_setval(problems, X2),
-       fail
+       error(C)
   ).
+
+% Report an error
+error(C) :-
+  nb_getval(problems, X1),
+  ( X1 == 0 -> nl; true ), 
+  format('Assertion failed: ~q~n', [C]),
+  X2 is X1 + 1,
+  nb_setval(problems, X2),
+  fail.
 
 % Monitor test-case execution
 test(Goal) :-

@@ -3,12 +3,29 @@ run :-
   format('~nMegamodel execution:~n', []),
   findall(D, declaration(D), L),
   initTesting,
-  map(evaluate, L).
+  map(evaluate, L),
+  listing(problem/1),
+  ( problem(_) -> abort; true ).
+
+:- dynamic problem/1.
+
+% Report a problem
+report(X) :-
+  problem(X) -> 
+      true
+    ; assertz(problem(X)).
 
 % Evaluate a udecl
 evaluate(D) :-
-  format(' * ~q~n',[D]),
-  once(evaluate_(D)).
+  format(' * ~q: ',[D]),
+  once(
+    ( evaluate_(D) ->
+        format('OK~n',[])
+      ; 
+        format('FAIL~n',[]),
+        report(failedDeclaration(D))
+    )
+  ).
 
 evaluate_(language(_)).
 
@@ -17,47 +34,50 @@ evaluate_(membership(Lang, _, _)) :-
 
 evaluate_(equivalence(Lang, _, _)) :-
   requireLanguage(Lang).
-    
-evaluate_(elementOf(File, Lang)) :-
-  require(
-    declarationOfMembership(Lang),
-    declaration(membership(Lang, Pred, Args1))
-  ),
-  readFile(File, Content),
-  append(Args1, [Content], Args2),
-  require(
-    elementOf(File, Lang),
-    apply(Pred, Args2)
-  ).
 
 evaluate_(function(_, LangsIn, LangsOut, _, _)) :-
   map(requireLanguage, LangsIn),
   map(requireLanguage, LangsOut).
+    
+evaluate_(elementOf(File, Lang)) :-
+  elementOf(File, Lang).
 
 % Apply a declared function
 evaluate_(mapsTo(Func, FilesIn, FilesOut)) :-
   declaration(function(Func, _, _, _, _)),
-  require(
-    resolution(Func, FilesIn, FilesOut),
-    (
+  ( (
       declaration(function(Func, LangsIn, LangsOut, Pred1, ArgsAbs)),
       map(getLanguage, FilesIn, LangsIn),
       map(getLanguage, FilesOut, LangsOut)
-    )
-  ),
-  Pred1 =.. [Sym|PredArgs],
-  append(PredArgs, ArgsAbs, AllArgs),
-  Pred2 =.. [Sym|AllArgs],
-  mapTo(Pred2, FilesIn, FilesOut).
+    ) ->
+        Pred1 =.. [Sym|PredArgs],
+        append(PredArgs, ArgsAbs, AllArgs),
+        Pred2 =.. [Sym|AllArgs],
+        mapsTo(Pred2, FilesIn, FilesOut)
+      ;
+        report(missingOverload(Func, FilesIn, FilesOut))
+  ).
 
 % Apply a predicate as a function
 evaluate_(mapsTo(Func, FilesIn, FilesOut)) :-
   \+ declaration(function(Func, _, _, _, _)),
-  mapTo(Func, FilesIn, FilesOut).
+  mapsTo(Func, FilesIn, FilesOut).
+
+evaluate_(not(X)) :-
+  not(evaluate_(X)).
+
+% Predicate for element-of test 
+elementOf(File, Lang) :-
+  declaration(membership(Lang, Pred, Args1)) ->
+        readFile(File, [Content]),
+        append(Args1, [Content], Args2),
+        apply(Pred, Args2)
+      ;
+        report(missingLanguage(Lang)).
 
 % Predicate application to files
-mapTo(Pred, FilesIn, FilesOut) :-
-  map(readFile, FilesIn, ContentsIn),
+mapsTo(Pred, FilesIn, FilesOut) :-
+  map(readFileStrictly, FilesIn, ContentsIn),
   map(readFile, FilesOut, Expected),
   map(getLanguage, FilesOut, LangsOut),
   map(succeed, Expected, Actual),
@@ -69,41 +89,38 @@ mapTo(Pred, FilesIn, FilesOut) :-
   ),
   map(equiv, ZArgs).
 
+% Fail for missing file
+readFileStrictly(File, Content) :-
+  readFile(File, [Content]).
 
-/*
-evaluate_(parsesTo(FileIn, FileOut)) :-
-  require(
-    languageOf(FileIn),
-    declaration(elementOf(FileIn, LangIn))
-  ),
-  require(
-    languageOf(FileOut),
-    declaration(elementOf(FileOut, LangOut))
-  ),
-  require(
-    parserFromTo(LangIn, LangOut),
-    declaration(parser(LangIn, LangOut, Pred, Args1))
-  ),
-  readFile(FileIn, ContentIn),
-  readFile(FileOut, Expected),
-  append(Args1, [ContentIn, Actual], Args2),
-  require(
-    parseable(Pred, FileIn),
-    apply(Pred, Args2)
-  ),
-  require(
-    expecedVersusActual(Expected, Actual),
-    append(Args1, [ContentIn, Expected], Args2)  
-  ).
-*/
+% Read file, if present
+readFile(File, MaybeContent) :-
+  exists_file(File) ->
+      ( (
+          getLanguage(File, Lang),
+          baseLanguage(Lang, Base)
+        ) ->
+            ( Base == text, readTextFile(File, Content)
+            ; Base == term, readTermFile(File, Content)
+            ),
+            MaybeContent = [Content]
+          ;
+            report(obscureFile(File)),
+            MaybeContent = [Content]
+      )
+    ;
+      report(missingFile(File)).    
 
-readFile(File, Content) :-
+% Write file, if present
+writeFile(File, Content) :-
   require(
     languageOf(File),
     getLanguage(File, Lang)
   ),
-  ( textLanguage(Lang), readTextFile(File, Content)
-  ; termLanguage(Lang), readTermFile(File, Content) ).
+  baseLanguage(Lang, Base),
+  ( Base == text, writeTextFile(File, Content)
+  ; Base == term, writeTermFile(File, Content)
+  ).
 
 requireLanguage(Lang) :-
   require(
@@ -111,22 +128,38 @@ requireLanguage(Lang) :-
     declaration(language(Lang))
   ).
 
+% A file's language is derived from not/elementOf declarations
 getLanguage(File, Lang) :-
-  declaration(elementOf(File, Lang)).
+   declaration(elementOf(File, Lang))
+ ; declaration(not(elementOf(File, Lang))).
 
-equiv((File, Lang, Expected, Actual)) :-
+% Establish equivalence between 'expected' and 'actual'
+equiv((File, Lang, [Expected], Actual)) :-
   ( declaration(equivalence(Lang, Pred, Args1)) ->
         true
       ; Pred = (==), Args1 = [] 
   ),
   append(Args1, [Expected, Actual], Args2),
-  require(
-    equiv(File, Lang, Expected, Actual),
-    apply(Pred, Args2) 
+  ( apply(Pred, Args2) ->
+        true
+      ; 
+        current_prolog_flag(argv, Argv),
+        ( member(override, Argv) ->
+              writeFile(File, Actual)
+            ; 
+              error(equiv(File, Lang, Expected, Actual))
+        )
   ).
 
-textLanguage(text).
-textLanguage(X) :- X =.. [_,Y], textLanguage(Y).
+% Force creation of missing baseline
+equiv((File, _, [], Content)) :-
+  current_prolog_flag(argv, Argv),
+  member(create, Argv),
+  writeFile(File, Content).
 
-termLanguage(term).
-termLanguage(X) :- X =.. [_,Y], termLanguage(Y).
+% Determine 'text' or 'term' as the base language of any language
+baseLanguage(text, text).
+baseLanguage(term, term).
+baseLanguage(X, Z) :-
+  X =.. [_,Y],
+  baseLanguage(Y, Z).

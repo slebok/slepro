@@ -1,0 +1,17 @@
+[
+  not(elementOf('parserError.fsml', fsml(text))),
+  macro(parse('initialNotOk.fsml')),
+  not(elementOf('initialNotOk.term', fsml(ok(term)))),
+  macro(parse('idsNotOk.fsml')),
+  not(elementOf('idsNotOk.term', fsml(ok(term)))),
+  macro(parse('resolutionNotOk.fsml')),
+  not(elementOf('resolutionNotOk.term', fsml(ok(term)))),
+  macro(parse('determinismNotOk.fsml')),
+  not(elementOf('determinismNotOk.term', fsml(ok(term)))),
+  macro(parse('reachabilityNotOk.fsml')),
+  not(elementOf('reachabilityNotOk.term', fsml(ok(term)))),
+  elementOf('illegalSymbol.input', term),
+  elementOf('infeasibleSymbol.input', term),
+  not(mapsTo(acceptFsm, ['../sample.term', 'illegalSymbol.input'], [])),
+  not(mapsTo(acceptFsm, ['../sample.term', 'infeasibleSymbol.input'], []))
+].

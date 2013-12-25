@@ -1,7 +1,7 @@
 abstractSyntax(Lang) :-
   TermLang =.. [Lang, term],
-  elementOf('as.esl', esl(text)),
-  elementOf('as.term', esl(term)),
-  mapsTo(parser, ['as.esl'], ['as.term']),
-  language(TermLang),
-  membership(TermLang, eslLanguage, ['as.term']).
+  declare(elementOf('as.esl', esl(text))),
+  declare(elementOf('as.term', esl(term))),
+  declare(mapsTo(parser, ['as.esl'], ['as.term'])),
+  declare(language(TermLang)),
+  declare(membership(TermLang, eslLanguage, ['as.term'])).

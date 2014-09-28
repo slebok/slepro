@@ -5,6 +5,7 @@
   membership(bgl(term), eslLanguage, ['as.term']),
   elementOf('as.esl', esl(text)),
   elementOf('as.term', esl(term)),
-  function(parser, [bgl(text)], [bgl(term)], parseBgl, [])
+  function(parser, [bgl(text)], [bgl(term)], parseBgl, []),
+  function(projection, [bgl(term)], [bsl(term)], bglToBsl, [])
 ].
 

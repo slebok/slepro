@@ -1,3 +1,5 @@
+eglAcceptor(Mapping, FileCs, FileLs, Text) :-
+  eglLanguage(Mapping, FileCs, FileLs, Text).
 eglLanguage(Mapping, FileCs, FileLs, Text) :-
   eglParser(Mapping, FileCs, FileLs, Text, _).
 eglParser(Mapping, FileCs, FileLs, Text, Term) :-

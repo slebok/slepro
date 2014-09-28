@@ -41,29 +41,6 @@ cfg_main :- runTests((
 %
 
    test(
-     exprScanner(
-       (i(text), 'languages/expr/sample-add.expr'),
-       (o(term), 'languages/expr/sample-add.tokens')
-     )
-   ),
-
-   test(
-     acceptTopDown(
-       (i(term), 'languages/expr/cs.term'),
-       (u, expr),
-       (i(term), 'languages/expr/sample-add.tokens')
-     )
-   ),
-
-   test(
-     acceptBottomUp(
-       (i(term), 'languages/expr/cs.term'),
-       (u, expr),
-       (i(term), 'languages/expr/sample-add.tokens')
-     )
-   ),
-
-   test(
      parseTopDown(
        (i(term), 'languages/expr/cs.term'),
        (u, expr),
@@ -79,21 +56,6 @@ cfg_main :- runTests((
      )
    ),
 
-   test(
-     implode(
-       (i(term), 'languages/expr/sample-add-ptree.term'),
-       (o(term), 'languages/expr/sample-add-prefix.term')
-     )
-   ),
-
-   test(
-     explode(
-       (i(term), 'languages/expr/cs.term'),
-       (u, expr),
-       (i(term), 'languages/expr/sample-add-prefix.term'),
-       (o(term), 'languages/expr/sample-add-ptree.term')
-     )
-   ),
 
    test(
      wellTypedTerm(

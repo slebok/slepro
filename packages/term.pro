@@ -27,18 +27,6 @@ term_main :- runTests((
 %
 
    test(
-     tupleTerm(
-       (i(term), 'languages/expr/sample-add-tuple.term')
-     )
-   ),
-
-   test(
-     prefixTerm(
-       (i(term), 'languages/expr/sample-add-prefix.term')
-     )
-   ),
-
-   test(
      appliedTerm(
        (i(term), 'languages/figure/sample-line.term')
      )
@@ -52,14 +40,6 @@ term_main :- runTests((
    test(
      signature(
        (i(term), 'languages/expr/as.term')
-     )
-   ),
-
-   test(
-     manySortedTerm(
-       (i(term), 'languages/expr/as.term'),
-       (i(term), 'languages/expr/sample-add-prefix.term'),
-       (u, expr)
      )
    ),
 

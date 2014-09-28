@@ -68,12 +68,21 @@ evaluate_(not(X)) :-
 
 % Predicate for element-of test 
 elementOf(File, Lang) :-
-  declaration(membership(Lang, Pred, Args1)) ->
+  findall(
+    (Pred, Args1), 
+    declaration(membership(Lang, Pred, Args1)),
+    Preds), 
+  ( Preds == [] ->
+        report(missingLanguage(Lang))
+      ; 
         readFile(File, [Content]),
-        append(Args1, [Content], Args2),
-        apply(Pred, Args2)
-      ;
-        report(missingLanguage(Lang)).
+        map(membership(Content), Preds)
+  ).
+
+% There may be multiple membership predicates
+membership(Content, (Pred, Args1)) :-
+  append(Args1, [Content], Args2),
+  once(apply(Pred, Args2)).
 
 % Predicate application to files
 mapsTo(Pred, FilesIn, FilesOut) :-
@@ -109,7 +118,8 @@ readFile(File, MaybeContent) :-
             MaybeContent = [Content]
       )
     ;
-      report(missingFile(File)).    
+      report(missingFile(File)),
+      MaybeContent = [].    
 
 % Write file, if present
 writeFile(File, Content) :-

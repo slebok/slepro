@@ -5,7 +5,7 @@ step(P, if(E1a, E2, E3), if(E1b, E2, E3)) :-
 % Commit to then branch
 step(_, if(boolconst(true), E, _), E).
 
-% Commit to then branch
+% Commit to else branch
 step(_, if(boolconst(false), _, E), E).
 
 % Simplify left operand

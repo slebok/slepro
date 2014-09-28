@@ -3,7 +3,7 @@ acceptTopDown(
     grammar(_, Rules), % rules to interpret
     Root, % root nonterminal
     Input % input string of terminals
-  ) :-
+  ) :- 
        acceptTopDown_(Rules, [n(Root)], Input).
 
 % Acceptance completed

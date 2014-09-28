@@ -1,4 +1,7 @@
 % Membership test
+eslChecker(File, Term) :-
+  eslLanguage(File, Term).
+
 eslLanguage(File, Term) :-
   readTermFile(File, Decls),
   [Decl|_] = Decls,

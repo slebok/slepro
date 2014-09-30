@@ -1,42 +1,8 @@
 [
 
-  % Manifestations of the EXPR language
-  language(expr(text)), % Text notation
-  language(expr(tokens(term))), % Tokenized text 
-  language(expr(ptree(term))), % Raw parse trees
-  language(expr(term)), % Imploded parse trees
-
-  % Syntax description of EXPR
-  elementOf('cs.bgl', bgl(text)),
-  elementOf('cs.term', bgl(term)),
-  elementOf('as.term', bsl(term)),
-  mapsTo(parser, ['cs.bgl'], ['cs.term']),
-  mapsTo(projection, ['cs.term'], ['as.term']),
-
-  % Membership tests for EXPR
-  membership(expr(text), bglTopDownAcceptor(exprScanner, expr), ['cs.term']),
-  membership(expr(tokens(term)), bglTopDownAcceptor(expr), ['cs.term']),
-  membership(expr(ptree(term)), succeed, []), % See implosion/explosion
-  membership(expr(term), bslChecker(expr), ['as.term']),
-
-  % A EXPR sample in different representations
-  elementOf('sample.expr', expr(text)),
-  elementOf('sample.tokens', expr(tokens(term))),
-  elementOf('sample.ptree', expr(ptree(term))),
-  elementOf('sample.term', expr(term)),
-
-  % Declarations of EXPR-specific scanners, parsers, and conversions
-  function(scanner, [expr(text)], [expr(tokens(term))], exprScanner, []),
-  function(parser, [expr(tokens(term))], [expr(term)], bglTopDownParser(expr), ['cs.term']),
-  function(parser, [expr(text)], [expr(term)], bglTopDownParser(exprScanner, expr), ['cs.term']),
-  function(imploder, [expr(ptree(term))], [expr(term)], bglImploder, []),
-  function(exploder, [expr(term)], [expr(ptree(term))], bglExploder(expr), ['cs.term']),
-
-  % BNL-specific applications of scanners, parsers, and conversions
-  mapsTo(scanner, ['sample.expr'], ['sample.tokens']),
-  mapsTo(parser, ['sample.tokens'], ['sample.term']),
-  mapsTo(parser, ['sample.expr'], ['sample.term']),
-  mapsTo(imploder, ['sample.ptree'], ['sample.term']),
-  mapsTo(exploder, ['sample.term'], ['sample.ptree'])
+  macro(bglSyntax(expr)),
+  macro(mmlSyntax(expr)),
+  macro(bglSample(expr)),
+  macro(mmlSample(expr))
 
 ].

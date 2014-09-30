@@ -1,0 +1,8 @@
+[
+  language(mml(graph(term))),
+  membership(mml(graph(term)), metamodel, []),
+  macro(eglSyntax(mml)),
+  macro(eslSyntax(mml)),
+  function(resolver, [mml(term)], [mml(graph(term))], metamodelToGraph, []),
+  equivalence(mml(graph(term)), graphEq, [])
+].

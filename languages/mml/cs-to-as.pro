@@ -1,5 +1,5 @@
-classesMapping(name, String, Atom) :-
+mmlMapping(name, String, Atom) :-
   name(Atom, String).
 
-classesMapping(abstract, abstract, true).
-classesMapping(abstract, concrete, false).
+mmlMapping(abstract, abstract, true).
+mmlMapping(abstract, concrete, false).

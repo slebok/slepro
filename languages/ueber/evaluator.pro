@@ -115,7 +115,7 @@ readFile(File, MaybeContent) :-
             MaybeContent = [Content]
           ;
             report(obscureFile(File)),
-            MaybeContent = [Content]
+            MaybeContent = []
       )
     ;
       report(missingFile(File)),

@@ -1,26 +1,26 @@
 % BGL-based top-down acceptor for token sequences
-bglTopDownAcceptor(Root, File, Input)
+bglTopDownAcceptor(File, Input)
  :-
     readTermFile(File, Grammar),
-    once(acceptTopDown(Grammar, Root, Input)).
+    once(acceptTopDown(Grammar, Input)).
 
 % BGL-based top-down acceptor with scanner
-bglTopDownAcceptor(Pred, Root, File, Input1)
+bglTopDownAcceptor(Pred, File, Input1)
  :-
     apply(Pred, [Input1, Input2]),
-    bglTopDownAcceptor(Root, File, Input2).
+    bglTopDownAcceptor(File, Input2).
 
 % BGL-based bottom-up acceptor for token sequences
-bglBottomUpAcceptor(Root, File, Input)
+bglBottomUpAcceptor(File, Input)
  :-
     readTermFile(File, Grammar),
-    once(acceptBottomUp(Grammar, Root, Input)).
+    once(acceptBottomUp(Grammar, Input)).
 
 % BGL-based bottom-up acceptor with scanner
-bglBottomUpAcceptor(Pred, Root, File, Input1)
+bglBottomUpAcceptor(Pred, File, Input1)
  :-
     apply(Pred, [Input1, Input2]),
-    bglBottomUpAcceptor(Root, File, Input2).
+    bglBottomUpAcceptor(File, Input2).
 
 % BGL-based imploder for parse trees
 bglImploder(Input, Output)
@@ -28,23 +28,24 @@ bglImploder(Input, Output)
     implode(Input, Output).
 
 % BGL-based exploder for parse trees
-bglExploder(Root, File, Input, Output)
+bglExploder(File, Input, Output)
  :-
     readTermFile(File, Grammar),
+    Grammar = grammar([Root|_], _),
     explode(Grammar, Root, Input, Output).
  
 % BGL-based top-down parser for token sequences
-bglTopDownParser(Root, File, Text, Term)
+bglTopDownParser(File, Text, Term)
  :-
     readTermFile(File, Grammar),
-    once(parseTopDown(Grammar, Root, Text, PTree)),
+    once(parseTopDown(Grammar, Text, PTree)),
     implode(PTree, Term).
 
 % BGL-based top-down parser with scanner
-bglTopDownParser(Pred, Root, File, Text1, Term)
+bglTopDownParser(Pred, File, Text1, Term)
  :-
     apply(Pred, [Text1, Text2]),
-    bglTopDownParser(Root, File, Text2, Term).
+    bglTopDownParser(File, Text2, Term).
 
 % More helpers for BGL
 elementOfBgl(Text) :-

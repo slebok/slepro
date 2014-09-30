@@ -1,36 +1,7 @@
 [
 
-  % Manifestations of the BNL language
-  language(bnl(term)),
-  language(bnl(tokens(term))),
-  language(bnl(text)),
-
-  % Syntax description of BNL
-  elementOf('cs.bgl', bgl(text)),
-  elementOf('cs.term', bgl(term)),
-  elementOf('as.term', bsl(term)),
-  mapsTo(parser, ['cs.bgl'], ['cs.term']),
-  mapsTo(projection, ['cs.term'], ['as.term']),
-
-  % Membership tests for BNL
-  membership(bnl(term), bslChecker(number), ['as.term']),
-  membership(bnl(tokens(term)), bglTopDownAcceptor(number), ['cs.term']),
-  membership(bnl(text), bglTopDownAcceptor(charsToTokens, number), ['cs.term']),
-
-  % A BNL sample in different representations
-  elementOf('sample.bnl', bnl(text)),
-  elementOf('sample.tokens', bnl(tokens(term))),
-  elementOf('sample.term', bnl(term)),
-
-  % Declarations of BNL-specific scanners and parsers
-  function(scanner, [bnl(text)], [bnl(tokens(term))], charsToTokens, []),
-  function(parser, [bnl(tokens(term))], [bnl(term)], bglTopDownParser(number), ['cs.term']),
-  function(parser, [bnl(text)], [bnl(term)], bglTopDownParser(charsToTokens, number), ['cs.term']),
-
-  % BNL-specific scanner and parser applications
-  mapsTo(scanner, ['sample.bnl'], ['sample.tokens']),
-  mapsTo(parser, ['sample.tokens'], ['sample.term']),
-  mapsTo(parser, ['sample.bnl'], ['sample.term']),
+  macro(bglSyntax(bnl)), % Syntax definition
+  macro(bglSample(bnl)), % Sample
 
   % Results of BNL evaluation
   elementOf('sample.formula', term),

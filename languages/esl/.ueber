@@ -1,20 +1,6 @@
 [
   language(term),
-  language(esl(text)),
-  language(esl(term)),
-
   membership(term, appliedTerm, []),
-  membership(esl(text), eglLanguage(eslMapping), ['cs.term', 'ls.term']),
-  membership(esl(term), appliedSignature, []),
-
-  elementOf('as.term', esl(term)),
-  elementOf('cs.egl', egl(text)),
-  elementOf('cs.term', egl(term)),
-  elementOf('ls.egl', egl(text)),
-  elementOf('ls.term', egl(term)),
-
-  function(parser, [esl(text)], [esl(term)], eglParser(eslMapping), ['cs.term', 'ls.term']),
-
-  mapsTo(parser, ['cs.egl'], ['cs.term']),
-  mapsTo(parser, ['ls.egl'], ['ls.term'])
+  macro(eglSyntax(esl)),
+  macro(eslSyntax(esl))
 ].

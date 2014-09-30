@@ -2,13 +2,13 @@
 grammar(
 
   % Nonterminals of the grammar
-  [nat, expr],
+  [expr, nat],
 
   % Production rules of the grammar
   [
-    rule(zero, nat, [t(zero)]),
-    rule(succ, nat, [t(succ), t('('), n(nat), t(')')]),
     rule(const, expr, [n(nat)]),
-    rule(add, expr, [n(expr), t('+'), n(expr)])
+    rule(add, expr, [n(expr), t('+'), n(expr)]),
+    rule(zero, nat, [t(zero)]),
+    rule(succ, nat, [t(succ), t('('), n(nat), t(')')])
   ]
 ).

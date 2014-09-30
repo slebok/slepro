@@ -1,7 +1,6 @@
 % Parse input, non-deterministically and top-down
 parseTopDown(
-    grammar(_, Rules), % rules to interpret
-    Root, % root nonterminal
+    grammar([Root|_], Rules), % rules to interpret
     Input, % input string of terminals
     Tree % parse tree
   ) :-

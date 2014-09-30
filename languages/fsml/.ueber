@@ -1,5 +1,6 @@
 [
-  macro(syntax(fsml)),
+  macro(eglSyntax(fsml)),
+  macro(eslSyntax(fsml)),
   macro(parse('sample.fsml')),
   language(fsml(ok(term))),
   membership(fsml(ok(term)), okFsm, []),

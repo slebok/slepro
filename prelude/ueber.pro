@@ -1,6 +1,8 @@
+:- ['languages/ueber/macros/bgl.pro'].
+:- ['languages/ueber/macros/esl.pro'].
+:- ['languages/ueber/macros/egl.pro'].
+:- ['languages/ueber/macros/mml.pro'].
 :- ['languages/ueber/macros/parse.pro'].
-:- ['languages/ueber/macros/abstractSyntax.pro'].
-:- ['languages/ueber/macros/syntax.pro'].
 :- nb_setval(ueber_level, 1).
 :- nb_setval(ueber_dir, '.').
 
@@ -51,7 +53,7 @@ load(File) :-
 declare(language(Lang)) :-
   ueber_indent,
   format(' * language(~q)~n',[Lang]),
-  assertz(declaration(language(Lang))).
+  ( \+ declaration(language(Lang)) -> assertz(declaration(language(Lang))); true ).
 
 % Pre-process language declaration
 declare(membership(Lang, Pred, ArgsRel)) :-

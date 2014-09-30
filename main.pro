@@ -1,4 +1,6 @@
 % Load the prelude of SLEPRO
+:- ['prelude/dynamic.pro'].
+:- ['prelude/multifile.pro'].
 :- ['prelude/data.pro'].
 :- ['prelude/higher-order.pro'].
 :- ['prelude/io.pro'].
@@ -9,6 +11,5 @@
 
 % UEBER-based processing of all code
 :- init.
-:- preprocess(languages).
-:- run.
+:- preprocess(languages), run.
 :- halt.

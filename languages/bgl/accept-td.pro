@@ -1,7 +1,6 @@
 % Accept input, non-deterministically and top-down
 acceptTopDown(
-    grammar(_, Rules), % rules to interpret
-    Root, % root nonterminal
+    grammar([Root|_], Rules), % rules to interpret
     Input % input string of terminals
   ) :- 
        acceptTopDown_(Rules, [n(Root)], Input).

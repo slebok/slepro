@@ -1,7 +1,8 @@
 % Wellness of collection of function declarations
-okProg(P) :-
-  map(toFunName, P, Ns),
+okProg((Fs, E)) :-
+  map(toFunName, Fs, Ns),
   set(Ns),
-  map(okFun(P), P).
+  map(okFun(Fs), Fs),
+  okExpr(Fs, [], E, _).
 
 toFunName(((N, _, _), _), N).

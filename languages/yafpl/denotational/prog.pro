@@ -1,7 +1,4 @@
-meaningProg(
-  P, % Program
-  E, % Expression
-  V % Result
-) :-
-     meaningExpr(P, E, F),
-     passTo([], F, V).
+% Evaluate main expression of program
+denotational((Fs, E), V) :-
+  meaningExpr(Fs, E, F),
+  passTo([], F, V).

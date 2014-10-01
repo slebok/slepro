@@ -1,8 +1,9 @@
-program : { function } * ;
+program : { function } * main ;
 function : funsig fundef ;
 funsig : name '::' type ;
 fundef : name { name }* '=' expr ;
 type : simpletype { '->' simpletype }* ;
+main : 'main' '=' 'print' '$' expr ;
 
 [inttype] simpletype :  'Int' ;
 [booltype] simpletype :  'Bool' ;

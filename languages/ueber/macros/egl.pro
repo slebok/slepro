@@ -15,3 +15,11 @@ eglSyntax(Lang) :-
   declare(mapsTo(parser, ['cs.egl'], ['cs.term'])),
   declare(mapsTo(parser, ['ls.egl'], ['ls.term'])).
 
+% Pattern of an EGL-based sample
+eglSample(Lang) :-
+  TextLang =.. [Lang, text],
+  TermLang =.. [Lang, term],
+  atom_concat('sample.', Lang, Sample),
+  declare(elementOf(Sample, TextLang)),
+  declare(elementOf('sample.term', TermLang)),
+  declare(mapsTo(parser, [Sample], ['sample.term'])).

@@ -1,3 +1,7 @@
+% Evaluate main expression of program
+bigStep((Fs, E), V) :-
+  evaluate(Fs, [], E, V).
+
 % A constant evaluates to itself
 evaluate(_, _, intconst(I), intval(I)).
 

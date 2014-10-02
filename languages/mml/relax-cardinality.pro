@@ -1,5 +1,5 @@
 % Turn all required members into optional members
-relaxMetamodel(MM1, MM2) :-
+relaxMm(MM1, MM2) :-
   topdownGraph(relaxOne, MM1, MM2).
 
 % Cardinality-level helper

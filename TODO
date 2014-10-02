@@ -1,3 +1,6 @@
+- Parsing
+  * Support separator lists; see, e.g., cs-to-as.pro in languages/ddl.
+  * Flatten lexical parse trees
 - An FSM language
   - Concrete syntax for FSMs
   - Code generator for Java

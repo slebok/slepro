@@ -1,0 +1,8 @@
+[
+
+  macro(eglSyntax(figure)),
+  macro(eslSyntax(figure)),
+  macro(eglSample(figure)),
+  macro(pplSample(figure))
+
+].

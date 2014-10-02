@@ -7,10 +7,15 @@ mmlSyntax(Lang) :-
   declare(elementOf('mm.graph', mml(graph(term)))),
   declare(mapsTo(parser, ['mm.mml'], ['mm.term'])),
   declare(mapsTo(resolver, ['mm.term'], ['mm.graph'])),
-  declare(membership(expr(graph(term)), mmlChecker, ['mm.graph'])).
+  declare(membership(GraphLang, mmlChecker, ['mm.graph'])),
+  declare(equivalence(GraphLang, graphEq, [])).
 
 % Pattern of a MML-based sample
-mmlSample(Lang) :-
+mmlSample(Lang, Sample) :-
   GraphLang =.. [Lang, graph(term)],
-  declare(elementOf('sample.graph', GraphLang)),
-  declare(elementOf('sample.graph', expr(graph(term)))).
+  atom_concat(Sample, '.graph', Graph),
+  declare(elementOf(Graph, GraphLang)).
+
+% Default for the sample's name
+mmlSample(Lang) :-
+  mmlSample(Lang, sample).

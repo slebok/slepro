@@ -1,10 +1,5 @@
-% Pretty print figures
-ppFigure(F, S) :-
-  ppFigure_(F, B),
-  pp(B, S).
-
-% One line per element
-ppFigure_(F, vlist(Bs)) :-
+% Pretty print figures with one line per element
+figurePp(F, vlist(Bs)) :-
   map(ppElement, F, Bs).
 
 % End each element by a semicolon
@@ -39,9 +34,6 @@ ppElement_(
      ppPoint(P, B1),
      ppInteger(I, B2).
 
-% Pretty print an integer
-ppInteger(I, text(I)).
-
 % Pretty print a point
 ppPoint(
   (X, Y),
@@ -49,3 +41,7 @@ ppPoint(
 ) :-
      ppInteger(X, B1),
      ppInteger(Y, B2).
+
+% Pretty print an integer
+ppInteger(I, number(I)).
+

@@ -46,6 +46,8 @@ appliedSort(Sort) :-
   \+ member(Sort, [
        atom, 
        integer, 
+       float, 
+       number, 
        boolean, 
        term
      ]).
@@ -53,6 +55,8 @@ appliedSort(Sort) :-
 % An applied term type 
 appliedType(atom).
 appliedType(integer).
+appliedType(float).
+appliedType(number).
 appliedType(boolean).
 appliedType(term).
 appliedType(sort(Sort)) :- 

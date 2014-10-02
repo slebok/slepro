@@ -22,7 +22,7 @@ concreteClassesOfMetamodel(MM, CNames) :-
     CNames).
 
 % Concrete classes with a certain base class
-concreteClassesOfMetamodel(MM, Bound, CNames) :-
+concreteClassesOfMetamodel(Bound, MM, CNames) :-
   lookup(classifiers, MM, Classes),
   findall(CName,
     (
@@ -35,9 +35,9 @@ concreteClassesOfMetamodel(MM, Bound, CNames) :-
     CNames).
 
 % Concrete classes for a member
-concreteClassesForMember(MM, CName, MName, CNames) :-
+concreteClassesForMember(CName, MName, MM, CNames) :-
   lookupMember(CName, MName, MM, M),
   lookup(type, M, #Ref),
   getObject(MM, Ref, Class),
   lookup(name, Class, Bound),
-  concreteClassesOfMetamodel(MM, Bound, CNames).
+  concreteClassesOfMetamodel(Bound, MM, CNames).

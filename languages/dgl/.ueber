@@ -1,10 +1,8 @@
 [
-  language(dgl(term)),
-  membership(dgl(term), eslLanguage, ['as.term']),
-  elementOf('as.esl', esl(text)),
-  elementOf('as.term', esl(term)),
-  elementOf('sample-graph.term', dgl(term)),
-  elementOf('sample-graph.dot', dot(text)),
-  mapsTo(parser, ['as.esl'], ['as.term']),
-  mapsTo(ppDgl, ['sample-graph.term'], ['sample-graph.dot'])
+
+  macro(eslSyntax(dgl)),
+  language(dgl(text)),
+  membership(dgl(text), succeed, []),
+  macro(pplSample(dgl))
+
 ].

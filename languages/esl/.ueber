@@ -1,6 +1,8 @@
 [
+
   language(term),
   membership(term, appliedTerm, []),
   macro(eglSyntax(esl)),
   macro(eslSyntax(esl))
+
 ].

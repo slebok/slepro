@@ -1,0 +1,6 @@
+[
+
+  macro(mmlSyntax(familyByName)),
+  macro(mmlSample(familyByName, 'small-family'))
+
+].

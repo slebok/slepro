@@ -12,6 +12,7 @@ wellTypedTerm(Decls, Sort, Term) :-
 
 % Apply symbol
 wellTypedTerm_(Decls, sort(Result), Term) :-
+  \+ (list(Term); tuple(Term)),
   Term =.. [Symbol|Terms],
   member(symbol(Symbol, Arguments, Result), Decls),
   map(wellTypedTerm_(Decls), Arguments, Terms).

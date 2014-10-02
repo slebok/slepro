@@ -1,0 +1,10 @@
+[
+  % Exercise "new object"
+  elementOf('new-expr.graph', exprRelaxed(graph(term))),
+  mapsTo(newObject(add), ['../exprRelaxed/mm.graph'], ['new-expr.graph']),
+
+  % Exercise "list concrete classes for a member"
+  elementOf('classes.term', term),
+  mapsTo(concreteClassesForMember(add, left), ['../exprRelaxed/mm.graph'], ['classes.term'])
+
+].

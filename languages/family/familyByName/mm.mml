@@ -9,7 +9,7 @@ metamodel family {
     value firstName : atom;
     value emailAddresses : atom*;
     value closestFriend : atom?;
- }
+  }
 
   datatype atom;
 

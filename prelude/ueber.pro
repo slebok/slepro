@@ -3,6 +3,7 @@
 :- ['languages/ueber/macros/egl.pro'].
 :- ['languages/ueber/macros/mml.pro'].
 :- ['languages/ueber/macros/parse.pro'].
+:- ['languages/ueber/macros/ppl.pro'].
 :- nb_setval(ueber_level, 1).
 :- nb_setval(ueber_dir, '.').
 

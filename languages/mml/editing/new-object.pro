@@ -1,15 +1,15 @@
 % Instantiate a class
-newObject(MM1, ClassN, Obj2) :-
-  newObject_(MM1, ClassN, Obj1),
+newObject(ClassN, MM1, Obj2) :-
+  newObject_(ClassN, MM1, Obj1),
   graphNf(Obj1, Obj2),
-  relaxMetamodel(MM1, MM2),
+  relaxMm(MM1, MM2),
   require(
     inconsistentNewObject(ClassN),
     conforms(Obj2, MM2)
   ).
 
 % Instantiation helper
-newObject_(MM, ClassN, Obj) :-
+newObject_(ClassN, MM, Obj) :-
   lookupConcreteClass(ClassN, MM, Class),
   lookup(members, Class, Ms),
   map(newMember, Ms, Fs),

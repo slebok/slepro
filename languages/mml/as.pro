@@ -1,4 +1,4 @@
-% Well-formedness of metamodels
+% Characterization of metamodel terms with lookup (resolution)
 metamodel(MM) :-
   require(
     graphMissing,

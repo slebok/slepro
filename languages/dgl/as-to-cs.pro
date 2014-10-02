@@ -1,9 +1,5 @@
 % Render DGL-like graphs
-ppDgl(G, S) :-
-  once(ppDgl_(G, B)),
-  pp(B, S).
-
-ppDgl_(
+dglPp(
   (Ns, Es), 
   vlist( [
     hlist([text(digraph), indent(text('G')), indent(text('{'))]),

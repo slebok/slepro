@@ -1,0 +1,9 @@
+[
+
+  macro(mmlSyntax(exprRelaxed)),
+  macro(mmlSample(exprRelaxed)),
+  mapsTo(relaxer, ['../mm.graph'], ['mm.graph']),
+  mapsTo(recardinalizer, ['mm.graph', '../mm.graph', 'sample.graph'], ['../sample.graph']),
+  mapsTo(recardinalizer, ['../mm.graph', 'mm.graph', '../sample.graph'], ['sample.graph'])
+
+].

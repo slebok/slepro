@@ -47,8 +47,8 @@ evaluate_(mapsTo(Func, FilesIn, FilesOut)) :-
   declaration(function(Func, _, _, _, _)),
   ( (
       declaration(function(Func, LangsIn, LangsOut, Pred1, ArgsAbs)),
-      map(getLanguage, FilesIn, LangsIn),
-      map(getLanguage, FilesOut, LangsOut)
+      map(getLanguages, FilesIn, LangsIn),
+      map(getLanguages, FilesOut, LangsOut)
     ) ->
         Pred1 =.. [Sym|PredArgs],
         append(PredArgs, ArgsAbs, AllArgs),
@@ -143,6 +143,11 @@ getLanguage(File, Lang) :-
    declaration(elementOf(File, Lang))
  ; declaration(not(elementOf(File, Lang))).
 
+% The immediate language and its supers for a file
+getLanguages(File, Lang2) :-
+  getLanguage(File, Lang1),
+  subLanguageOf(Lang1, Lang2).
+
 % Establish equivalence between 'expected' and 'actual'
 equiv((File, Lang, [Expected], Actual)) :-
   ( declaration(equivalence(Lang, Pred, Args1)) ->
@@ -173,3 +178,9 @@ baseLanguage(term, term).
 baseLanguage(X, Z) :-
   X =.. [_,Y],
   baseLanguage(Y, Z).
+
+% Sub-languages of languages
+subLanguageOf(Lang, Lang).
+subLanguageOf(Sub1, Super) :-
+  Sub1 =.. [F,Sub2],
+  subLanguageOf(Sub2, Super).

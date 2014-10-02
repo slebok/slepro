@@ -7,48 +7,16 @@ eglParser(Mapping, FileCs, FileLs, Text, Term) :-
 eglParser(Layout, Mapping, FileCs, FileLs, Text, Term) :-
   readTermFile(FileCs, CfSyn),  
   readTermFile(FileLs, LexSyn),
-  CfSyn = [(_,Root,_)|_],
-  scannerlessParser(CfSyn, Root, LexSyn, Layout, Mapping, Text, Term).
+  scannerless(Layout, Mapping, CfSyn, LexSyn, Text, Term).
 
-textElementOfEgl(Text) :-
-  parseEgl(Text, _).
-
-parseEgl(Text, Term) :-
-  scannerfullEgl(Text, Term).
-
-scannerfullEgl(Text, Term) :-
-  require(
-    scannerFailed(egl),
-    tokens(eglToken, Text, Tokens)),
-  File = 'languages/egl/cs.term',
-  require(
-    fileNotReadable(File),
-    readTermFile(File, Egl)),
-  require(
-    parserFailed(egl),
-    scannerfullParser(Egl, grammar, fail, Tokens, Term)).
-
-scannerlessEgl(Text, Term) :-
-  File1 = 'languages/egl/cs.term',
-  require(
-    fileNotReadable(File1),
-    readTermFile(File1, Consyn)),
-  File2 = 'languages/egl/ls.term',
-  require(
-    fileNotReadable(File2),
-    readTermFile(File2, Lexsyn)),
-  require(
-    parserFailed(egl),
-    scannerlessParser(Consyn, grammar, Lexsyn, layout, eglMapping, Text, Term)).
-
-% Scannerfull parser construction
-scannerfullParser(
-    CfSyn, % context-free syntax
-    Root, % root nonterminal
+% Scannerfull parsing
+scannerfull(
     Mapping, % tree mapping
+    CfSyn, % context-free syntax
     Input0, % input string of terminals
     Tree % parse tree
   ) :-
+       CfSyn = [(_,Root,_)|_],
        Config = (
          CfSyn,
          scannerfullTerminal,
@@ -64,16 +32,16 @@ scannerfullTerminal(T, [T|Input], Input).
 scannerfullLexical(N, V, [T|Input], Input) :-
   T =.. [N, V].
 
-% Scannerless parser construction
-scannerlessParser(
-    CfSyn, % rules of context-free syntax
-    Root, % root nonterminal
-    LexSyn, % rules of lexical syntax
+% Scannerless parsing
+scannerless(
     Layout, % layout nonterminal
     Mapping, % tree mapping
+    CfSyn, % rules of context-free syntax
+    LexSyn, % rules of lexical syntax
     Input0, % input string of terminals
     Tree % parse tree
   ) :-
+       CfSyn = [(_,Root,_)|_],
        Config = (
          CfSyn,
          scannerlessTerminal(LexSyn, Layout, Mapping),

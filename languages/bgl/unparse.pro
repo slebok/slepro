@@ -1,16 +1,22 @@
-% Unparse parse tree into terminal string
-unparse(Tree, String) :-
-  unparse_([Tree], String).
+% Unparse parse tree to string
+bglTreeToText(Tree, Text) :-
+  bglTreeToTokens(Tree, Tokens),
+  atomic_list_concat(Tokens, Atom),
+  name(Atom, Text).
+
+% Unparse parse tree to token sequence
+bglTreeToTokens(Tree, Tokens) :-
+  unparse([Tree], Tokens).
 
 % Base case
-unparse_([], []).
+unparse([], []).
 
 % Copy leaf terminal to output string and recurse
-unparse_([leaf(T)|Trees], [T|String]) :-
-  unparse_(Trees, String).
+unparse([leaf(T)|Trees], [T|Tokens]) :-
+  unparse(Trees, Tokens).
 
 % Unparse sub-trees of fork tree and remaining trees 
-unparse_([fork(_, Trees1)|Trees2], String3) :-
-  unparse_(Trees1, String1),
-  unparse_(Trees2, String2),
-  append(String1, String2, String3).
+unparse([fork(_, Trees1)|Trees2], Tokens3) :-
+  unparse(Trees1, Tokens1),
+  unparse(Trees2, Tokens2),
+  append(Tokens1, Tokens2, Tokens3).

@@ -94,7 +94,7 @@ mapsTo(Pred, FilesIn, FilesOut) :-
   zip(FilesOut, LangsOut, Expected, Actual, ZArgs),
   require(
     mappable(Pred, FilesIn),
-    apply(Pred, Args)
+    once(apply(Pred, Args))
   ),
   map(equiv, ZArgs).
 
@@ -152,7 +152,7 @@ getLanguages(File, Lang2) :-
 equiv((File, Lang, [Expected], Actual)) :-
   ( declaration(equivalence(Lang, Pred, Args1)) ->
         true
-      ; Pred = (==), Args1 = [] 
+      ; Pred = equivDefault(Lang), Args1 = [] 
   ),
   append(Args1, [Expected, Actual], Args2),
   ( apply(Pred, Args2) ->
@@ -172,6 +172,12 @@ equiv((File, _, [], Content)) :-
   member(create, Argv),
   writeFile(File, Content).
 
+% Slightly flexible equality
+equivDefault(_, X, X).
+equivDefault(Lang, X, Y) :-
+  baseLanguage(Lang, text),
+  ( append(X, [10], Y) ; append(Y, [10], X) ).
+ 
 % Determine 'text' or 'term' as the base language of any language
 baseLanguage(text, text).
 baseLanguage(term, term).

@@ -2,7 +2,7 @@
   % Syntax and sample
   macro(eglSyntax(yafpl)),
   macro(eslSyntax(yafpl)),
-  macro(eglSample(yafpl)),
+  macro(parse(yafpl)),
 
   % Wellness
   language(yafpl(ok(term))),

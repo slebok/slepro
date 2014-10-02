@@ -16,6 +16,8 @@ bglSyntax(Lang) :-
   declare(function(scanner, [TextLang], [TokenLang], Scanner, [])),
   declare(function(parser, [TokenLang], [TermLang], bglTopDownParser, ['cs.term'])),
   declare(function(parser, [TextLang], [TermLang], bglTopDownParser(Scanner), ['cs.term'])),
+  declare(function(unparser, [PTreeLang], [TokenLang], bglTreeToTokens, [])),
+  declare(function(unparser, [PTreeLang], [TextLang], bglTreeToText, [])),
   declare(function(imploder, [PTreeLang], [TermLang], bglImploder, [])),
   declare(function(exploder, [TermLang], [PTreeLang], bglExploder, ['cs.term'])),
   declare(elementOf('cs.bgl', bgl(text))),
@@ -38,5 +40,7 @@ bglSample(Lang) :-
   declare(mapsTo(scanner, [Sample], ['sample.tokens'])),
   declare(mapsTo(parser, ['sample.tokens'], ['sample.term'])),
   declare(mapsTo(parser, [Sample], ['sample.term'])),
+  declare(mapsTo(unparser, ['sample.ptree'], ['sample.tokens'])),
+  declare(mapsTo(unparser, ['sample.ptree'], [Sample])),
   declare(mapsTo(imploder, ['sample.ptree'], ['sample.term'])),
   declare(mapsTo(exploder, ['sample.term'], ['sample.ptree'])).

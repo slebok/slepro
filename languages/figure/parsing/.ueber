@@ -1,0 +1,21 @@
+[
+  
+  % An extra language of token sequences
+  language(figure(tokens(term))),
+  membership(figure(tokens(term)), succeed, []),
+  elementOf('sample.tokens', figure(tokens(term))),
+
+  % Scannerless parsing with EGL for both context-free and lexical syntax
+  mapsTo(
+    scannerless(layout, figureMapping), 
+    ['../cs.term', '../ls.term', '../sample.figure'], 
+    ['../sample.term']),
+
+  % Scannerfull parsing with EGL for context-free syntax and separate scanner
+  mapsTo(
+    scannerfull(figureMapping), 
+    ['../cs.term', 'sample.tokens'], 
+    ['../sample.term'])
+
+].
+

@@ -100,7 +100,7 @@ belowskip = 0pt,
 \noindent
 \textbf{Version}
 
-0.00003 as of 25 December 2013.
+0.00004 as of 2 October 2014.
 
 \medskip
 
@@ -128,7 +128,7 @@ belowskip = 0pt,
 
 \begin{figure}[t!]
 \vspace{-77\in}
-\includegraphics[width=\textwidth]{../../languages/fsml/sample.pdf}
+\includegraphics[width=\textwidth]{../../languages/fsml/dot/sample.pdf}
 \vspace{-150\in}
 \caption{A finite state machine for turnstiles.}
 \label{F:turnstile}
@@ -600,7 +600,7 @@ support. We do not consider editing here.
 
 \codefigure{%
 The FSM of \autoref{F:turnstile} in the abstract syntax of the DGL language}{%
-languages/fsml/sample.dgl}{%
+languages/fsml/dot/sample.term}{%
 prolog}
 
 The visualization in \autoref{F:turnstile} renders an FSM as a
@@ -616,13 +616,14 @@ for this notation. Nodes are quadruplets of the form (\m{Id},
 
 \codefigure{%
 The FSM of \autoref{F:turnstile} in the dot language}{%
-languages/fsml/sample.dot}{%
+languages/fsml/dot/sample.dgl}{%
 dot}
 
-The DGL processor translates the graph into a specification according
-to the \emph{dot} language of
+The DGL processor translates the graph into the concrete syntax
+of the \emph{dot} language of
 \emph{GraphViz}\footnote{\url{http://www.graphviz.org/}}; see
-\autoref{languages/fsml/sample.dot}. The GraphViz tool
+\autoref{languages/fsml/sample.dot}. (That is, DGL can be viewed as a 
+subset of the DOT language.) The GraphViz tool
 directly renders the dot specification as shown \autoref{F:turnstile}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

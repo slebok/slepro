@@ -4,7 +4,7 @@ bslChecker(File, Term) :-
 
 bslLanguage(File, Term) :-
   readTermFile(File, Sig),
-  Sig = [symbol(_, _, Sort)|_],
+  Sig = [(_, _, Sort)|_],
   manySortedTerm(Sig, Term, Sort).
 
 % Parser of BSL signatures relying on ESL

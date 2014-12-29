@@ -7,7 +7,7 @@ eslToBsl(Ss1, Ss2) :-
 
 eslToBslSymbol(
   symbol(Sym, Args1, Result),
-  symbol(Sym, Args2, Result)
+  (Sym, Args2, Result)
 ) :-
      map(bslSymbolArg, Args1, Args2).
 

@@ -11,13 +11,13 @@ profiles(Profiles) :-
   map(profile(ResultsSet), Profiles).
 
 % The symbol of a profile
-symbolOfProfile(symbol(Symbol, _, _), Symbol).
+symbolOfProfile((Symbol, _, _), Symbol).
 
 % The result sort of a profile
-resultOfProfile(symbol(_, _, Result), Result).
+resultOfProfile((_, _, Result), Result).
 
 % A profile consists of a symbol, argument sorts, and a result sort.
-profile(Sorts, symbol(Symbol, Arguments, _)) :-
+profile(Sorts, (Symbol, Arguments, _)) :-
   atom(Symbol),
   % An argument sort is also "defined" by some symbol.
   map(flip(member, Sorts), Arguments).

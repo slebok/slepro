@@ -1,0 +1,2 @@
+type signature = symbol* ;
+type symbol = (atom, atom*, atom) ;

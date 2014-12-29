@@ -1,3 +1,4 @@
-[ symbol(zero, [], nat),
-  symbol(succ, [nat], nat)
+[ 
+  (zero, [], nat),
+  (succ, [nat], nat)
 ].

@@ -5,7 +5,7 @@ bglToBsl(Rules, Profiles) :-
 % Convert a rule to a profile
 rule2profile(
     (Label, Lhs, Rhs),
-    symbol(Symbol, Arguments, Result)
+    (Symbol, Arguments, Result)
   ) :-
        Label = Symbol,
        Lhs = Result,

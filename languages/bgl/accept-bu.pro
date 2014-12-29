@@ -1,20 +1,23 @@
-% Accept input, non-deterministically and bottom-up
-acceptBottomUp(
-    grammar([Root|_], Rules), % rules to interpret
-    Input % input string of terminals
-  ) :-
-       acceptBottomUp_(Rules, Root, [], Input).
+% Accept input bottom-up
+acceptBottomUp(Rules, Input) :-
+    Rules = [(_, Root, _)|_],
+    acceptBottomUp(Rules, Root, [], Input).
 
 % Acceptance completed
-acceptBottomUp_(_, Root, [n(Root)], []).
+acceptBottomUp(_, Root, [n(Root)], []).
 
 % Shift terminal from input to stack
-acceptBottomUp_(Rules, Root, Stack, [T|Input0]) :-
-  acceptBottomUp_(Rules, Root, [t(T)|Stack], Input0).
+acceptBottomUp(Rules, Root, Stack0, [T|Input0]) :-
+    append(Stack0, [t(T)], Stack1),
+    acceptBottomUp(Rules, Root, Stack1, Input0).
 
-% Reduce prefix of stack to according to rule
-acceptBottomUp_(Rules, Root, Stack0, Input0) :-
-  append(RhsReverse, Stack1, Stack0),
-  reverse(RhsReverse, Rhs),
-  member(rule(_, N, Rhs), Rules), 
-  acceptBottomUp_(Rules, Root, [n(N)|Stack1], Input0).
+% Reduce prefix on stack to nonterminal
+acceptBottomUp(Rules, Root, Stack0, Input0) :-
+    % Remove a prefix from the stack
+    append(Stack1, Rhs, Stack0),
+    % Find the prefix as the RHS of a rule
+    member((_, N, Rhs), Rules),
+    % Add LHS nonterminal to the stack
+    append(Stack1, [n(N)], Stack2),
+    % Proceed recursively
+    acceptBottomUp(Rules, Root, Stack2, Input0).

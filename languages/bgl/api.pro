@@ -31,8 +31,7 @@ bglImploder(Input, Output)
 bglExploder(File, Input, Output)
  :-
     readTermFile(File, Grammar),
-    Grammar = grammar([Root|_], _),
-    explode(Grammar, Root, Input, Output).
+    explode(Grammar, Input, Output).
  
 % BGL-based top-down parser for token sequences
 bglTopDownParser(File, Text, Term)

@@ -2,10 +2,10 @@ asConvert__(number(Bits, Rest), Val1+Val2) :-
   convertBits__(Bits, Len1-1, Len1, Val1),
   convertRest__(Rest, Val2).
 
-convertBits__(bit(Bit), Pos, 1, Val) :-
+convertBits__(single(Bit), Pos, 1, Val) :-
   convertBit__(Bit, Pos, Val).
 
-convertBits__(bits(Bit, Bits), Pos0, Len1+1, Val1+Val2) :-
+convertBits__(many(Bit, Bits), Pos0, Len1+1, Val1+Val2) :-
   convertBit__(Bit, Pos0, Val1),
   convertBits__(Bits, Pos0-1, Len1, Val2).
 

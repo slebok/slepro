@@ -1,14 +1,6 @@
-% A grammar for simple expression
-grammar(
-
-  % Nonterminals of the grammar
-  [expr, nat],
-
-  % Production rules of the grammar
-  [
-    rule(const, expr, [n(nat)]),
-    rule(add, expr, [n(expr), t('+'), n(expr)]),
-    rule(zero, nat, [t(zero)]),
-    rule(succ, nat, [t(succ), t('('), n(nat), t(')')])
-  ]
-).
+[ 
+  (const, expr, [n(nat)]),
+  (add, expr, [n(expr), t(+), n(expr)]),
+  (zero, nat, [t(zero)]),
+  (succ, nat, [t(succ), t('('), n(nat), t(')')])
+].

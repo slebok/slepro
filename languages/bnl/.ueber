@@ -1,6 +1,7 @@
 [
 
-  macro(bglSyntax(bnl)), % Syntax definition
+  macro(bglSyntax(bnl)), % Concrete syntax
+%  macro(bslSyntax(bnl)), % Abstract syntax
   macro(bglSample(bnl)), % Sample
 
   % Results of BNL evaluation

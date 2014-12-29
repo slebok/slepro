@@ -188,5 +188,5 @@ baseLanguage(X, Z) :-
 % Sub-languages of languages
 subLanguageOf(Lang, Lang).
 subLanguageOf(Sub1, Super) :-
-  Sub1 =.. [F,Sub2],
+  Sub1 =.. [_,Sub2],
   subLanguageOf(Sub2, Super).

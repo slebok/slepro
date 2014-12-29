@@ -16,7 +16,7 @@ scannerfull(
     Input0, % input string of terminals
     Tree % parse tree
   ) :-
-       CfSyn = [(_,Root,_)|_],
+       CfSyn = [(_, Root, _)|_],
        Config = (
          CfSyn,
          scannerfullTerminal,

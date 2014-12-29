@@ -1,10 +1,13 @@
 [
+  language(bsl(text)),
   language(bsl(term)),
   language(tuple(term)),
   language(prefix(term)),
+  membership(bsl(text), elementOfBsl, []),
   membership(bsl(term), signature, []),
   membership(tuple(term), tupleTerm, []),
   membership(prefix(term), prefixTerm, []),
+  function(parser, [bsl(text)], [bsl(term)], parserOfBsl, []),
   elementOf('sample.bsl', bsl(term)),
   elementOf('sample.tupleTerm', tuple(term)),
   elementOf('sample.prefixTerm', prefix(term))

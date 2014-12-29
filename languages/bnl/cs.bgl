@@ -1,6 +1,6 @@
 [number] number : bits rest ;
-[bit] bits : bit ;
-[bits] bits : bit bits ;
+[single] bits : bit ;
+[many] bits : bit bits ;
 [zero] bit : '0' ;
 [one] bit : '1' ; 
 [integer] rest : ; 

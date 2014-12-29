@@ -6,11 +6,11 @@ asConvert_(number(Bits, Rest), Val0) :-
   { Pos1 =:= Len1 - 1 },
   { Val0 =:= Val1 + Val2 }.
 
-convertBits_(bit(Bit), Pos, Len, Val) :-
+convertBits_(single(Bit), Pos, Len, Val) :-
   convertBit_(Bit, Pos, Val),
   { Len =:= 1 }.
 
-convertBits_(bits(Bit, Bits), Pos0, Len0, Val0) :-
+convertBits_(many(Bit, Bits), Pos0, Len0, Val0) :-
   convertBit_(Bit, Pos0, Val1),
   convertBits_(Bits, Pos1, Len1, Val2),
   { Pos1 =:= Pos0 - 1 },

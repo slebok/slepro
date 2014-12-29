@@ -17,7 +17,7 @@ implode_(
 
 % Implode subtree recursively
 implode_(
-    [fork(rule(L, _, _), ETrees1)|ETrees2], % nonterminal tree in front
+    [fork((L, _, _), ETrees1)|ETrees2], % nonterminal tree in front
     [ITree|ITrees2] % binarily recursively imploded trees
   ) :-
        implode_(ETrees1, ITrees1),

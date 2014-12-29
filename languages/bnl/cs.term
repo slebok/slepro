@@ -1,1 +1,9 @@
-grammar([number,bits,bit,rest],[rule(number,number,[n(bits),n(rest)]),rule(bit,bits,[n(bit)]),rule(bits,bits,[n(bit),n(bits)]),rule(zero,bit,[t('0')]),rule(one,bit,[t('1')]),rule(integer,rest,[]),rule(rational,rest,[t('.'),n(bits)])]).
+[
+  (number, number, [n(bits), n(rest)]),
+  (single, bits, [n(bit)]),
+  (many, bits, [n(bit), n(bits)]),
+  (zero, bit, [t('0')]),
+  (one, bit, [t('1')]),
+  (integer, rest, []),
+  (rational, rest, [t('.'), n(bits)])
+].

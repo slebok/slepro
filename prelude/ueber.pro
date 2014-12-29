@@ -1,5 +1,5 @@
-:- ['languages/ueber/macros/bgl.pro'].
 :- ['languages/ueber/macros/esl.pro'].
+:- ['languages/ueber/macros/bgl.pro'].
 :- ['languages/ueber/macros/egl.pro'].
 :- ['languages/ueber/macros/mml.pro'].
 :- ['languages/ueber/macros/parse.pro'].

@@ -1,14 +1,10 @@
 % Convert a grammar to a signature
-bglToBsl(
-    grammar(Nonterminals, Rules),
-    signature(Sorts, STypes)
-  ) :-
-       Nonterminals = Sorts,
-       map(rule2sType, Rules, STypes).
+bglToBsl(Rules, Profiles) :-
+   map(rule2profile, Rules, Profiles).
 
-% Convert a rule to a symbol type
-rule2sType(
-    rule(Label, Lhs, Rhs),
+% Convert a rule to a profile
+rule2profile(
+    (Label, Lhs, Rhs),
     symbol(Symbol, Arguments, Result)
   ) :-
        Label = Symbol,

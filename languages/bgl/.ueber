@@ -1,11 +1,8 @@
 [
 
   language(bgl(text)),
-  language(bgl(term)),
   membership(bgl(text), elementOfBgl, []),
-  membership(bgl(term), eslLanguage, ['as.term']),
-  elementOf('as.esl', esl(text)),
-  elementOf('as.term', esl(term)),
+  macro(eslSyntax(bgl)),
   function(parser, [bgl(text)], [bgl(term)], parserOfBgl, []),
   function(projection, [bgl(term)], [bsl(term)], bglToBsl, [])
 

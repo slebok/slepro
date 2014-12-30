@@ -1,9 +1,0 @@
-[
-
-  % Basics
-  macro(eglSyntax(figure)),
-  macro(eslSyntax(figure)),
-  macro(parse(figure)),
-  macro(pplSample(figure))
-
-].

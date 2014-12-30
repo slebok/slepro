@@ -1,3 +1,0 @@
-signature : { symbol ';' }* ;
-symbol : 'symbol' name ':' args '->' name ;
-args : { name { 'x' name }* }? ;

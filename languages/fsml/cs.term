@@ -1,1 +1,0 @@
-[ ([],fsm,[star([n(state)])]), ([],state,[n(initial),t(state),n(id),t('{'),star([n(transition)]),t('}')]), ([initial],initial,[t(initial)]), ([noninitial],initial,[]), ([],transition,[n(input),option([t(/),n(action)]),option([t(->),n(id)]),t(;)]), ([],id,[n(name)]), ([],input,[n(name)]), ([],action,[n(name)])].

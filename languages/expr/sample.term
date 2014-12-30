@@ -1,4 +1,0 @@
-add(
-  const(zero),
-  const(succ(zero))
-).

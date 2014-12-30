@@ -1,5 +1,0 @@
-[
-  language(text),
-  membership(text, succeed, []),
-  equivalence(text, textEq, [])
-].

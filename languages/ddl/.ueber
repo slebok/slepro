@@ -1,5 +1,0 @@
-[
-  macro(eglSyntax(ddl)),
-  macro(eslSyntax(ddl)),
-  macro(parse(ddl))
-].

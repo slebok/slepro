@@ -1,6 +1,0 @@
-{
-  class : metamodel,
-  name : emptyMetamodel,
-  classifiers : [
-  ]
-}.

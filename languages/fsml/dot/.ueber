@@ -1,5 +1,0 @@
-[
-  mapsTo(fsmToDgl, ['../sample.term'], ['sample.term']),
-  macro(pplSample(dgl))
-].
-

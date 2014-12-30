@@ -1,1 +1,0 @@
-:- multifile ppEval/2.

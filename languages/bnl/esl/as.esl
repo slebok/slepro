@@ -1,3 +1,0 @@
-type number = (bit+, bit*) ;
-symbol zero: -> bit ;
-symbol one: -> bit ;

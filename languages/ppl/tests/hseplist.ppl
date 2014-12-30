@@ -1,2 +1,0 @@
-hseplist(text(', '), [text(a), text(b), text(c)]).
-

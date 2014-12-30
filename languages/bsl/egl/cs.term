@@ -1,1 +1,0 @@
-[ ([],signature,[star([n(symbol),t(;)])]), ([],symbol,[t(symbol),n(name),t(:),n(args),t(->),n(name)]), ([],args,[option([n(name),star([t(x),n(name)])])])].

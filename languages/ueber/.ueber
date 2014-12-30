@@ -1,4 +1,0 @@
-[
-  macro(eslSyntax(ueber)),
-  elementOf('.ueber', ueber(term))
-].

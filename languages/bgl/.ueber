@@ -1,7 +1,0 @@
-[
-  language(bgl(text)),
-  membership(bgl(text), elementOfBgl, []),
-  function(parser, [bgl(text)], [bgl(term)], parserOfBgl, []),
-  function(projection, [bgl(term)], [bsl(term)], bglToBsl, [])
-].
-

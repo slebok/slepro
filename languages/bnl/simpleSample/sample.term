@@ -1,6 +1,0 @@
-number(
-  many(
-    one,
-    single(
-      zero)),
-  integer).

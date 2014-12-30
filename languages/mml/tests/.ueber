@@ -1,8 +1,0 @@
-[
-
-  elementOf('mm1.graph', mml(graph(term))),
-  elementOf('mm2.graph', mml(graph(term))),
-  elementOf('mm3.graph', mml(graph(term))),
-  elementOf('mm4.graph', mml(graph(term)))
-
-].

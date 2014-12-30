@@ -1,9 +1,0 @@
-symbol empty : -> box ;
-symbol text : atom -> box ;
-symbol number : number -> box ;
-symbol hbox : box x box -> box ;
-symbol hlist : box* -> box ;
-symbol hseplist : box x box* -> box ;
-symbol vbox : box x box -> box ;
-symbol vlist : box* -> box ;
-symbol indent : box -> box ;

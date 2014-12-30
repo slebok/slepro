@@ -1,8 +1,0 @@
-[
-
-  macro(mmlSyntax(familyByRef)),
-  macro(mmlSample(familyByRef, 'empty-family')),
-  macro(mmlSample(familyByRef, 'singleton-family')),
-  macro(mmlSample(familyByRef, 'small-family'))
-
-].

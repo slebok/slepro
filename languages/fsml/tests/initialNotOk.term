@@ -1,1 +1,0 @@
-[ (true,locked,[ (ticket,[collect],unlocked), (pass,[alarm],exception)]), (true,unlocked,[ (ticket,[eject],unlocked), (pass,[],locked)]), (false,exception,[ (ticket,[eject],exception), (pass,[],exception), (mute,[],exception), (release,[],locked)])].

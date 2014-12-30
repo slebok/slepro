@@ -1,4 +1,4 @@
 [
-  macro(eslSyntax(bsl_esl))
+  macro(eslSyntax(bsl))
 ].
 

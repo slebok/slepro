@@ -1,11 +1,11 @@
 grammar : {rule}* ;
-rule : {'[' label ']'}? nonterminal ':' symbols ';' ;
-[t] symbol : terminal ;
-[n] symbol : nonterminal ;
-[star] symbol : '{' symbols '}' '*' ;
-[plus] symbol : '{' symbols '}' '+' ;
-[option] symbol : '{' symbols '}' '?' ;
-symbols : {symbol}* ;
+rule : {'[' label ']'}? nonterminal ':' gsymbols ';' ;
+[t] gsymbol : terminal ;
+[n] gsymbol : nonterminal ;
+[star] gsymbol : '{' gsymbols '}' '*' ;
+[plus] gsymbol : '{' gsymbols '}' '+' ;
+[option] gsymbol : '{' gsymbols '}' '?' ;
+gsymbols : {gsymbol}* ;
 label : name ;
 terminal : qstring ;
 nonterminal : name ;

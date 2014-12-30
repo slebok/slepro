@@ -1,2 +1,2 @@
-type signature = symbol* ;
-type symbol = (atom, atom*, atom) ;
+type signature = profile* ;
+type profile = (atom, atom*, atom) ;

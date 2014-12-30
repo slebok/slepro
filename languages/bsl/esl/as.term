@@ -1,1 +1,1 @@
-[type(signature,star(sort(symbol))),type(symbol,tuple([atom,star(atom),atom]))].
+[type(signature,star(sort(profile))),type(profile,tuple([atom,star(atom),atom]))].

@@ -1,4 +1,4 @@
 [
-  macro(eglSyntax(bgl_egl))
+  macro(eglSyntax(bgl))
 ].
 

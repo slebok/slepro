@@ -1,7 +1,7 @@
 grammar : {rule}* ;
-rule : '[' label ']' nonterminal ':' {symbol}* ';' ;
-[t] symbol : terminal ;
-[n] symbol : nonterminal ;
+rule : '[' label ']' nonterminal ':' {gsymbol}* ';' ;
+[t] gsymbol : terminal ;
+[n] gsymbol : nonterminal ;
 label : name ;
 terminal : qstring ;
 nonterminal : name ;

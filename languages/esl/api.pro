@@ -7,4 +7,4 @@ eslLanguage(File, Term) :-
   [Decl|_] = Decls,
   ( Decl = symbol(_, _, Sort)
   ; Decl = type(Sort, _) ),
-  wellTypedTerm(Decls, Sort, Term).
+  wellTypedTerm(Decls, sort(Sort), Term).
